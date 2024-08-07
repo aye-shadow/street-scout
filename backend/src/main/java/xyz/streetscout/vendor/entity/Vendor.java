@@ -1,53 +1,46 @@
 package xyz.streetscout.vendor.entity;
 
-import xyz.streetscout.review.entity.Review;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import xyz.streetscout.review.entity.Review;
+import xyz.streetscout.user.entity.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "vendor")
-public class Vendor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "name", unique = true, nullable = false)
-    private String name;
+@PrimaryKeyJoinColumn(name = "user_id")
+@NoArgsConstructor
+public class Vendor extends User {
 
     @Column(name = "description")
     private String description;
 
+    @Column(name = "photos")
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "vendor_photos",
             joinColumns = @JoinColumn(name = "vendor_id"))
-    @Column(name = "photos")
     private List<String> photos;
 
-    @OneToOne(mappedBy = "vendor")
+    @OneToOne
     private Location location;
 
-    @OneToOne(mappedBy = "vendor")
+    @OneToOne
     private OperatingHours operatingHours;
 
-    @OneToMany(mappedBy = "vendor")
+    @OneToMany
     @Column(name = "menu")
     private Set<MenuItem> menu = new HashSet<>();
 
     @OneToMany(mappedBy = "vendor")
     @Column(name = "reviews")
-    private List<Review> reviews;
-
-    @Column(name = "email")
-    private String email;
+    private List<Review> reviews = new ArrayList<>();
 
     public void addReview(Review review) {
         if (reviews == null) {

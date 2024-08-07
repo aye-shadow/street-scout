@@ -12,21 +12,24 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    protected Long id;
 
     @Column(name = "email", unique = true, nullable = false)
-    private String email;
+    protected String email;
+
+    @Column(name = "name", nullable = false)
+    protected String name;
 
     @Column(name = "password", nullable = false)
-    private String password;
+    protected String password;
 
     @Column(name = "role")
-    private String role;
+    protected String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

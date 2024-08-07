@@ -19,6 +19,7 @@ public interface ReviewMapper {
     ReviewList toReviewList(Page<Review> reviews);
 
     @Mapping(target = "rating", source = "rating")
+    @BeanMapping(ignoreByDefault = true)
     Review toReview(ReviewCreation reviewCreation);
 
     @Mapping(target = "reviewerId", source = "reviewer.id")
@@ -27,6 +28,6 @@ public interface ReviewMapper {
     @Mapping(target = "vendor", source = "vendor.name")
     ReviewDetails toReviewDetails(Review review);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(ignoreByDefault = true, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(ReviewEdit reviewEdit, @MappingTarget Review review);
 }
