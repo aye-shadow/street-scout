@@ -13,8 +13,6 @@ import xyz.streetscout.vendor.entity.Vendor;
 import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.VendorRepository;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class VendorServiceImpl implements VendorService {
@@ -51,7 +49,7 @@ public class VendorServiceImpl implements VendorService {
      * @return <code>VendorProfile</code> with updated values
      */
     @Override
-    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) {
         Vendor vendor = findById(vendorId);
         vendorMapper.update(vendorUpdate, vendor);
         vendor = vendorRepository.save(vendor);
@@ -63,6 +61,7 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     public void deactivateVendor(Long vendorId) {
-        vendorRepository.deleteById(vendorId);
+        Vendor vendor = findById(vendorId);
+        vendor.deactivate();
     }
 }

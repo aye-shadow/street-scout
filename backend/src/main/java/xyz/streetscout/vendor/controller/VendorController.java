@@ -63,7 +63,7 @@ public class VendorController {
     public ResponseEntity<VendorProfile> updateVendor(
             @Valid @RequestBody VendorUpdate vendorUpdate,
             @PathVariable Long vendorId
-    ) throws Exception {
+    ) {
         VendorProfile vendor = vendorService.updateVendor(vendorId,vendorUpdate);
         return ResponseEntity.status(HttpStatus.OK).body(vendor);
     }

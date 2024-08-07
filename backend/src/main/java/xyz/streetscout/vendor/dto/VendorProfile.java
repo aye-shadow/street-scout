@@ -15,5 +15,6 @@ public record VendorProfile(
         List<String> photos,
         Location location,
         OperatingHours operatingHours,
-        Set<MenuItem> menu
+        Set<MenuItem> menu,
+        Boolean active
 ) { }

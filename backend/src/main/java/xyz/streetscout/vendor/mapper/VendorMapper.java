@@ -12,6 +12,7 @@ import xyz.streetscout.vendor.entity.Vendor;
 public interface VendorMapper {
     VendorMapper INSTANCE = Mappers.getMapper(VendorMapper.class);
 
+    @Mapping(target = "active", expression = "java(vendor.isActive())")
     VendorProfile toVendorProfile(Vendor vendor);
 
     @Mapping(target = "page", source = "pageable.pageNumber")

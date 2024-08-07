@@ -7,6 +7,7 @@ import lombok.Setter;
 import xyz.streetscout.review.entity.Review;
 import xyz.streetscout.user.entity.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +17,6 @@ import java.util.Set;
 @Setter
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
-@NoArgsConstructor
 public class Vendor extends User {
 
     @Column(name = "description")
@@ -46,5 +46,14 @@ public class Vendor extends User {
         }
         reviews.add(review);
         review.setVendor(this);
+    }
+
+    public boolean isActive() {
+        return location != null && operatingHours == null;
+    }
+
+    public void deactivate() {
+        location = null;
+        operatingHours = null;
     }
 }
