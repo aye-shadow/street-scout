@@ -85,4 +85,10 @@ public class VendorController {
         MenuItemList menu = vendorService.addToMenu(vendorId, menuItem);
         return ResponseEntity.status(HttpStatus.CREATED).body(menu);
     }
+
+    @DeleteMapping("/{vendorId}/menu/{menuItemId}")
+    public ResponseEntity<Void> removeMenuItem(@PathVariable Long menuItemId){
+        vendorService.removeMenuItem(menuItemId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

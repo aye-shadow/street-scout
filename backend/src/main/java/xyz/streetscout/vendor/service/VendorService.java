@@ -14,4 +14,6 @@ public interface VendorService {
     void deactivateVendor(Long vendorId);
 
     MenuItemList addToMenu(Long vendorId, MenuItemDTO menuItem);
+
+    void removeMenuItem(Long menuItemId);
 }

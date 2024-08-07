@@ -81,4 +81,12 @@ public class VendorServiceImpl implements VendorService {
         item = menuItemRepository.save(item);
         return menuMapper.toMenuItemList(item.getVendor());
     }
+
+    /**
+     * @param menuItemId <code>MenuItem</code> id
+     */
+    @Override
+    public void removeMenuItem(Long menuItemId) {
+        menuItemRepository.deleteById(menuItemId);
+    }
 }

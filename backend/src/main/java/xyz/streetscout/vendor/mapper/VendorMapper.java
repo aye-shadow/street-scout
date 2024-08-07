@@ -8,7 +8,7 @@ import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorUpdate;
 import xyz.streetscout.vendor.entity.Vendor;
 
-@Mapper
+@Mapper(uses = MenuMapper.class)
 public interface VendorMapper {
     VendorMapper INSTANCE = Mappers.getMapper(VendorMapper.class);
 
