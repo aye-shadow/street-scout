@@ -7,14 +7,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.customer.dto.CustomerProfile;
+import xyz.streetscout.customer.entity.Customer;
 import xyz.streetscout.customer.service.CustomerService;
+import xyz.streetscout.exception.UserRegistrationException;
 import xyz.streetscout.security.JwtUtils;
-import xyz.streetscout.user.dto.LoginRequest;
-import xyz.streetscout.user.dto.Register;
-import xyz.streetscout.user.dto.Response;
+import xyz.streetscout.user.dto.*;
 import xyz.streetscout.user.entity.User;
+import xyz.streetscout.user.mapper.UserMapper;
 import xyz.streetscout.user.repository.UserRepository;
-import xyz.streetscout.vendor.dto.VendorDetails;
+import xyz.streetscout.vendor.dto.VendorProfile;
+import xyz.streetscout.vendor.entity.Vendor;
 import xyz.streetscout.vendor.service.VendorService;
 
 @Service
@@ -32,27 +34,27 @@ public class UserServiceImpl implements UserService{
 
     private final AuthenticationManager authenticationManager;
 
+    private final UserMapper userMapper = UserMapper.INSTANCE;
+
+
     @Override
     public String register(Register register){
-        if (register.role() == "VENDOR") {
-            User user = new User();
-            user.setEmail(register.vendorRegistration().email());
-            user.setRole(register.role());
-            user.setPassword(passwordEncoder.encode(register.password()));
+        User user = new User();
+        user.setEmail(register.vendorRegistration().email());
+        user.setRole(register.role());
+        user.setPassword(passwordEncoder.encode(register.password()));
+
+        if (register.role().equals("VENDOR")) {
+            VendorProfile vendor = vendorService.registerVendor(register.vendorRegistration());
+        } else if (register.role().equals("CUSTOMER")) {
             User savedUser = userRepository.save(user);
-            VendorDetails vendor = vendorService.registerVendor(register.vendorRegistration());
-            return ("Registered successfully");
-        } else if (register.role() == "CUSTOMER") {
-            User user = new User();
-            user.setEmail(register.vendorRegistration().email());
-            user.setRole(register.role());
-            user.setPassword(passwordEncoder.encode(register.password()));
-            User savedUser = userRepository.save(user);
-            CustomerProfile customerProfile=customerService.addCustomer(register.registerCustomer());
-            return ("Registered successfully");
+            CustomerProfile customerProfile = customerService.addCustomer(register.registerCustomer());
         } else{
-            return new String("enter valid details");
-    }
+            throw new UserRegistrationException("enter valid details");
+        }
+
+        User savedUser = userRepository.save(user);
+        return ("Registered successfully");
     }
 
     @Override
@@ -61,15 +63,32 @@ public class UserServiceImpl implements UserService{
         var user = userRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new Exception("user Not found"));
 
         var token = jwtUtils.generateToken(user);
-        if(user.getRole()=="VENDOR"){
-            VendorDetails vendorDetails=vendorService.getVendorByEmail(user.getEmail());
-        return new Response("Logged in successfully",token,vendorDetails,null);
+        if(user.getRole().equals("VENDOR")){
+            VendorProfile vendorProfile =vendorService.getVendorByEmail(user.getEmail());
+        return new Response("Logged in successfully",token, vendorProfile,null);
         }
-        else if(user.getRole()=="CUSTOMER"){
+        else if(user.getRole().equals("CUSTOMER")){
             CustomerProfile customerProfile=customerService.getCustomerProfileByEmail(user.getEmail());
             return new Response("Logged in successfully",token,null,customerProfile);}
         else{
             throw new Exception("User not found");
         }
+    }
+
+    /**
+     * @param registration <code>UserRegistration</code> email, password & role
+     * @return <code>RegistrationResponse</code>
+     */
+    @Override
+    public UserProfile registerUser(UserRegistration registration) {
+        User user = switch (registration.role()) {
+            case "VENDOR" -> userMapper.toVendor(registration);
+            case "CUSTOMER" -> userMapper.toCustomer(registration);
+            default -> throw new UserRegistrationException("Invalid role " + registration.role());
+        };
+
+        user.setPassword(passwordEncoder.encode(registration.password()));
+        user = userRepository.save(user);
+        return userMapper.toUserProfile(user);
     }
 }
