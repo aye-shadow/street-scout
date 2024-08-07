@@ -17,6 +17,11 @@ docker compose up -d
 
 ## [API Reference](http://localhost:8080/swagger-ui.html)
 
+### [Auth](http://localhost:8080/auth)
+- `POST /auth/register` - Register user (VENDOR | CUSTOMER)
+- `POST /auth/login` - Login with credentials
+
+
 ### [Vendors](http://localhost:8080/api/vendors)
 - `GET /api/vendors` - List all vendors
 - `GET /api/vendors/:id` - Get vendor details
