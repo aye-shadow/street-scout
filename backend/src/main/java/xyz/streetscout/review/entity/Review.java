@@ -2,6 +2,7 @@ package xyz.streetscout.review.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import xyz.streetscout.customer.entity.Customer;
 import xyz.streetscout.vendor.entity.Vendor;
 import jakarta.persistence.*;
@@ -36,8 +37,13 @@ public class Review {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "is_enabled", nullable = false)
-    private boolean isEnabled = true;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+
+    @Column(name = "is_disabled", nullable = false)
+    private boolean disabled = false;
 
     @Override
     public String toString() {
@@ -50,7 +56,7 @@ public class Review {
                 ", rating=" + rating +
                 ", text='" + text + '\'' +
                 ", createdAt=" + createdAt +
-                ", isEnabled=" + isEnabled +
+                ", disabled=" + disabled +
                 '}';
     }
 }

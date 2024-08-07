@@ -17,6 +17,11 @@ docker compose up -d
 
 ## [API Reference](http://localhost:8080/swagger-ui.html)
 
+### [Auth](http://localhost:8080/auth)
+- `POST /auth/register` - Register user (VENDOR | CUSTOMER)
+- `POST /auth/login` - Login with credentials
+
+
 ### [Vendors](http://localhost:8080/api/vendors)
 - `GET /api/vendors` - List all vendors
 - `GET /api/vendors/:id` - Get vendor details
@@ -59,10 +64,9 @@ docker compose up -d
 - `operatingHours`:
     - `open`: string;
     - `close`: string;
-- `menu`: [MenuItem](#menuitem-table)[];
 - `photos`: string[];
+- `menu`: [MenuItem](#menuitem-table)[];
 - `reviews`: [Review](#review-table)[];
-- `is_active`: boolean
 
 ### [Customer Table]()
 - `id`: number
@@ -72,8 +76,8 @@ docker compose up -d
 
 ### [Review Table](src%2Fmain%2Fjava%2Fxyz%2Fstreetscout%2Freview%2Fentity%2FReview.java)
 - `id`: number
-- `userId`: number
-- `vendorId`: number
+- `reviewer`: [Customer](#customer-table)
+- `vendor`: [Vendor](#vendor-table)
 - `rating`: number
 - `text`: string
 - `createdAt`: Timestamp

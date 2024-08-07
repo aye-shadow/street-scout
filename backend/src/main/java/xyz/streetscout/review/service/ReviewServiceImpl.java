@@ -44,8 +44,8 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     public ReviewDetails createReview(Long vendorId, ReviewCreation reviewCreation) {
-        Review review = reviewMapper.toReview(reviewCreation);
         Vendor vendor = findVendorById(vendorId);
+        Review review = reviewMapper.toReview(reviewCreation);
         vendor.addReview(review);
         review = reviewRepository.save(review);
         return reviewMapper.toReviewDetails(review);
@@ -82,7 +82,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void disableReview(Long vendorId, Long reviewId) {
         Review review = findById(reviewId);
-        review.setEnabled(false);
+        review.setDisabled(true);
         reviewRepository.save(review);
     }
 }

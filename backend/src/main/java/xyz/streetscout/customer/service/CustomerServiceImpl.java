@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.customer.dto.CustomerProfile;
 import xyz.streetscout.customer.dto.CustomerUpdate;
-import xyz.streetscout.customer.dto.RegisterCustomer;
 import xyz.streetscout.customer.entity.Customer;
 import xyz.streetscout.customer.mapper.CustomerMapper;
 import xyz.streetscout.customer.repository.CustomerRepository;
@@ -24,29 +23,12 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final VendorRepository vendorRepository;
 
-    @Override
-    public CustomerProfile addCustomer(RegisterCustomer registerCustomer) {
-        Customer customer=new Customer();
-        customer.setEmail(registerCustomer.email());
-        customer.setName(registerCustomer.name());
-
-        Customer savedCustomer=customerRepository.save(customer);
-
-        return new CustomerProfile(savedCustomer.getId(), savedCustomer.getName(), savedCustomer.getEmail(), null);
-    }
-
     /**
      * @return CustomerProfile
      */
     @Override
     public CustomerProfile getCustomerProfile(Long customerId) {
         Customer customer = findById(customerId);
-        return customerMapper.toProfile(customer);
-    }
-
-    @Override
-    public CustomerProfile getCustomerProfileByEmail(String email) {
-        Customer customer=customerRepository.findByEmail(email);
         return customerMapper.toProfile(customer);
     }
 
@@ -66,8 +48,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         customerMapper.update(customerUpdate, customer);
-        Customer saved = customerRepository.save(customer);
-        return customerMapper.toProfile(saved);
+        customer = customerRepository.save(customer);
+        return customerMapper.toProfile(customer);
 
     }
 
@@ -80,11 +62,9 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerProfile addFavorite(Long customerId, Long vendorId) {
         Customer customer = findById(customerId);
         Vendor vendor = findVendorById(vendorId);
-
         customer.addFavorite(vendor);
-        Customer saved = customerRepository.save(customer);
-
-        return customerMapper.toProfile(saved);
+        customer = customerRepository.save(customer);
+        return customerMapper.toProfile(customer);
     }
 
     private Vendor findVendorById(Long vendorId) {

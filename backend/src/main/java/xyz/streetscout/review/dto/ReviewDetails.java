@@ -5,11 +5,12 @@ import java.time.LocalDateTime;
 public record ReviewDetails(
         Long id,
         Long reviewerId,
+        String reviewerName,
         Long vendorId,
-        String vendor,
-        String reviewer,
+        String vendorName,
         Integer rating,
         String text,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }
