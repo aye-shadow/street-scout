@@ -14,8 +14,6 @@ public record ReviewEdit(
         Integer rating,
 
         @Size(min = 3, message = "Text size must be at least 3 characters")
-        String text,
-
-        boolean isEnabled
+        String text
 ) {
 }

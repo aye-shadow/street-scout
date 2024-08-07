@@ -27,6 +27,6 @@ public interface ReviewMapper {
     @Mapping(target = "vendorName", source = "vendor.name")
     ReviewDetails toReviewDetails(Review review);
 
-    @BeanMapping(ignoreByDefault = true, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(ReviewEdit reviewEdit, @MappingTarget Review review);
 }
