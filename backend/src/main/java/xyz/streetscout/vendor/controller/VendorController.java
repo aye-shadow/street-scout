@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,12 @@ public class VendorController {
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
-    public ResponseEntity<VendorList> getAllVendors(){
-        VendorList vendors = vendorService.getAllVendors();
+    public ResponseEntity<VendorList> getAllVendors(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        VendorList vendors = vendorService.getAllVendors(pageRequest);
         return ResponseEntity.status(HttpStatus.OK).body(vendors);
     }
 

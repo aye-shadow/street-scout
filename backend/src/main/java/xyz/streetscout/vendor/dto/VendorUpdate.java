@@ -1,7 +1,6 @@
 package xyz.streetscout.vendor.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import xyz.streetscout.review.entity.Review;
 import xyz.streetscout.vendor.entity.Location;
 import xyz.streetscout.vendor.entity.MenuItem;
 import xyz.streetscout.vendor.entity.OperatingHours;

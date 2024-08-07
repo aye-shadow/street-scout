@@ -3,6 +3,8 @@ package xyz.streetscout.vendor.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.vendor.dto.VendorList;
 import xyz.streetscout.vendor.dto.VendorProfile;
@@ -11,9 +13,7 @@ import xyz.streetscout.vendor.entity.Vendor;
 import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.VendorRepository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -26,21 +26,10 @@ public class VendorServiceImpl implements VendorService {
      * @return VendorList
      */
     @Override
-    public VendorList getAllVendors() {
-        List<VendorProfile> vendors = vendorRepository.findAll().stream()
-                .map(entity -> new VendorProfile(
-                        entity.getId(),
-                        entity.getName(),
-                        entity.getDescription(),
-                        entity.getEmail(),
-                        entity.getPhotos(),
-                        entity.getLocation(),
-                        entity.getOperatingHours(),
-                        entity.getMenu()
-                ))
-                .collect(Collectors.toList());
+    public VendorList getAllVendors(PageRequest pageRequest) {
+        Page<Vendor> vendors = vendorRepository.findAll(pageRequest);
 
-        return new VendorList(vendors);
+        return vendorMapper.toVendorList(vendors);
     }
 
     /**

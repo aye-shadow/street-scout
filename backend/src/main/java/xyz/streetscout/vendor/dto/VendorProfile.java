@@ -10,11 +10,10 @@ import java.util.Set;
 public record VendorProfile(
         Long id,
         String name,
-        String description,
         String email,
+        String description,
         List<String> photos,
         Location location,
         OperatingHours operatingHours,
         Set<MenuItem> menu
-) {
-}
+) { }
