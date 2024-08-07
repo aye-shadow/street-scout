@@ -59,10 +59,9 @@ docker compose up -d
 - `operatingHours`:
     - `open`: string;
     - `close`: string;
-- `menu`: [MenuItem](#menuitem-table)[];
 - `photos`: string[];
+- `menu`: [MenuItem](#menuitem-table)[];
 - `reviews`: [Review](#review-table)[];
-- `is_active`: boolean
 
 ### [Customer Table]()
 - `id`: number

@@ -15,7 +15,7 @@ import xyz.streetscout.vendor.service.VendorService;
 
 @Tag(
     name = "REST APIs for Vendors",
-    description = "REST APIs to CREATE, UPDATE, FETCH and DELETE Vendors")
+    description = "REST APIs to UPDATE, FETCH Vendors")
 @RestController
 @RequestMapping("/api/vendors")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -79,6 +79,12 @@ public class VendorController {
     }
 
     @PostMapping("/{vendorId}/menu")
+    @Operation(
+            summary = "Add To Menu",
+            description = "REST API to Add item to menu")
+    @ApiResponse(
+            responseCode = "201",
+            description = "HTTP Status CREATED")
     public ResponseEntity<MenuItemList> addToMenu(
             @PathVariable Long vendorId,
             @Valid @RequestBody MenuItemDTO menuItem){
@@ -87,8 +93,14 @@ public class VendorController {
     }
 
     @DeleteMapping("/{vendorId}/menu/{menuItemId}")
+    @Operation(
+            summary = "Remove Menu Item",
+            description = "REST API to remove item from menu")
+    @ApiResponse(
+            responseCode = "204",
+            description = "HTTP Status NO CONTENT")
     public ResponseEntity<Void> removeMenuItem(@PathVariable Long menuItemId){
         vendorService.removeMenuItem(menuItemId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
