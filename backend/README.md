@@ -71,8 +71,8 @@ docker compose up -d
 
 ### [Review Table](src%2Fmain%2Fjava%2Fxyz%2Fstreetscout%2Freview%2Fentity%2FReview.java)
 - `id`: number
-- `userId`: number
-- `vendorId`: number
+- `reviewer`: [Customer](#customer-table)
+- `vendor`: [Vendor](#vendor-table)
 - `rating`: number
 - `text`: string
 - `createdAt`: Timestamp

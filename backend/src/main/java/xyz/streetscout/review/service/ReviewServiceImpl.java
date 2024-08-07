@@ -44,8 +44,8 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     public ReviewDetails createReview(Long vendorId, ReviewCreation reviewCreation) {
-        Review review = reviewMapper.toReview(reviewCreation);
         Vendor vendor = findVendorById(vendorId);
+        Review review = reviewMapper.toReview(reviewCreation);
         vendor.addReview(review);
         review = reviewRepository.save(review);
         return reviewMapper.toReviewDetails(review);

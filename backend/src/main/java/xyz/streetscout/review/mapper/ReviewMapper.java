@@ -19,13 +19,12 @@ public interface ReviewMapper {
     ReviewList toReviewList(Page<Review> reviews);
 
     @Mapping(target = "rating", source = "rating")
-    @BeanMapping(ignoreByDefault = true)
     Review toReview(ReviewCreation reviewCreation);
 
     @Mapping(target = "reviewerId", source = "reviewer.id")
-    @Mapping(target = "reviewer", source = "reviewer.name")
+    @Mapping(target = "reviewerName", source = "reviewer.name")
     @Mapping(target = "vendorId", source = "vendor.id")
-    @Mapping(target = "vendor", source = "vendor.name")
+    @Mapping(target = "vendorName", source = "vendor.name")
     ReviewDetails toReviewDetails(Review review);
 
     @BeanMapping(ignoreByDefault = true, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
