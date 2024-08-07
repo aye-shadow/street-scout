@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.streetscout.user.dto.LoginRequest;
-import xyz.streetscout.user.dto.Response;
-import xyz.streetscout.user.dto.UserProfile;
-import xyz.streetscout.user.dto.UserRegistration;
+import xyz.streetscout.user.dto.*;
 import xyz.streetscout.user.service.UserService;
 
 @RestController
@@ -29,8 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response> login(@Valid @RequestBody LoginRequest login) throws Exception {
-        Response response = userService.login(login);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest login) {
+        LoginResponse loginResponse = userService.loginUser(login);
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
 }

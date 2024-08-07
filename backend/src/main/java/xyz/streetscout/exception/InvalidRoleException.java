@@ -4,11 +4,11 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
-public class UserRegistrationException extends RuntimeException {
+public class InvalidRoleException extends RuntimeException {
 
     private final HttpStatus statusCode = HttpStatus.BAD_REQUEST;
 
-    public UserRegistrationException(String message) {
+    public InvalidRoleException(String message) {
         super(message);
     }
 }

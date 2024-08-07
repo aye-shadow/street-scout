@@ -8,4 +8,6 @@ public interface UserService {
     Response login(LoginRequest loginRequest) throws Exception;
 
     UserProfile registerUser(UserRegistration userRegistration);
+
+    LoginResponse loginUser(LoginRequest login);
 }
