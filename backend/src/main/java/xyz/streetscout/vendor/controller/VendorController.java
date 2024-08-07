@@ -10,9 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorProfile;
-import xyz.streetscout.vendor.dto.VendorUpdate;
+import xyz.streetscout.vendor.dto.*;
 import xyz.streetscout.vendor.service.VendorService;
 
 @Tag(
@@ -78,5 +76,13 @@ public class VendorController {
     public ResponseEntity<Void> deactivateVendor(@PathVariable Long vendorId) {
         vendorService.deactivateVendor(vendorId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PostMapping("/{vendorId}/menu")
+    public ResponseEntity<MenuItemList> addToMenu(
+            @PathVariable Long vendorId,
+            @Valid @RequestBody MenuItemDTO menuItem){
+        MenuItemList menu = vendorService.addToMenu(vendorId, menuItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(menu);
     }
 }

@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorProfile;
-import xyz.streetscout.vendor.dto.VendorUpdate;
+import xyz.streetscout.vendor.dto.*;
+import xyz.streetscout.vendor.entity.MenuItem;
 import xyz.streetscout.vendor.entity.Vendor;
+import xyz.streetscout.vendor.mapper.MenuMapper;
 import xyz.streetscout.vendor.mapper.VendorMapper;
+import xyz.streetscout.vendor.repository.MenuItemRepository;
 import xyz.streetscout.vendor.repository.VendorRepository;
 
 @Service
@@ -18,7 +19,9 @@ import xyz.streetscout.vendor.repository.VendorRepository;
 public class VendorServiceImpl implements VendorService {
 
     private final VendorMapper vendorMapper = VendorMapper.INSTANCE;
+    private final MenuMapper menuMapper = MenuMapper.INSTANCE;
     private final VendorRepository vendorRepository;
+    private final MenuItemRepository menuItemRepository;
 
     /**
      * @return <code>VendorList</code>
@@ -63,5 +66,19 @@ public class VendorServiceImpl implements VendorService {
     public void deactivateVendor(Long vendorId) {
         Vendor vendor = findById(vendorId);
         vendor.deactivate();
+    }
+
+    /**
+     * @param vendorId <code>Vendor</code> id
+     * @param menuItemDTO <code>MenuItemDTO</code>
+     * @return <code>MenuItemList</code>
+     */
+    @Override
+    public MenuItemList addToMenu(Long vendorId, MenuItemDTO menuItemDTO) {
+        Vendor vendor = findById(vendorId);
+        MenuItem item = menuMapper.toMenuItem(menuItemDTO);
+        vendor.addItem(item);
+        item = menuItemRepository.save(item);
+        return menuMapper.toMenuItemList(item.getVendor());
     }
 }

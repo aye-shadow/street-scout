@@ -24,6 +24,7 @@ public class VendorConfig {
         Vendor vendor = new Vendor();
         vendor.setName("Chow Town");
         vendor.setEmail("chow@town.com");
+        vendor.setRole("VENDOR");
         vendor.setPassword(passwordEncoder.encode("password"));
         vendorRepository.save(vendor);
     }
