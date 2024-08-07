@@ -3,151 +3,60 @@ package xyz.streetscout.vendor.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import xyz.streetscout.vendor.dto.VendorProfile;
-import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorRegistration;
-import xyz.streetscout.vendor.dto.VendorUpdate;
+import xyz.streetscout.vendor.dto.*;
+import xyz.streetscout.vendor.entity.MenuItem;
 import xyz.streetscout.vendor.entity.Vendor;
+import xyz.streetscout.vendor.mapper.MenuMapper;
+import xyz.streetscout.vendor.mapper.VendorMapper;
+import xyz.streetscout.vendor.repository.MenuItemRepository;
 import xyz.streetscout.vendor.repository.VendorRepository;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class VendorServiceImpl implements VendorService {
 
+    private final VendorMapper vendorMapper = VendorMapper.INSTANCE;
+    private final MenuMapper menuMapper = MenuMapper.INSTANCE;
     private final VendorRepository vendorRepository;
+    private final MenuItemRepository menuItemRepository;
 
     /**
-     * @return VendorList
+     * @return <code>VendorList</code>
      */
     @Override
-    public VendorList getAllVendors() {
-        List<VendorProfile> vendors = vendorRepository.findAll().stream()
-                .map(entity -> new VendorProfile(
-                        entity.getId(),
-                        entity.getName(),
-                        entity.getDescription(),
-                        entity.getPhotos(),
-                        entity.getLocation(),
-                        entity.getOperatingHours(),
-                        entity.getMenu(),
-                        entity.getEmail()
-                ))
-                .collect(Collectors.toList());
-
-        return new VendorList(vendors);
+    public VendorList getAllVendors(PageRequest pageRequest) {
+        Page<Vendor> vendors = vendorRepository.findAll(pageRequest);
+        return vendorMapper.toVendorList(vendors);
     }
 
     /**
-     * @param vendorId Vendor id
-     * @return VendorProfile
+     * @param vendorId <code>Vendor</code> id
+     * @return <code>VendorProfile</code>
      */
     @Override
     public VendorProfile getVendorById(Long vendorId) {
-        Optional<Vendor> vendorOptional = vendorRepository.findById(vendorId);
+        Vendor vendor = findById(vendorId);
+        return vendorMapper.toVendorProfile(vendor);
+    }
 
-        return vendorOptional.map(entity -> new VendorProfile(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getPhotos(),
-                entity.getLocation(),
-                entity.getOperatingHours(),
-                entity.getMenu(),
-                entity.getEmail()
-        )).orElseThrow(() -> new EntityNotFoundException("Vendor not found"));
+    private Vendor findById(Long vendorId) {
+        return vendorRepository.findById(vendorId)
+                .orElseThrow(() -> new EntityNotFoundException("Vendor with id " + vendorId + " not found"));
     }
 
     /**
-     * @param email
-     * @return
+     * @param vendorUpdate <code>VendorUpdate</code> with updated details
+     * @return <code>VendorProfile</code> with updated values
      */
     @Override
-    public VendorProfile getVendorByEmail(String email) {
-        return null;
-    }
-
-    /**
-     * @param vendorRegistration Initial Vendor information
-     * @return VendorProfile
-     */
-    @Override
-    public VendorProfile registerVendor(VendorRegistration vendorRegistration) {
-        Vendor vendor = new Vendor();
-        vendor.setName(vendorRegistration.name());
-        vendor.setDescription(vendorRegistration.description());
-        vendor.setLocation(vendorRegistration.location());
-        vendor.setOperatingHours(vendorRegistration.operatingHours());
-        vendor.setMenu(vendorRegistration.menu());
-        vendor.setEmail(vendorRegistration.email());
-
-        Vendor savedVendor = vendorRepository.save(vendor);
-
-        return new VendorProfile(
-                savedVendor.getId(),
-                savedVendor.getName(),
-                savedVendor.getDescription(),
-                savedVendor.getPhotos(),
-                savedVendor.getLocation(),
-                savedVendor.getOperatingHours(),
-                savedVendor.getMenu(),
-                savedVendor.getEmail()
-        );
-    }
-
-    /**
-     * @param vendorUpdate Vendor details to be updated
-     * @return VendorProfile with updated values
-     */
-    @Override
-    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
-        Vendor vendor = vendorRepository.findById(vendorId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
-        if (vendorUpdate.description() != null && !vendorUpdate.description().isEmpty()) {
-            vendor.setDescription(vendorUpdate.description());
-        }
-
-        if (vendorUpdate.photos() != null && !vendorUpdate.photos().isEmpty()) {
-            if (vendor.getPhotos() == null) {
-                vendor.setPhotos(vendorUpdate.photos());
-            } else {
-                vendor.getPhotos().addAll(vendorUpdate.photos());
-            }
-        }
-
-        if (vendorUpdate.menu() != null && !vendorUpdate.menu().isEmpty()) {
-            if (vendor.getMenu() == null) {
-                vendor.setMenu(vendorUpdate.menu());
-            } else {
-                vendor.getMenu().addAll(vendorUpdate.menu());
-            }
-        }
-
-        if (vendorUpdate.location() != null) {
-            vendor.setLocation(vendorUpdate.location());
-        }
-        if (vendorUpdate.operatingHours() != null) {
-            vendor.setOperatingHours(vendorUpdate.operatingHours());
-        }
-
-
-        Vendor updatedVendor = vendorRepository.save(vendor);
-
-        return new VendorProfile(
-                updatedVendor.getId(),
-                updatedVendor.getName(),
-                updatedVendor.getDescription(),
-                updatedVendor.getPhotos(),
-                updatedVendor.getLocation(),
-                updatedVendor.getOperatingHours(),
-                updatedVendor.getMenu(),
-                updatedVendor.getEmail()
-        );
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) {
+        Vendor vendor = findById(vendorId);
+        vendorMapper.update(vendorUpdate, vendor);
+        vendor = vendorRepository.save(vendor);
+        return vendorMapper.toVendorProfile(vendor);
     }
 
     /**
@@ -155,6 +64,29 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     public void deactivateVendor(Long vendorId) {
-        vendorRepository.deleteById(vendorId);
+        Vendor vendor = findById(vendorId);
+        vendor.deactivate();
+    }
+
+    /**
+     * @param vendorId <code>Vendor</code> id
+     * @param menuItemDTO <code>MenuItemDTO</code>
+     * @return <code>MenuItemList</code>
+     */
+    @Override
+    public MenuItemList addToMenu(Long vendorId, MenuItemDTO menuItemDTO) {
+        Vendor vendor = findById(vendorId);
+        MenuItem item = menuMapper.toMenuItem(menuItemDTO);
+        vendor.addItem(item);
+        item = menuItemRepository.save(item);
+        return menuMapper.toMenuItemList(item.getVendor());
+    }
+
+    /**
+     * @param menuItemId <code>MenuItem</code> id
+     */
+    @Override
+    public void removeMenuItem(Long menuItemId) {
+        menuItemRepository.deleteById(menuItemId);
     }
 }

@@ -1,21 +1,19 @@
 package xyz.streetscout.vendor.service;
 
-import xyz.streetscout.vendor.dto.VendorProfile;
-import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorRegistration;
-import xyz.streetscout.vendor.dto.VendorUpdate;
+import org.springframework.data.domain.PageRequest;
+import xyz.streetscout.vendor.dto.*;
 
 public interface VendorService {
 
-    VendorList getAllVendors();
+    VendorList getAllVendors(PageRequest pageRequest);
 
     VendorProfile getVendorById(Long vendorId);
 
-    VendorProfile getVendorByEmail(String email);
-
-    VendorProfile registerVendor(VendorRegistration vendorRegistration);
-
-    VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception;
+    VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate);
 
     void deactivateVendor(Long vendorId);
+
+    MenuItemList addToMenu(Long vendorId, MenuItemDTO menuItem);
+
+    void removeMenuItem(Long menuItemId);
 }

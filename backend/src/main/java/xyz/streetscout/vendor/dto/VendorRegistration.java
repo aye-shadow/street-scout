@@ -10,6 +10,7 @@ import java.util.Set;
 @Schema(
     name = "VendorRegistration",
     description = "Schema to hold new Vendor details")
+@Deprecated(forRemoval = true)
 public record VendorRegistration(
         String email,
         String password,

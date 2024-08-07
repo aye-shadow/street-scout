@@ -23,6 +23,8 @@ docker compose up -d
 - `POST /api/vendors` - Create new vendor
 - `PUT /api/vendors/:id` - Update vendor details
 - `DELETE /api/vendors/:id` - Deactivate vendor
+- `POST /api/vendors/:id/menu` - Add item to menu
+- `DELETE /api/vendors/:id/menu` - Remove item from menu
 
 ### [Customers](http://localhost:8080/api/customers)
 - `GET /api/users/:id` - Get user profile

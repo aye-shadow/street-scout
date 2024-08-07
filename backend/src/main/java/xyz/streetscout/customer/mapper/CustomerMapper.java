@@ -1,6 +1,9 @@
 package xyz.streetscout.customer.mapper;
 
-import org.mapstruct.*;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 import xyz.streetscout.customer.dto.CustomerProfile;
 import xyz.streetscout.customer.dto.CustomerUpdate;
