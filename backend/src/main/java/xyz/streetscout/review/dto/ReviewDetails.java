@@ -10,6 +10,7 @@ public record ReviewDetails(
         String vendorName,
         Integer rating,
         String text,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }
