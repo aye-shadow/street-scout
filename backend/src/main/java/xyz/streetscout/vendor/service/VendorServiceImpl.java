@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.streetscout.vendor.dto.VendorDetails;
+import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorList;
 import xyz.streetscout.vendor.dto.VendorRegistration;
 import xyz.streetscout.vendor.dto.VendorUpdate;
@@ -26,8 +26,8 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     public VendorList getAllVendors() {
-        List<VendorDetails> vendors = vendorRepository.findAll().stream()
-                .map(entity -> new VendorDetails(
+        List<VendorProfile> vendors = vendorRepository.findAll().stream()
+                .map(entity -> new VendorProfile(
                         entity.getId(),
                         entity.getName(),
                         entity.getDescription(),
@@ -44,13 +44,13 @@ public class VendorServiceImpl implements VendorService {
 
     /**
      * @param vendorId Vendor id
-     * @return VendorDetails
+     * @return VendorProfile
      */
     @Override
-    public VendorDetails getVendorById(Long vendorId) {
+    public VendorProfile getVendorById(Long vendorId) {
         Optional<Vendor> vendorOptional = vendorRepository.findById(vendorId);
 
-        return vendorOptional.map(entity -> new VendorDetails(
+        return vendorOptional.map(entity -> new VendorProfile(
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
@@ -63,11 +63,20 @@ public class VendorServiceImpl implements VendorService {
     }
 
     /**
-     * @param vendorRegistration Initial Vendor information
-     * @return VendorDetails
+     * @param email
+     * @return
      */
     @Override
-    public VendorDetails registerVendor(VendorRegistration vendorRegistration) {
+    public VendorProfile getVendorByEmail(String email) {
+        return null;
+    }
+
+    /**
+     * @param vendorRegistration Initial Vendor information
+     * @return VendorProfile
+     */
+    @Override
+    public VendorProfile registerVendor(VendorRegistration vendorRegistration) {
         Vendor vendor = new Vendor();
         vendor.setName(vendorRegistration.name());
         vendor.setDescription(vendorRegistration.description());
@@ -78,7 +87,7 @@ public class VendorServiceImpl implements VendorService {
 
         Vendor savedVendor = vendorRepository.save(vendor);
 
-        return new VendorDetails(
+        return new VendorProfile(
                 savedVendor.getId(),
                 savedVendor.getName(),
                 savedVendor.getDescription(),
@@ -92,10 +101,10 @@ public class VendorServiceImpl implements VendorService {
 
     /**
      * @param vendorUpdate Vendor details to be updated
-     * @return VendorDetails with updated values
+     * @return VendorProfile with updated values
      */
     @Override
-    public VendorDetails updateVendor(Long vendorId,VendorUpdate vendorUpdate) throws Exception {
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
         Vendor vendor = vendorRepository.findById(vendorId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
@@ -129,7 +138,7 @@ public class VendorServiceImpl implements VendorService {
 
         Vendor updatedVendor = vendorRepository.save(vendor);
 
-        return new VendorDetails(
+        return new VendorProfile(
                 updatedVendor.getId(),
                 updatedVendor.getName(),
                 updatedVendor.getDescription(),

@@ -7,7 +7,7 @@ import xyz.streetscout.vendor.entity.OperatingHours;
 import java.util.List;
 import java.util.Set;
 
-public record VendorDetails(
+public record VendorProfile(
         Long id,
         String name,
         String description,

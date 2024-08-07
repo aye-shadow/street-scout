@@ -1,8 +1,8 @@
 package xyz.streetscout.user.dto;
 
 import xyz.streetscout.customer.dto.CustomerProfile;
-import xyz.streetscout.vendor.dto.VendorDetails;
+import xyz.streetscout.vendor.dto.VendorProfile;
 
-public record Response(String message,String token,  VendorDetails vendorDetails, CustomerProfile customerProfile) {
+public record Response(String message, String token, VendorProfile vendorProfile, CustomerProfile customerProfile) {
 
 }

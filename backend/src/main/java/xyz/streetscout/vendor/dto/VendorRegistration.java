@@ -11,6 +11,8 @@ import java.util.Set;
     name = "VendorRegistration",
     description = "Schema to hold new Vendor details")
 public record VendorRegistration(
+        String email,
+        String password,
         String name,
         String description,
         Location location,
