@@ -14,8 +14,8 @@ import java.util.Set;
     description = "Schema to hold updated Vendor information")
 public record VendorUpdate(
         String description,
-        List<String> photos,
         Location location,
         OperatingHours operatingHours,
-        Set<MenuItem> menu) {
-}
+        List<String> photos,
+        Set<MenuItem> menu
+) { }

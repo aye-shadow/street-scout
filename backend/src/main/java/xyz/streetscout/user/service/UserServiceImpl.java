@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService{
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
 
+    @Deprecated
     @Override
     public String register(Register register){
         User user = new User();
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService{
         return ("Registered successfully");
     }
 
+    @Deprecated
     @Override
     public Response login(LoginRequest loginRequest) throws Exception {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));

@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorRegistration;
+import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorUpdate;
 import xyz.streetscout.vendor.service.VendorService;
 
@@ -40,7 +39,7 @@ public class VendorController {
     @GetMapping("/{vendorId}")
     @Operation(
             summary = "Get Vendor By Id",
-            description = "REST API to FETCH a Vendor")
+            description = "REST API to FETCH a Vendor by id")
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
@@ -49,26 +48,17 @@ public class VendorController {
         return ResponseEntity.status(HttpStatus.OK).body(vendor);
     }
 
-    @PostMapping("")
-    @Operation(
-            summary = "Register Vendor",
-            description = "REST API to Register a new Vendor")
-    @ApiResponse(
-            responseCode = "201",
-            description = "HTTP Status CREATED")
-    public ResponseEntity<VendorProfile> registerVendor(@Valid @RequestBody VendorRegistration vendorRegistration){
-        VendorProfile vendor = vendorService.registerVendor(vendorRegistration);
-        return ResponseEntity.status(HttpStatus.CREATED).body(vendor);
-    }
-
     @PutMapping("/{vendorId}")
     @Operation(
             summary = "Update Vendor",
-            description = "REST API to update Vendor details")
+            description = "REST API to update Vendor profile")
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
-    public ResponseEntity<VendorProfile> updateVendor(@Valid @RequestBody VendorUpdate vendorUpdate, @PathVariable Long vendorId) throws Exception {
+    public ResponseEntity<VendorProfile> updateVendor(
+            @Valid @RequestBody VendorUpdate vendorUpdate,
+            @PathVariable Long vendorId
+    ) throws Exception {
         VendorProfile vendor = vendorService.updateVendor(vendorId,vendorUpdate);
         return ResponseEntity.status(HttpStatus.OK).body(vendor);
     }

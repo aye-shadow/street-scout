@@ -35,11 +35,9 @@ public class Vendor extends User {
     private OperatingHours operatingHours;
 
     @OneToMany
-    @Column(name = "menu")
     private Set<MenuItem> menu = new HashSet<>();
 
     @OneToMany(mappedBy = "vendor")
-    @Column(name = "reviews")
     private List<Review> reviews = new ArrayList<>();
 
     public void addReview(Review review) {

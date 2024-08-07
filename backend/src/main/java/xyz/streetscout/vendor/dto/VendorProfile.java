@@ -11,10 +11,10 @@ public record VendorProfile(
         Long id,
         String name,
         String description,
+        String email,
         List<String> photos,
         Location location,
         OperatingHours operatingHours,
-        Set<MenuItem> menu,
-        String email
+        Set<MenuItem> menu
 ) {
 }

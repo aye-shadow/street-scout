@@ -4,11 +4,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorList;
-import xyz.streetscout.vendor.dto.VendorRegistration;
+import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorUpdate;
 import xyz.streetscout.vendor.entity.Vendor;
+import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.VendorRepository;
 
 import java.util.List;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class VendorServiceImpl implements VendorService {
 
+    private final VendorMapper vendorMapper = VendorMapper.INSTANCE;
     private final VendorRepository vendorRepository;
 
     /**
@@ -31,11 +32,11 @@ public class VendorServiceImpl implements VendorService {
                         entity.getId(),
                         entity.getName(),
                         entity.getDescription(),
+                        entity.getEmail(),
                         entity.getPhotos(),
                         entity.getLocation(),
                         entity.getOperatingHours(),
-                        entity.getMenu(),
-                        entity.getEmail()
+                        entity.getMenu()
                 ))
                 .collect(Collectors.toList());
 
@@ -54,49 +55,12 @@ public class VendorServiceImpl implements VendorService {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
+                entity.getEmail(),
                 entity.getPhotos(),
                 entity.getLocation(),
                 entity.getOperatingHours(),
-                entity.getMenu(),
-                entity.getEmail()
+                entity.getMenu()
         )).orElseThrow(() -> new EntityNotFoundException("Vendor not found"));
-    }
-
-    /**
-     * @param email
-     * @return
-     */
-    @Override
-    public VendorProfile getVendorByEmail(String email) {
-        return null;
-    }
-
-    /**
-     * @param vendorRegistration Initial Vendor information
-     * @return VendorProfile
-     */
-    @Override
-    public VendorProfile registerVendor(VendorRegistration vendorRegistration) {
-        Vendor vendor = new Vendor();
-        vendor.setName(vendorRegistration.name());
-        vendor.setDescription(vendorRegistration.description());
-        vendor.setLocation(vendorRegistration.location());
-        vendor.setOperatingHours(vendorRegistration.operatingHours());
-        vendor.setMenu(vendorRegistration.menu());
-        vendor.setEmail(vendorRegistration.email());
-
-        Vendor savedVendor = vendorRepository.save(vendor);
-
-        return new VendorProfile(
-                savedVendor.getId(),
-                savedVendor.getName(),
-                savedVendor.getDescription(),
-                savedVendor.getPhotos(),
-                savedVendor.getLocation(),
-                savedVendor.getOperatingHours(),
-                savedVendor.getMenu(),
-                savedVendor.getEmail()
-        );
     }
 
     /**
@@ -138,16 +102,7 @@ public class VendorServiceImpl implements VendorService {
 
         Vendor updatedVendor = vendorRepository.save(vendor);
 
-        return new VendorProfile(
-                updatedVendor.getId(),
-                updatedVendor.getName(),
-                updatedVendor.getDescription(),
-                updatedVendor.getPhotos(),
-                updatedVendor.getLocation(),
-                updatedVendor.getOperatingHours(),
-                updatedVendor.getMenu(),
-                updatedVendor.getEmail()
-        );
+        return vendorMapper.toVendorProfile(updatedVendor);
     }
 
     /**
