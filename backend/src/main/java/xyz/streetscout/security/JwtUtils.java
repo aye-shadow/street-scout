@@ -25,13 +25,15 @@ public class JwtUtils {
 
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return Jwts.builder()
+    public JwtToken generateToken(UserDetails userDetails) {
+        Date expiration = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+        String token = Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .expiration(expiration)
                 .signWith(Key)
                 .compact();
+        return new JwtToken(token, expiration);
     }
 
     public String extractUsername(String token) {

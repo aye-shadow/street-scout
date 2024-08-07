@@ -1,35 +1,27 @@
 package xyz.streetscout.customer.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import xyz.streetscout.user.entity.User;
 import xyz.streetscout.vendor.entity.Vendor;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "customer")
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
+@PrimaryKeyJoinColumn(name = "user_id")
+@NoArgsConstructor
+public class Customer extends User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "favourite_vendors",
             joinColumns = @JoinColumn(name = "customer_id"))
     @Column(name = "vendor_name")
-    private Set<String> favouriteVendors;
+    private Set<String> favouriteVendors = new HashSet<>();
 
     public void addFavorite(Vendor vendor) {
         if (favouriteVendors == null) {
