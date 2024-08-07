@@ -23,75 +23,39 @@ public class VendorServiceImpl implements VendorService {
     private final VendorRepository vendorRepository;
 
     /**
-     * @return VendorList
+     * @return <code>VendorList</code>
      */
     @Override
     public VendorList getAllVendors(PageRequest pageRequest) {
         Page<Vendor> vendors = vendorRepository.findAll(pageRequest);
-
         return vendorMapper.toVendorList(vendors);
     }
 
     /**
-     * @param vendorId Vendor id
-     * @return VendorProfile
+     * @param vendorId <code>Vendor</code> id
+     * @return <code>VendorProfile</code>
      */
     @Override
     public VendorProfile getVendorById(Long vendorId) {
-        Optional<Vendor> vendorOptional = vendorRepository.findById(vendorId);
+        Vendor vendor = findById(vendorId);
+        return vendorMapper.toVendorProfile(vendor);
+    }
 
-        return vendorOptional.map(entity -> new VendorProfile(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getEmail(),
-                entity.getPhotos(),
-                entity.getLocation(),
-                entity.getOperatingHours(),
-                entity.getMenu()
-        )).orElseThrow(() -> new EntityNotFoundException("Vendor not found"));
+    private Vendor findById(Long vendorId) {
+        return vendorRepository.findById(vendorId)
+                .orElseThrow(() -> new EntityNotFoundException("Vendor with id " + vendorId + " not found"));
     }
 
     /**
-     * @param vendorUpdate Vendor details to be updated
-     * @return VendorProfile with updated values
+     * @param vendorUpdate <code>VendorUpdate</code> with updated details
+     * @return <code>VendorProfile</code> with updated values
      */
     @Override
     public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
-        Vendor vendor = vendorRepository.findById(vendorId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
-        if (vendorUpdate.description() != null && !vendorUpdate.description().isEmpty()) {
-            vendor.setDescription(vendorUpdate.description());
-        }
-
-        if (vendorUpdate.photos() != null && !vendorUpdate.photos().isEmpty()) {
-            if (vendor.getPhotos() == null) {
-                vendor.setPhotos(vendorUpdate.photos());
-            } else {
-                vendor.getPhotos().addAll(vendorUpdate.photos());
-            }
-        }
-
-        if (vendorUpdate.menu() != null && !vendorUpdate.menu().isEmpty()) {
-            if (vendor.getMenu() == null) {
-                vendor.setMenu(vendorUpdate.menu());
-            } else {
-                vendor.getMenu().addAll(vendorUpdate.menu());
-            }
-        }
-
-        if (vendorUpdate.location() != null) {
-            vendor.setLocation(vendorUpdate.location());
-        }
-        if (vendorUpdate.operatingHours() != null) {
-            vendor.setOperatingHours(vendorUpdate.operatingHours());
-        }
-
-
-        Vendor updatedVendor = vendorRepository.save(vendor);
-
-        return vendorMapper.toVendorProfile(updatedVendor);
+        Vendor vendor = findById(vendorId);
+        vendorMapper.update(vendorUpdate, vendor);
+        vendor = vendorRepository.save(vendor);
+        return vendorMapper.toVendorProfile(vendor);
     }
 
     /**

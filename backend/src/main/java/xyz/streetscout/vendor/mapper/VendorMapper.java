@@ -1,11 +1,11 @@
 package xyz.streetscout.vendor.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import xyz.streetscout.vendor.dto.VendorList;
 import xyz.streetscout.vendor.dto.VendorProfile;
+import xyz.streetscout.vendor.dto.VendorUpdate;
 import xyz.streetscout.vendor.entity.Vendor;
 
 @Mapper
@@ -19,5 +19,6 @@ public interface VendorMapper {
     @Mapping(target = "vendors", source = "content")
     VendorList toVendorList(Page<Vendor> vendors);
 
-
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void update(VendorUpdate vendorUpdate, @MappingTarget Vendor vendor);
 }
