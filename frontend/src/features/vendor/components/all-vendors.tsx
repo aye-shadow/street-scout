@@ -1,28 +1,17 @@
 "use client";
 
 import React, {ReactNode, useState} from 'react';
-import {stringify, useAllVendors, VendorProfile} from "@/features/vendor";
-import {
-  Box,
-  Container,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography
-} from "@mui/material";
+import {useAllVendors, VendorProfile} from "@/features/vendor";
 import {DataTable} from "@/components/data-table";
+import {useRouter} from "next/navigation";
 
 interface Props {
   children?: ReactNode;
 
 }
 
-export function Vendors ({}: Props) {
+export function AllVendors ({}: Props) {
+  const router = useRouter();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const {
@@ -60,6 +49,10 @@ export function Vendors ({}: Props) {
     totalPages
   } = data;
 
+  function handleRowClick(vendor: VendorProfile) {
+    router.push("/test/vendors/" + vendor.id);
+  }
+
   return (
     <DataTable
       title={"Vendors"}
@@ -69,5 +62,9 @@ export function Vendors ({}: Props) {
       rowsPerPage={rowsPerPage}
       setPage={setPage}
       setRowsPerPage={setRowsPerPage}
-    />)
+      onRowClick={(vendor) => {
+        router.push("/test/vendor/" + vendor.id)
+      }}
+    />
+  )
 };

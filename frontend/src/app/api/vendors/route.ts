@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import {BACKEND_API_URL, VendorList} from "../../../features/vendor";
+import {BACKEND_API_URL, VendorList} from "@/features/vendor";
 import axios from "axios";
 
 export async function GET(request: Request) {

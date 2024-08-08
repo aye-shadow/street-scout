@@ -13,17 +13,18 @@ import {
   Typography
 } from "@mui/material";
 
-interface Props {
-  data: object[],
+interface Props<T extends {}> {
+  data: T[],
   page: number,
   totalPages: number,
   rowsPerPage: number,
   setPage: (value: (((prevState: number) => number) | number)) => void,
   setRowsPerPage: (value: (((prevState: number) => number) | number)) => void,
   title: string
+  onRowClick?: (item: T, e: React.MouseEvent<HTMLTableRowElement>) => void
 }
 
-export function DataTable({data, page, totalPages, rowsPerPage, setPage, setRowsPerPage, title}: Props) {
+export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setRowsPerPage, title, onRowClick}: Props<T>) {
 
   const keys = data && data.length > 0
     ? Object.keys(data[0]) as Array<keyof VendorProfile>
@@ -37,6 +38,7 @@ export function DataTable({data, page, totalPages, rowsPerPage, setPage, setRows
     setRowsPerPage(+e.target.value);
     setPage(0);
   };
+
   return (
     <Box sx={{width: '100%'}}>
       <Paper sx={{width: '100%', mb: 2}}>
@@ -58,7 +60,7 @@ export function DataTable({data, page, totalPages, rowsPerPage, setPage, setRows
             </TableHead>
             <TableBody>
               {data.map((item, index) => (
-                <TableRow key={index}>
+                <TableRow hover key={index} onClick={e => onRowClick(item, e)}>
                   {keys.map((key, index) => (
                     <TableCell key={key} align={"center"}>
                       {stringify(item[key])}

@@ -1,6 +1,10 @@
 export * from "./api/get-all-vendors"
 export * from "./types"
 export * from "./utils/constants"
-export * from "./components/vendors"
+export * from "./components/all-vendors"
 export * from "./hooks/use-all-vendors"
 export * from "./utils/stringify"
+
+export * from "./components/vendor-id-client"
+export * from "./hooks/use-vendor"
+export * from "./api/get-vendor"
