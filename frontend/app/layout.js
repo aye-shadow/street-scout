@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         className={`${manrope.className} m-4 relative bg-[rgb(var(--background))]`}
       >
         <Container
-          className="bg-[rgb(var(--foreground))] rounded-lg pb-4"
+          className="bg-[rgb(var(--foreground))] rounded-lg pb-6"
           disableGutters
         >
           <NavBar />

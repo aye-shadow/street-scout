@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import FontProvider from "@/app/theme/fontProvider";
 
-export default function CustomButton({ text }) {
+export default function CustomButton({ text, size }) {
   return (
     <FontProvider>
       <Button
@@ -11,7 +11,7 @@ export default function CustomButton({ text }) {
         sx={{
           backgroundColor: "rgb(var(--lightergreen))",
           color: "white",
-          fontSize: "12px",
+          fontSize: `${size}px`,
           "&:hover": {
             backgroundColor: "rgba(var(--lightergreen), 0.7)", 
           },
