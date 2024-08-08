@@ -1,8 +1,8 @@
 import { Box, Container } from "@mui/material";
 import { Manrope } from "next/font/google";
-import "./globals.css";
-import NavBar from "./components/Navbar";
-import {ReactQueryProvider} from "@/features/utils";
+import "../theme/globals.css";
+import NavBar from "@/components/Navbar";
+import Providers from "@/app/providers";
 
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${manrope.className} m-4 relative bg-[rgb(var(--background))]`}
       >
-        <ReactQueryProvider>
+        <Providers>
           <Container
               className="bg-[rgb(var(--foreground))] rounded-lg pb-4"
               disableGutters
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
               <NavBar />
               <Box px={3}>{children}</Box>
             </Container>
-          </ReactQueryProvider>
+          </Providers>
       </body>
     </html>
   );
