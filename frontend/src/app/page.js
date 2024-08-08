@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {Container} from "@mui/material";
 import {Vendors} from "@/features/vendor";
 

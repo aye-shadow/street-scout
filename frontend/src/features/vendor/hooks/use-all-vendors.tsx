@@ -1,14 +1,14 @@
 import {useQuery} from "@tanstack/react-query";
-import {getAllVendors} from "@/features/vendor";
+import {getAllVendors, VendorProfile} from "@/features/vendor";
 import {VendorList} from "../types";
 
-export function useAllVendors()  {
+export function useAllVendors({ page = 0, rowsPerPage = 5 })  {
+
   return useQuery<VendorList>({
     queryKey: ["vendors"],
     queryFn: async () => {
-      return getAllVendors()
+      return getAllVendors(page, rowsPerPage);
     },
-    refetchOnWindowFocus: false,
-    refetchInterval: 1000 * 30,
+    refetchOnWindowFocus: true,
   });
 }

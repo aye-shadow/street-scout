@@ -1,6 +1,3 @@
-import type {MenuItemDetails} from "@/features/vendor";
-import {Menu} from "@mui/material";
-
 export const stringify = (value: any) => {
   if (typeof value === 'string') {
     return value;

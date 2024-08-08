@@ -1,8 +1,9 @@
 "use client";
 
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {stringify, useAllVendors, VendorProfile} from "@/features/vendor";
 import {
+  Box,
   Container,
   Paper,
   Table,
@@ -10,9 +11,11 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   Typography
 } from "@mui/material";
+import {DataTable} from "@/components/data-table";
 
 interface Props {
   children?: ReactNode;
@@ -20,55 +23,51 @@ interface Props {
 }
 
 export function Vendors ({}: Props) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const {
     data,
     isLoading,
     isError
-  } = useAllVendors()
+  } = useAllVendors({page, rowsPerPage})
 
   if (isLoading) {
-    return <Container>Loading...</Container>
+    return <DataTable
+      title={"Vendors Loading..."}
+      data={[]}
+      totalPages={0}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      setPage={setPage}
+      setRowsPerPage={setRowsPerPage}
+    />
   }
 
   if (isError) {
-    return <Container>Error</Container>
+    return <DataTable
+      title={"Vendors [error]"}
+      data={[]}
+      totalPages={0}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      setPage={setPage}
+      setRowsPerPage={setRowsPerPage}
+    />
   }
 
-
-  const { vendors } = data;
-  const keys = vendors && vendors.length > 0
-    ? Object.keys(vendors[0]) as Array<keyof VendorProfile>
-    : [];
+  const {
+    vendors,
+    totalPages
+  } = data;
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell colSpan={keys.length} align={"center"}>
-              <Typography variant="h2" component="div">Vendors</Typography>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            {keys.map((key, index) => (
-              <TableCell key={key} align="center">
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {vendors.map((vendor, index) => (
-            <TableRow key={index}>
-              {keys.map((key, index) => (
-                <TableCell key={key} align={"center"}>
-                  {stringify(vendor[key])}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    <DataTable
+      title={"Vendors"}
+      data={vendors}
+      totalPages={totalPages}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      setPage={setPage}
+      setRowsPerPage={setRowsPerPage}
+    />)
 };
