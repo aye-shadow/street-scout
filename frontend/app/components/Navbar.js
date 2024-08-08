@@ -2,9 +2,7 @@ import React from "react";
 import Image from "next/image";
 import {
   Box,
-  InputAdornment,
   Link,
-  TextField,
   Typography,
 } from "@mui/material";
 import FontProvider from "../theme/fontProvider";
