@@ -1,7 +1,8 @@
 "use server"
 
 import axios from "axios";
-import {MenuItemRequest, MenuItemList, BACKEND_API_URL} from "@/features/vendor";
+import {BACKEND_API_URL, MenuItemList, MenuItemRequest} from "@/features/vendor";
+import {handleError} from "@/features/utils";
 
 export async function addMenuItem(vendorId: number, payload: MenuItemRequest): Promise<MenuItemList> {
   try {
@@ -12,6 +13,6 @@ export async function addMenuItem(vendorId: number, payload: MenuItemRequest): P
     );
     return data;
   } catch (error: any) {
-    return error.message;
+    return handleError(error)
   }
 };

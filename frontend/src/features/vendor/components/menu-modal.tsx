@@ -10,7 +10,7 @@ interface Props {
 
 export function MenuModal ({ vendor }: Props) {
   const [open, setOpen] = useState(false);
-  const menuItemMutation = useCreateMenuItem();
+  const menuItemMutation = useCreateMenuItem(setOpen);
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,6 +37,7 @@ export function MenuModal ({ vendor }: Props) {
     })
 
   };
+
   return (
     <Box alignItems={"center"}>
       <Button onClick={handleOpen}>Add menu item</Button>
