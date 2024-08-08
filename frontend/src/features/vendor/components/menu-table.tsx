@@ -1,7 +1,8 @@
-import React, {ReactNode} from 'react';
-import {stringify, VendorProfile} from "@/features/vendor";
+"use client";
+
+import React, {ReactNode, useState} from 'react';
+import {MenuItemDetails, MenuModal, stringify} from "@/features/vendor";
 import {
-  Box,
   Paper,
   Table,
   TableBody,
@@ -13,21 +14,17 @@ import {
   Typography
 } from "@mui/material";
 
-interface Props<T extends {}> {
-  data: T[],
-  page: number,
-  totalPages: number,
-  rowsPerPage: number,
-  setPage: (value: (((prevState: number) => number) | number)) => void,
-  setRowsPerPage: (value: (((prevState: number) => number) | number)) => void,
-  title: string
-  onRowClick?: (item: T, e: React.MouseEvent<HTMLTableRowElement>) => void
+interface Props {
+  menu: MenuItemDetails[];
+  children?: ReactNode;
 }
 
-export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setRowsPerPage, title, onRowClick}: Props<T>) {
+export function MenuTable ({ menu, children }: Props) {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const keys = data && data.length > 0
-    ? Object.keys(data[0]) as Array<keyof VendorProfile>
+  const keys = menu && menu.length > 0
+    ? Object.keys(menu[0]) as Array<keyof MenuItemDetails>
     : [];
 
   const handlePageChange = (newPage: number) => {
@@ -46,7 +43,7 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
           <TableHead>
             <TableRow>
               <TableCell colSpan={keys.length} align={"center"}>
-                <Typography variant="h2" component="div">{title}</Typography>
+                <Typography variant="h2" component="div">Menu</Typography>
               </TableCell>
             </TableRow>
             <TableRow>
@@ -58,15 +55,17 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((item, index) => (
-              <TableRow hover key={index} onClick={e => onRowClick(item, e)}>
-                {keys.map((key, index) => (
-                  <TableCell key={key} align={"center"}>
-                    {stringify(item[key])}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
+            {menu
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((item, index) => (
+                <TableRow hover key={index}>
+                  {keys.map((key, index) => (
+                    <TableCell key={key} align={"center"}>
+                      {stringify(item[key])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -74,7 +73,7 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
         rowsPerPageOptions={[5, 10, 20]}
         rowsPerPage={rowsPerPage}
         page={page}
-        count={totalPages ?? 0}
+        count={menu.length}
         onPageChange={(e, page) => handlePageChange(page)}
         onRowsPerPageChange={e => handleChangeRowsPerPage(e)}
         component={"div"}

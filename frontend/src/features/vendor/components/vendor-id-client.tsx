@@ -1,8 +1,9 @@
 "use client";
 
 import React, {ReactNode} from 'react';
-import {useVendor} from "@/features/vendor";
+import {MenuModal, MenuTable, useVendor} from "@/features/vendor";
 import {Container, Typography} from "@mui/material";
+import {DataTable} from "@/components/data-table";
 
 interface Props {
   id: number
@@ -21,9 +22,11 @@ export function VendorIdClient({ id }: Props) {
   console.log(profile)
   return (
     <Container>
-      <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
-        Vendor: {profile.name}
+      <Typography variant="h1" component="div" align={"center"}>
+        {profile.name}
       </Typography>
+      <MenuModal vendor={profile} />
+      <MenuTable menu={profile.menu} />
     </Container>
   );
 };

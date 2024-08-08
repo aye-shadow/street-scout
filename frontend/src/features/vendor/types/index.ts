@@ -33,3 +33,11 @@ export interface OperatingHours {
   open: Date;
   close: Date;
 }
+
+export interface MenuItemRequest {
+  name: string;
+  description: string;
+  price: number;
+}
+
+export interface MenuItemList {}
