@@ -13,7 +13,7 @@ public record VendorUpdate(
         @Schema(description = "Description", example = "Nice place to eat")
         String description,
         @Schema(description = "Location (lat,long)")
-        Location location,
+        LocationDTO location,
         @Schema(description = "Operating hours (open and close)")
-        OperatingHours operatingHours
+        OperatingHoursDTO operatingHours
 ) { }
