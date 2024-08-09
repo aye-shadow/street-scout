@@ -23,7 +23,7 @@ interface Props<T extends {}> {
   onRowClick?: (item: T, e: React.MouseEvent<HTMLTableRowElement>) => void
 }
 
-export function DataTable<T>(
+export function VendorTable<T>(
   {
     title,
     data = [],

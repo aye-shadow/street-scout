@@ -1,8 +1,10 @@
 "use client";
 
 import React from 'react';
-import {MenuModal, MenuTable, useVendor} from "@/features/vendor";
+import {AddMenuItemForm, MenuTable, useVendor} from "@/features/vendor";
 import {Container, Typography} from "@mui/material";
+import {ShowModalButton} from "@/features/modal";
+import {Add} from "@mui/icons-material";
 
 interface Props {
   id: number
@@ -10,7 +12,7 @@ interface Props {
 
 export function VendorIdClient({ id }: Props) {
   const {
-    data: profile,
+    data: vendor,
     isLoading
   } = useVendor(id)
 
@@ -18,14 +20,18 @@ export function VendorIdClient({ id }: Props) {
     return <Container>Loading...</Container>
   }
 
-  console.log(profile)
+  console.log(vendor)
   return (
     <Container>
       <Typography variant="h1" component="div" align={"center"}>
-        {profile.name}
+        {vendor.name}
       </Typography>
-      <MenuModal vendor={profile} />
-      <MenuTable menu={profile.menu} />
+      <ShowModalButton
+        startIcon={<Add />}
+        text={"Add to menu"}>
+        <AddMenuItemForm vendor={vendor} />
+      </ShowModalButton>
+      <MenuTable menu={vendor.menu} />
     </Container>
   );
 };

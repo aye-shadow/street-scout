@@ -2,7 +2,7 @@
 
 import React, {ReactNode, useState} from 'react';
 import {CreateVendorForm, useAllVendors, VendorProfile} from "@/features/vendor";
-import {DataTable} from "@/features/vendor/components/data-table";
+import {VendorTable} from "@/features/vendor/components/vendor-table";
 import {useRouter} from "next/navigation";
 import {ShowModalButton} from "@/features/modal";
 import {Add} from "@mui/icons-material";
@@ -24,7 +24,7 @@ export function AllVendors ({}: Props) {
   } = useAllVendors({page, rowsPerPage})
 
   if (isLoading) {
-    return <DataTable
+    return <VendorTable
       title={"Vendors"}
       data={[]}
       page={page}
@@ -35,7 +35,7 @@ export function AllVendors ({}: Props) {
   }
 
   if (isError) {
-    return <DataTable
+    return <VendorTable
       title={"Vendors"}
       data={[]}
       page={page}
@@ -58,7 +58,7 @@ export function AllVendors ({}: Props) {
         <CreateVendorForm />
       </ShowModalButton>
 
-      <DataTable
+      <VendorTable
         title={"Vendors"}
         data={vendors}
         page={page}
