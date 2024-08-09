@@ -1,9 +1,8 @@
 "use client";
 
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {MenuModal, MenuTable, useVendor} from "@/features/vendor";
 import {Container, Typography} from "@mui/material";
-import {DataTable} from "@/components/data-table";
 
 interface Props {
   id: number
