@@ -5,6 +5,7 @@ import {CreateVendorForm, useAllVendors, VendorProfile} from "@/features/vendor"
 import {DataTable} from "@/features/vendor/components/data-table";
 import {useRouter} from "next/navigation";
 import {ShowModalButton} from "@/features/modal";
+import {Add} from "@mui/icons-material";
 
 interface Props {
   children?: ReactNode;
@@ -46,14 +47,17 @@ export function AllVendors ({}: Props) {
 
   const {
     vendors,
-    totalPages
   } = data;
 
   return (
     <>
-      <ShowModalButton text={"Add Vendor"}>
+      <ShowModalButton
+        text={"Add Vendor"}
+        startIcon={<Add />}
+      >
         <CreateVendorForm />
       </ShowModalButton>
+
       <DataTable
         title={"Vendors"}
         data={vendors}
