@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {ReactQueryProvider} from "@/features/utils";
+import {ReactQueryProvider} from "src/features/lib";
 import {BaseModal} from "@/features/modal";
 import FontProvider from "@/theme/fontProvider";
 

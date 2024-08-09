@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import {UserProfile, UserRegistration} from "@/features/users";
-import {handleError} from "@/features/utils";
+import {handleError} from "src/features/lib";
 import {BACKEND_API_URL} from "@/features/vendor";
 
 export async function registerUser(userInfo: UserRegistration): Promise<UserProfile> {
