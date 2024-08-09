@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Box, Button, FormControl, FormLabel, TextField} from "@mui/material";
-import {MenuItemRequest, useCreateMenuItem, VendorProfile} from "@/features/vendor";
+import {MenuItemRequest, useAddMenuItem, VendorProfile} from "@/features/vendor";
 import {useModalStore} from "@/features/modal";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 export function AddMenuItemForm ({ vendor }: Props) {
   const hideModal = useModalStore(state => state.hide);
-  const menuItemMutation = useCreateMenuItem(hideModal);
+  const menuItemMutation = useAddMenuItem(hideModal);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

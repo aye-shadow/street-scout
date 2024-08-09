@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {addMenuItem, MenuItemRequest, MenuItemList} from "@/features/vendor";
 
-export function useCreateMenuItem(setIsModalOpen: (isModalOpen: boolean) => void)  {
+export function useAddMenuItem(setIsModalOpen: (isModalOpen: boolean) => void)  {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({vendorId, payload }: {vendorId: number, payload: MenuItemRequest}): Promise<MenuItemList> => {
