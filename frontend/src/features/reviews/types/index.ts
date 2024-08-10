@@ -14,3 +14,5 @@ export interface ReviewDetails {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ReviewEdit {}
