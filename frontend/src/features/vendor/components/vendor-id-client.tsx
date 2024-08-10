@@ -40,12 +40,6 @@ export function VendorIdClient({ id }: Props) {
         <CreateReviewForm vendorId={vendor.id} />
       </ShowModalButton>
 
-      <ShowModalButton
-        startIcon={<Add />}
-        text={"Create Review"}>
-        <CreateReviewForm vendorId={vendor.id} />
-      </ShowModalButton>
-
       <DeactivateVendorButton vendor={vendor} />
 
       <MenuTable menu={vendor.menu} />
