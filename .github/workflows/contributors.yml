@@ -1,0 +1,21 @@
+name: Update Contributors
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight
+  push:
+    branches:
+      - main
+
+jobs:
+  update-contributors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate contributors list
+        uses: jakejarvis/github-contributors-action@main
+        with:
+          readme-path: 'README.md'
+          readme-section: '## Contributors'
