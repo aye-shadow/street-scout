@@ -5,6 +5,7 @@ import {AddMenuItemForm, DeactivateVendorButton, MenuTable, useVendor} from "@/f
 import {Container, Typography} from "@mui/material";
 import {ShowModalButton} from "@/features/modal";
 import {Add} from "@mui/icons-material";
+import {CreateReviewForm} from "@/features/reviews";
 
 interface Props {
   id: number
@@ -31,6 +32,12 @@ export function VendorIdClient({ id }: Props) {
         startIcon={<Add />}
         text={"Add to menu"}>
         <AddMenuItemForm vendor={vendor} />
+      </ShowModalButton>
+
+      <ShowModalButton
+        startIcon={<Add />}
+        text={"Create Review"}>
+        <CreateReviewForm vendorId={vendor.id} />
       </ShowModalButton>
 
       <DeactivateVendorButton vendor={vendor} />
