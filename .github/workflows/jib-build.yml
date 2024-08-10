@@ -30,4 +30,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image with Jib
+        working-directory: ./backend
         run: mvn compile jib:build
