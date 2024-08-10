@@ -272,9 +272,9 @@ Start the server
 <!-- CONTRIBUTORS -->
 ## Contributors
 
-<!-- CONTRIBUTORS-LIST:START -->
-<!-- CONTRIBUTORS-LIST:END -->
-
+<a href="https://github.com/aye-shadow/street-scout/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=aye-shadow/street-scout" />
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
