@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.streetscout.user.dto.*;
 import xyz.streetscout.user.service.UserService;
 
+import static xyz.streetscout.user.constants.AuthConstants.AUTHORIZATION_HEADER;
+
 @Tag(
     name = "REST APIs for Authorization",
     description = "REST APIs for User login and registration")
@@ -46,6 +48,8 @@ public class AuthController {
             description = "HTTP Status OK")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest login) {
         LoginResponse loginResponse = userService.loginUser(login);
-        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
+        return ResponseEntity.status(HttpStatus.OK)
+                .header(AUTHORIZATION_HEADER, loginResponse.accessToken())
+                .body(loginResponse);
     }
 }
