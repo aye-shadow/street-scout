@@ -24,7 +24,6 @@ public class OperatingHours {
     @Column(name = "close")
     private LocalTime close;
 
-
     public static OperatingHours allDay() {
         OperatingHours operatingHours = new OperatingHours();
         operatingHours.open = LocalTime.of(0, 0);
