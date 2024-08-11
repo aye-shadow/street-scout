@@ -24,11 +24,13 @@ public class Vendor extends User {
             joinColumns = @JoinColumn(name = "vendor_id"))
     private List<String> photos;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-    @OneToOne
-    private OperatingHours operatingHours;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "op_hours_id", referencedColumnName = "id")
+    private OperatingHours operatingHours = OperatingHours.allDay();
 
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private List<MenuItem> menu = new ArrayList<>();
