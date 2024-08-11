@@ -49,7 +49,7 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest login) {
         LoginResponse loginResponse = userService.loginUser(login);
         return ResponseEntity.status(HttpStatus.OK)
-                .header(AUTHORIZATION_HEADER, loginResponse.accessToken())
+                .header(AUTHORIZATION_HEADER, loginResponse.token())
                 .body(loginResponse);
     }
 }

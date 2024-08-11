@@ -24,6 +24,7 @@ public class CustomerConfig {
         Customer customer = new Customer();
         customer.setName("Mark Jacobs");
         customer.setEmail("mark@jacobs.com");
+        customer.setRole("CUSTOMER");
         customer.setPassword(passwordEncoder.encode("password"));
         customerRepository.save(customer);
     }

@@ -10,7 +10,7 @@ import java.util.Date;
 public record LoginResponse(
         String email,
         String role,
-        String accessToken,
+        String token,
         Date expiresAt
 ) {
 }
