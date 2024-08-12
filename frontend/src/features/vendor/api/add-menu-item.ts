@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import {BACKEND_API_URL, MenuItemList, MenuItemRequest} from "@/features/vendor";
-import {handleError} from "@/features/utils";
+import {handleError} from "src/features/lib";
 
 export async function addMenuItem(vendorId: number, payload: MenuItemRequest): Promise<MenuItemList> {
   try {

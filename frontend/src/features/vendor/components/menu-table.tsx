@@ -1,7 +1,7 @@
 "use client";
 
 import React, {ReactNode, useState} from 'react';
-import {MenuItemDetails, MenuModal, stringify} from "@/features/vendor";
+import {MenuItemDetails, stringify} from "@/features/vendor";
 import {
   Paper,
   Table,

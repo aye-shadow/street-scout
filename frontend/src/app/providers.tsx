@@ -1,5 +1,7 @@
 import React, {ReactNode} from 'react';
-import {ReactQueryProvider} from "@/features/utils";
+import {ReactQueryProvider} from "src/features/lib";
+import {BaseModal} from "@/features/modal";
+import FontProvider from "@/theme/fontProvider";
 
 interface Props {
   children: ReactNode;
@@ -8,7 +10,10 @@ interface Props {
 const Providers = ({ children }: Props) => {
   return (
     <ReactQueryProvider>
-      {children}
+      <FontProvider>
+        <BaseModal />
+        {children}
+      </FontProvider>
     </ReactQueryProvider>
   );
 };

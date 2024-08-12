@@ -1,9 +1,11 @@
 "use client";
 
-import React, {ReactNode} from 'react';
-import {MenuModal, MenuTable, useVendor} from "@/features/vendor";
+import React from 'react';
+import {AddMenuItemForm, DeactivateVendorButton, MenuTable, useVendor} from "@/features/vendor";
 import {Container, Typography} from "@mui/material";
-import {DataTable} from "@/components/data-table";
+import {ShowModalButton} from "@/features/modal";
+import {Add} from "@mui/icons-material";
+import {CreateReviewForm} from "@/features/reviews";
 
 interface Props {
   id: number
@@ -11,7 +13,7 @@ interface Props {
 
 export function VendorIdClient({ id }: Props) {
   const {
-    data: profile,
+    data: vendor,
     isLoading
   } = useVendor(id)
 
@@ -19,14 +21,34 @@ export function VendorIdClient({ id }: Props) {
     return <Container>Loading...</Container>
   }
 
-  console.log(profile)
+  console.log(vendor)
   return (
     <Container>
       <Typography variant="h1" component="div" align={"center"}>
-        {profile.name}
+        {vendor.name}
       </Typography>
-      <MenuModal vendor={profile} />
-      <MenuTable menu={profile.menu} />
+
+      <ShowModalButton
+        startIcon={<Add />}
+        text={"Add to menu"}>
+        <AddMenuItemForm vendor={vendor} />
+      </ShowModalButton>
+
+      <ShowModalButton
+        startIcon={<Add />}
+        text={"Create Review"}>
+        <CreateReviewForm vendorId={vendor.id} />
+      </ShowModalButton>
+
+      <ShowModalButton
+        startIcon={<Add />}
+        text={"Create Review"}>
+        <CreateReviewForm vendorId={vendor.id} />
+      </ShowModalButton>
+
+      <DeactivateVendorButton vendor={vendor} />
+
+      <MenuTable menu={vendor.menu} />
     </Container>
   );
 };

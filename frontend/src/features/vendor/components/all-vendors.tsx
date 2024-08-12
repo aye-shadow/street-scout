@@ -1,9 +1,11 @@
 "use client";
 
 import React, {ReactNode, useState} from 'react';
-import {useAllVendors, VendorProfile} from "@/features/vendor";
-import {DataTable} from "@/components/data-table";
+import {CreateVendorForm, useAllVendors, VendorProfile} from "@/features/vendor";
+import {VendorTable} from "@/features/vendor/components/vendor-table";
 import {useRouter} from "next/navigation";
+import {ShowModalButton} from "@/features/modal";
+import {Add} from "@mui/icons-material";
 
 interface Props {
   children?: ReactNode;
@@ -14,6 +16,7 @@ export function AllVendors ({}: Props) {
   const router = useRouter();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10)
+
   const {
     data,
     isLoading,
@@ -21,10 +24,9 @@ export function AllVendors ({}: Props) {
   } = useAllVendors({page, rowsPerPage})
 
   if (isLoading) {
-    return <DataTable
-      title={"Vendors Loading..."}
+    return <VendorTable
+      title={"Vendors"}
       data={[]}
-      totalPages={0}
       page={page}
       rowsPerPage={rowsPerPage}
       setPage={setPage}
@@ -33,10 +35,9 @@ export function AllVendors ({}: Props) {
   }
 
   if (isError) {
-    return <DataTable
-      title={"Vendors [error]"}
+    return <VendorTable
+      title={"Vendors"}
       data={[]}
-      totalPages={0}
       page={page}
       rowsPerPage={rowsPerPage}
       setPage={setPage}
@@ -46,25 +47,28 @@ export function AllVendors ({}: Props) {
 
   const {
     vendors,
-    totalPages
   } = data;
 
-  function handleRowClick(vendor: VendorProfile) {
-    router.push("/test/vendors/" + vendor.id);
-  }
-
   return (
-    <DataTable
-      title={"Vendors"}
-      data={vendors}
-      totalPages={totalPages}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      setPage={setPage}
-      setRowsPerPage={setRowsPerPage}
-      onRowClick={(vendor) => {
-        router.push("/test/vendor/" + vendor.id)
-      }}
-    />
+    <>
+      <ShowModalButton
+        text={"Add Vendor"}
+        startIcon={<Add />}
+      >
+        <CreateVendorForm />
+      </ShowModalButton>
+
+      <VendorTable
+        title={"Vendors"}
+        data={vendors}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        setPage={setPage}
+        setRowsPerPage={setRowsPerPage}
+        onRowClick={(vendor) => {
+          router.push("/test/vendor/" + vendor.id)
+        }}
+      />
+    </>
   )
 };

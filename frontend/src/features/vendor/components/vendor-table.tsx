@@ -14,20 +14,28 @@ import {
 } from "@mui/material";
 
 interface Props<T extends {}> {
-  data: T[],
-  page: number,
-  totalPages: number,
-  rowsPerPage: number,
-  setPage: (value: (((prevState: number) => number) | number)) => void,
-  setRowsPerPage: (value: (((prevState: number) => number) | number)) => void,
   title: string
+  data?: T[],
+  page?: number,
+  rowsPerPage?: number,
+  setPage?: (value: number) => void,
+  setRowsPerPage?: (value: number) => void,
   onRowClick?: (item: T, e: React.MouseEvent<HTMLTableRowElement>) => void
 }
 
-export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setRowsPerPage, title, onRowClick}: Props<T>) {
-
+export function VendorTable<T>(
+  {
+    title,
+    data = [],
+    page = 0,
+    rowsPerPage = 5,
+    setPage,
+    setRowsPerPage,
+    onRowClick,
+  }: Props<T>
+) {
   const keys = data && data.length > 0
-    ? Object.keys(data[0]) as Array<keyof VendorProfile>
+    ? Object.keys(data[0]) as Array<keyof T>
     : [];
 
   const handlePageChange = (newPage: number) => {
@@ -51,8 +59,8 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
             </TableRow>
             <TableRow>
               {keys.map((key, index) => (
-                <TableCell key={key} align="center">
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                <TableCell key={String(key)} align="center">
+                  {String(key).charAt(0).toUpperCase() + String(key).slice(1)}
                 </TableCell>
               ))}
             </TableRow>
@@ -60,8 +68,10 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
           <TableBody>
             {data.map((item, index) => (
               <TableRow hover key={index} onClick={e => onRowClick(item, e)}>
-                {keys.map((key, index) => (
-                  <TableCell key={key} align={"center"}>
+                {keys
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((key, index) => (
+                  <TableCell key={String(key)} align={"center"}>
                     {stringify(item[key])}
                   </TableCell>
                 ))}
@@ -74,7 +84,7 @@ export function DataTable<T>({data, page, totalPages, rowsPerPage, setPage, setR
         rowsPerPageOptions={[5, 10, 20]}
         rowsPerPage={rowsPerPage}
         page={page}
-        count={totalPages ?? 0}
+        count={data.length}
         onPageChange={(e, page) => handlePageChange(page)}
         onRowsPerPageChange={e => handleChangeRowsPerPage(e)}
         component={"div"}
