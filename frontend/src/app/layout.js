@@ -9,7 +9,7 @@ const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
 export const metadata = {
   title: "Street Scout",
   description:
-    "by Devin, Satyam, Ayesha, and Megan for the Boost Hacks II Hackathon",
+    "by MADS & Co. for the Boost Hacks II Hackathon",
 };
 
 export default function RootLayout({ children }) {
