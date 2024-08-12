@@ -18,7 +18,7 @@ docker compose up -d
 ## [API Reference](http://localhost:8080/swagger-ui.html)
 
 ### [Auth](http://localhost:8080/auth)
-- `POST /auth/register` - Register user (VENDOR | CUSTOMER)
+- `POST /auth/register` - Register user
 - `POST /auth/login` - Login with credentials
 
 ### [Vendors](http://localhost:8080/api/vendors)
@@ -89,3 +89,4 @@ docker compose up -d
 - `price`: number;
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
