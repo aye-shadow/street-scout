@@ -68,7 +68,7 @@
 ## Technical Stack
 
 ### Frontend
-- **Framework**: Next.js
+- **Framework**: Next.js, MaterialUI
 - **State Management**: Redux/Context/Zustand for managing application state
 
 ### Backend
