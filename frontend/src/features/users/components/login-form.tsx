@@ -1,8 +1,8 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {Box, Button, FormControl, FormLabel, TextField} from "@mui/material";
-import {signIn} from "next-auth/react";
+import {signIn} from "@/features/lib/auth/auth";
 
 interface Props {}
 
@@ -10,10 +10,8 @@ export function LoginForm (props: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    })
+    signIn("credentials", formData)
+      .then((result) => {})
   };
 
   return (

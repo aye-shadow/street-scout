@@ -1,6 +1,6 @@
 "use server"
 
-import axios from "@/features/lib/api/axios";
+import axios from "@/features/lib/axios";
 
 export async function deactivateVendor(vendorId: number) {
   try {

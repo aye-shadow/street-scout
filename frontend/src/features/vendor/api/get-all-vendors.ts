@@ -2,7 +2,7 @@
 
 import {VendorList} from "../types";
 import {handleError} from "src/features/lib";
-import axios from "@/features/lib/api/axios";
+import axios from "@/features/lib/axios";
 
 export async function getAllVendors(page = 0, size = 10): Promise<VendorList> {
   try {

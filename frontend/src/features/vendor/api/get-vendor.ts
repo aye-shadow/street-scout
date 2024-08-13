@@ -2,7 +2,7 @@
 
 import {VendorProfile} from "@/features/vendor";
 import {handleError} from "src/features/lib";
-import axios from "@/features/lib/api/axios";
+import axios from "@/features/lib/axios";
 
 export async function getVendor(id: number): Promise<VendorProfile> {
   try {

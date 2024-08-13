@@ -5,6 +5,11 @@ export const authConfig = {
     signIn: `/signin`,
     verifyRequest: `/signin`,
     error: "/signin", // Error code passed in query string as ?error=
-  }, // Add providers with an empty array for now
+  },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      return !!auth?.user;
+    },
+  },
   providers: []
 } satisfies NextAuthConfig;
