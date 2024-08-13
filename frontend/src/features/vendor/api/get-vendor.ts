@@ -6,7 +6,7 @@ import axios from "@/features/lib/axios";
 
 export async function getVendor(id: number): Promise<VendorProfile> {
   try {
-    const { data } = await axios.get<VendorProfile>(
+    const { data  } = await axios.get<VendorProfile>(
       `/api/vendors/${id}`);
     return data;
   } catch (error: any) {

@@ -1,5 +1,7 @@
-import axios from "axios";
+"use server"
+
 import {LoginRequest, LoginResponse} from "@/features/users";
+import axios from "@/features/lib/axios";
 
 export async function loginUser(loginCredentials: LoginRequest) {
   try {
