@@ -8,9 +8,10 @@ import java.util.Date;
     name = "LoginResponse",
     description = "Schema to hold Auth token after login")
 public record LoginResponse(
+        Long id,
         String email,
         String role,
         String token,
-        Date expiresAt
+        Date expiration
 ) {
 }
