@@ -1,10 +1,9 @@
 import React from 'react';
-import {Container, Paper} from "@mui/material";
+import {Container} from "@mui/material";
 import {ShowModalButton} from "@/features/modal";
 import {Add} from "@mui/icons-material";
-import {AddMenuItemForm, DeactivateVendorButton, DataTable, MenuData, MenuPagination} from "@/features/vendor";
+import {AddMenuItemForm, DeactivateVendorButton, VendorMenu} from "@/features/vendor";
 import {CreateReviewForm} from "@/features/reviews";
-import {menuItemKeys} from "@/features/lib";
 
 interface Props {
   params: { id: number };
@@ -31,12 +30,8 @@ const VendorIdPage = ({ params }: Props) => {
 
       <DeactivateVendorButton vendorId={id} />
 
-      <Paper sx={{width: '100%', mb: 2}}>
-        <DataTable header={"Menu"} columns={menuItemKeys}>
-          <MenuData vendorId={id} />
-        </DataTable>
-        <MenuPagination vendorId={id} />
-      </Paper>
+      <VendorMenu vendorId={id} />
+
     </Container>
     )
 };
