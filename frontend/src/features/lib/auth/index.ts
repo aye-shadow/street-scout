@@ -22,7 +22,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             .safeParse(credentials);
 
           if (parsedCredentials.success) {
-            console.log(parsedCredentials);
             const { email, password } = parsedCredentials.data
             const { data} = await axios.post<LoginResponse>(
               `/auth/login`,
@@ -31,8 +30,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 password
               }
             );
-
-            console.log("loginResponse", data, typeof data.expiresAt)
 
             if (data.token) {
               return {

@@ -1,22 +1,16 @@
-"use client";
+"use client"
 
 import React from 'react';
 import {Box, Button, FormControl, FormLabel, TextField} from "@mui/material";
-import {signIn} from "@/features/lib/auth/auth";
+import {useSignIn} from "@/features/users";
 
 interface Props {}
 
 export function LoginForm (props: Props) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    signIn("credentials", formData)
-      .then((result) => {})
-  };
-
+  const { mutate: signIn } = useSignIn();
   return (
     <Box alignItems={"center"}>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form action={signIn}>
         <FormControl>
           <FormLabel htmlFor={"email"}>Enter Email</FormLabel>
           <TextField id={"email"} name={"email"} type={"email"} />

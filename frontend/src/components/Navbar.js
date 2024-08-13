@@ -63,7 +63,7 @@ export default function NavBar() {
               ),
             }}
           />
-          <Link href="../signin" color={"inherit"}>
+          <Link href="/signin" color={"inherit"}>
             <CustomButton text={'Sign In'} />
           </Link>
         </FontProvider>
