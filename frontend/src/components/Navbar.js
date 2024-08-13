@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
-import FontProvider from "@/theme/fontProvider";
+import { Box, Link, Typography } from "@mui/material";
+import FontProvider from "../theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "./ui/CustomButton";
+import SearchBar from "./ui/SearchBar";
 
 export default function NavBar() {
   return (
@@ -15,9 +16,9 @@ export default function NavBar() {
       py={2}
       px={3}
       borderBottom={"1px solid rgb(var(--lightergreen))"}
-      position={'relative'}
-      mb={2}
-      className="text-[var(--darkgreen)]"
+      position={"relative"}
+      mb={3}
+      sx={{ color: "var(--darkgreen)" }}
     >
       <Link
         href="/"
@@ -35,33 +36,19 @@ export default function NavBar() {
           className="w-auto h-auto"
           priority="true"
         />
-        <Typography variant="h7" className="font-bold">
+        <Typography variant="h7" sx={{ fontWeight: "bold" }}>
           Street Scout
         </Typography>
       </Link>
       <Box display={"flex"} gap={2}>
         <FontProvider>
-          <TextField
-            placeholder="Search..."
-            variant="outlined"
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(var(--lightergreen))",
-                },
-              },
-              "& .MuiInputBase-input": {
-                fontSize: "12px",
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{color: 'rgb(var(--lightergreen))'}} />
-                </InputAdornment>
-              ),
-            }}
+          <SearchBar
+            searchFontSize={12}
+            searchBarSize={"small"}
+            placeholderText={"Search..."}
+            startAdornComp={
+              <SearchIcon sx={{ color: "rgb(var(--lightergreen))" }} />
+            }
           />
           <Link href="/signin" color={"inherit"}>
             <CustomButton text={'Sign In'} />

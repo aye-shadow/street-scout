@@ -72,8 +72,9 @@ information on food truck locations, menus, and wait times.
 ## Technical Stack
 
 ### Frontend
-- **Framework**: Next.js
-- **State Management**: Context/Zustand for managing application state
+
+- **Framework**: Next.js, MaterialUI
+- **State Management**: Redux/Context/Zustand for managing application state
 
 ### Backend
 - **Framework**: Spring Boot
