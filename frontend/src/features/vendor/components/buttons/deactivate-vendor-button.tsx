@@ -6,20 +6,20 @@ import {useDeactivateVendor, VendorProfile} from "@/features/vendor";
 import {Delete} from "@mui/icons-material";
 
 interface Props extends ButtonProps {
-  vendor: VendorProfile;
+  vendorId: number;
 }
 
-export function DeactivateVendorButton ({ vendor, ...rest }: Props) {
+export function DeactivateVendorButton ({ vendorId, ...rest }: Props) {
   const {
     mutate: deactivate
-  } = useDeactivateVendor(vendor.id);
+  } = useDeactivateVendor(vendorId);
   return (
     <Button
       startIcon={<Delete />}
       {...rest}
       onClick={() => deactivate()}
     >
-      Deactivate {vendor.name}
+      Deactivate vendor
     </Button>
   );
 };

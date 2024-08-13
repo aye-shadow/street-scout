@@ -19,30 +19,12 @@ export function AllVendors ({}: Props) {
 
   const {
     data,
-    isLoading,
+    isPending,
     isError
   } = useAllVendors({page, rowsPerPage})
 
-  if (isLoading) {
-    return <VendorTable
-      title={"Vendors"}
-      data={[]}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      setPage={setPage}
-      setRowsPerPage={setRowsPerPage}
-    />
-  }
-
-  if (isError) {
-    return <VendorTable
-      title={"Vendors"}
-      data={[]}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      setPage={setPage}
-      setRowsPerPage={setRowsPerPage}
-    />
+  if (isPending) {
+    return <>Pending...</>
   }
 
   const {
@@ -51,13 +33,6 @@ export function AllVendors ({}: Props) {
 
   return (
     <>
-      <ShowModalButton
-        text={"Add Vendor"}
-        startIcon={<Add />}
-      >
-        <CreateVendorForm />
-      </ShowModalButton>
-
       <VendorTable
         title={"Vendors"}
         data={vendors}
@@ -66,7 +41,7 @@ export function AllVendors ({}: Props) {
         setPage={setPage}
         setRowsPerPage={setRowsPerPage}
         onRowClick={(vendor) => {
-          router.push("/test/vendor/" + vendor.id)
+          router.push("/vendor/" + vendor.id)
         }}
       />
     </>

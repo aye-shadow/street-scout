@@ -2,7 +2,8 @@ import axios, {AxiosError} from "axios";
 
 export function handleError(error: any) {
   if (axios.isAxiosError(error)) {
-    console.error("Axios Error:", (error as AxiosError).message);
+    const e = (error as AxiosError);
+    console.error("Axios Error:", e.message, e.status);
     return (error as AxiosError).response?.data || "Unknown error"
   }
 

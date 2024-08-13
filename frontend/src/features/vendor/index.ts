@@ -6,7 +6,7 @@ export * from "@/features/vendor/components/forms/add-menu-item-form"
 export * from "./components/all-vendors"
 export * from "@/features/vendor/components/forms/create-vendor-form"
 export * from "./components/vendor-table"
-export * from "./components/menu-table"
+export * from "./components/data-table"
 export * from "./components/vendor-id-client"
 export * from "./hooks/use-add-menu-item"
 export * from "./hooks/use-all-vendors"
@@ -19,3 +19,8 @@ export * from "./api/deactivate-vendor"
 export * from "./hooks/use-deactivate-vendor"
 
 export * from "./components/buttons/deactivate-vendor-button"
+
+export * from "./stores/use-menu-table"
+
+export * from "./components/menu-pagination"
+export * from "./components/menu-data"
