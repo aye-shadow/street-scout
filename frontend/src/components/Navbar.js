@@ -1,10 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {
-  Box,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import FontProvider from "../theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "./ui/CustomButton";
@@ -22,7 +18,7 @@ export default function NavBar() {
       borderBottom={"1px solid rgb(var(--lightergreen))"}
       position={"relative"}
       mb={3}
-      className="text-[var(--darkgreen)]"
+      sx={{ color: "var(--darkgreen)" }}
     >
       <Link
         href="/"
@@ -40,7 +36,7 @@ export default function NavBar() {
           className="w-auto h-auto"
           priority="true"
         />
-        <Typography variant="h7" className="font-bold">
+        <Typography variant="h7" sx={{ fontWeight: "bold" }}>
           Street Scout
         </Typography>
       </Link>
