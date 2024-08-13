@@ -3,9 +3,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import {authConfig} from './auth.config';
 import {LoginResponse} from "@/features/users";
 import {z} from "zod";
-import axios from "axios";
-
-const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL;
+import {handleError} from "@/features/lib";
+import axios from "@/features/lib/axios";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -23,26 +22,29 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             .safeParse(credentials);
 
           if (parsedCredentials.success) {
-            const { email, password } = parsedCredentials.data;
+            console.log(parsedCredentials);
+            const { email, password } = parsedCredentials.data
             const { data} = await axios.post<LoginResponse>(
-              `${BACKEND_API_URL}/auth/login`,
+              `/auth/login`,
               {
                 email,
                 password
               }
             );
 
+            console.log("loginResponse", data, typeof data.expiresAt)
+
             if (data.token) {
               return {
                 role: data.role,
                 email: data.email,
-                expiration: data.expiresAt.toISOString(),
+                expiresAt: data.expiresAt,
                 jwtToken: data.token,
               };
             }
           }
         } catch(error: any) {
-          console.log("Authorization error:", error.message);
+          handleError(error)
         }
         return null;
       }
@@ -53,7 +55,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (user) {
         token.role = user.role;
         token.jwtToken = user.jwtToken;
-        token.expiration = user.expiration;
+        token.expiresAt = user.expiresAt;
       }
       return token;
     },
@@ -61,7 +63,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (token && session.user) {
         session.user.role = token.role as string;
         session.user.jwtToken = token.jwtToken as string;
-        session.user.expiration = token.expiration as string;
+        // @ts-expect-error
+        session.user.expiresAt = token.expiresAt;
       }
       return session;
     }
