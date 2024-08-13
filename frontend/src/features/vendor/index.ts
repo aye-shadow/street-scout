@@ -18,3 +18,8 @@ export * from "./hooks/use-deactivate-vendor"
 export * from "./components/buttons/deactivate-vendor-button"
 
 export * from "./stores/use-menu-table"
+
+export * from "./components/vendor-name-input"
+export * from "./api/update-vendor"
+export * from "./hooks/use-update-vendor"
+export * from "./stores/use-vendor"

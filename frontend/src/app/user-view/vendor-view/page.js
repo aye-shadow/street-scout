@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import {auth} from "@/features/lib/auth";
 import {redirect} from "next/navigation";
+import {VendorNameInput} from "@/features/vendor";
 
 export default async function VendorView() {
     const session = await auth();
@@ -58,14 +59,14 @@ export default async function VendorView() {
                             Enter the name of your business here. Keep it short
                             and simple.
                         </Typography>
-                        <TextField
-                            fullWidth
-                            variant="filled"
-                            sx={{
-                                bgcolor: "#F3F695",
-                                "& .MuiInputBase-input": { color: "black" },
-                                borderRadius: 4,
-                            }}
+                        <VendorNameInput
+                          fullWidth
+                          variant="filled"
+                          sx={{
+                              bgcolor: "#F3F695",
+                              "& .MuiInputBase-input": { color: "black" },
+                              borderRadius: 4,
+                          }}
                         />
                     </Box>
 
