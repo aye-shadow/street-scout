@@ -1,9 +1,10 @@
-import { Manrope } from "next/font/google";
-import { Box, Container } from "@mui/material";
-import { shadows } from "@mui/system";
+import {Manrope} from "next/font/google";
+import {Box, Container} from "@mui/material";
 import "../theme/globals.css";
 import NavBar from "@/components/Navbar";
 import Providers from "@/app/providers";
+import {BaseModal} from "@/features/modal";
+import React from "react";
 
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
             }}
           >
             <NavBar />
+            <BaseModal />
             <Box px={3}>{children}</Box>
           </Container>
         </Providers>

@@ -13,7 +13,6 @@ const Providers = ({ children }: Props) => {
     <SessionProvider>
       <ReactQueryProvider>
         <FontProvider>
-          <BaseModal />
           {children}
         </FontProvider>
       </ReactQueryProvider>

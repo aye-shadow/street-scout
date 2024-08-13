@@ -1,3 +1,5 @@
+import {PartialPick} from "@/features/lib/types";
+
 export interface VendorList {
   page: number;
   totalPages: number;
@@ -41,3 +43,5 @@ export interface MenuItemRequest {
 }
 
 export interface MenuItemList {}
+
+export type VendorUpdate = PartialPick<VendorProfile, "name" | "description" | "location" | "operatingHours">

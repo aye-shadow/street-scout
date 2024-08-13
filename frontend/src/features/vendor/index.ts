@@ -13,8 +13,15 @@ export * from "./hooks/use-vendor"
 export * from "./utils/stringify"
 
 export * from "./api/deactivate-vendor"
-export * from "./hooks/use-deactivate-vendor"
+export * from "./api/update-vendor"
 
 export * from "./components/buttons/deactivate-vendor-button"
+export * from "./components/buttons/save-vendor-button"
+export * from "./components/inputs/vendor-name-input"
+
+export * from "./hooks/use-deactivate-vendor"
+export * from "./hooks/use-update-vendor"
 
 export * from "./stores/use-menu-table"
+export * from "./stores/use-vendor"
+
