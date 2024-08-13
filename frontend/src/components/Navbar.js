@@ -20,7 +20,7 @@ export default function NavBar() {
       className="text-[var(--darkgreen)]"
     >
       <Link
-        href="/frontend/public"
+        href="/"
         display={"flex"}
         alignItems={"center"}
         gap={2}

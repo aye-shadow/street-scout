@@ -1,7 +1,7 @@
 import React from "react";
+import {LoginForm} from "@/features/users";
 
 export default function SignIn() {
-  return (
-    <div>signin</div>
-  );
+
+    return (<LoginForm />);
 }

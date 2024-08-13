@@ -1,11 +1,9 @@
 "use client";
 
 import React, {ReactNode, useState} from 'react';
-import {CreateVendorForm, useAllVendors, VendorProfile} from "@/features/vendor";
+import {useAllVendors} from "@/features/vendor";
 import {VendorTable} from "@/features/vendor/components/vendor-table";
 import {useRouter} from "next/navigation";
-import {ShowModalButton} from "@/features/modal";
-import {Add} from "@mui/icons-material";
 
 interface Props {
   children?: ReactNode;

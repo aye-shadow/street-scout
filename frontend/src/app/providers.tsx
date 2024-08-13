@@ -1,8 +1,8 @@
 import React, {ReactNode} from 'react';
-import {ReactQueryProvider} from "src/features/lib";
 import {BaseModal} from "@/features/modal";
 import FontProvider from "@/theme/fontProvider";
 import {SessionProvider} from "next-auth/react";
+import {ReactQueryProvider} from "@/features/lib";
 
 interface Props {
   children: ReactNode;
