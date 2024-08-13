@@ -7,8 +7,16 @@ import {
     Grid,
     Container,
 } from "@mui/material";
+import {auth} from "@/features/lib/auth";
+import {redirect} from "next/navigation";
 
-export default function Home() {
+export default async function VendorView() {
+    const session = await auth();
+
+    if (!session) redirect("/signin");
+    if (session.user?.role !== "VENDOR") redirect("/user-view/customer-view");
+
+
     return (
         <Container
             maxWidth="lg"
