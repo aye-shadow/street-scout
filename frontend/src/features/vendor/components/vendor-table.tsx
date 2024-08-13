@@ -66,17 +66,8 @@ export function VendorTable<T>(
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((item, index) => (
-              <TableRow hover key={index} onClick={e => onRowClick(item, e)}>
-                {keys
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((key, index) => (
-                  <TableCell key={String(key)} align={"center"}>
-                    {stringify(item[key])}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
+            {"vendor data"}
+
           </TableBody>
         </Table>
       </TableContainer>
@@ -92,3 +83,17 @@ export function VendorTable<T>(
     </Paper>
   );
 };
+
+/**
+ * {data.map((item, index) => (
+ *               <TableRow hover key={index} onClick={e => onRowClick(item, e)}>
+ *                 {keys
+ *                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+ *                   .map((key, index) => (
+ *                     <TableCell key={String(key)} align={"center"}>
+ *                       {stringify(item[key])}
+ *                     </TableCell>
+ *                   ))}
+ *               </TableRow>
+ *             ))}
+ */

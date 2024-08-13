@@ -15,4 +15,7 @@ export interface ReviewDetails {
   updatedAt: Date;
 }
 
-export interface ReviewEdit {}
+export interface ReviewEdit {
+  rating?: number;
+  text?: string;
+}

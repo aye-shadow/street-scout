@@ -1,24 +1,13 @@
 "use client";
 
 import React, {useState} from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField
-} from "@mui/material";
-import {useModalStore} from "@/features/modal";
 import {useRegisterUser, UserRegistration, UserRole} from "@/features/users";
+import {useModalStore} from "@/features/modal";
+import {Box, Button, FormControl, FormLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 
 interface Props {}
 
-export function CreateVendorForm (props: Props) {
-
+export function RegisterForm (props: Props) {
   const [role, setRole] = useState<UserRole>("VENDOR")
 
   const hideModal = useModalStore(state => state.hide);
