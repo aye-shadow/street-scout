@@ -1,14 +1,25 @@
-import { useMutation } from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
+import {updateVendor, useVendorStore, VendorUpdate} from "@/features/vendor";
 
 export function useUpdateVendor()  {
 
-  return useMutation({
-    mutationFn: async () => {},
+  const vendorStore = useVendorStore();
 
-    onSuccess: (data) => {},
+  return useMutation({
+    mutationFn: async () => {
+      const vendorDetails: VendorUpdate = {
+        ...vendorStore
+      }
+      return updateVendor(vendorDetails)
+    },
+
+
+    onSuccess: (data) => {
+      console.log("⚡️updateVendor", data)
+    },
 
     onError: (error) => {
-      console.log("error", error);
+      console.log("🛑error", error);
     },
   });
 };

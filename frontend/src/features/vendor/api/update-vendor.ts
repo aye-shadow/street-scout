@@ -1,8 +1,13 @@
-import axios from "axios";
+"use server"
 
-export async function updateVendor() {
+import {VendorProfile, VendorUpdate} from "@/features/vendor";
+import axios from "@/features/lib/axios";
+
+export async function updateVendor(vendorDetails: VendorUpdate) {
   try {
-    const { data } = await axios.get<any>(`/api/vendor/update-vendor`,
+    const { data } = await axios.put<VendorProfile>(
+      `/api/vendors`,
+      vendorDetails,
     );
     return data;
   } catch (error: any) {
