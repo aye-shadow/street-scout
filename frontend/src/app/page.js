@@ -1,11 +1,10 @@
-import { Box, Grid, Typography } from "@mui/material";
+import {Box, Grid, Typography} from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
-import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "@/components/ui/CustomButton";
 import BoldWord from "@/components/ui/BoldWord";
-import {SearchBar} from "@/features/search";
+import {LocationAdornment, SearchBar} from "@/features/search";
 
 export default function Home() {
     const localFoodVendors = [
@@ -79,7 +78,7 @@ export default function Home() {
                     bgColor="white"
                     placeholder={"Enter your location"}
                     startAdornComp={
-                        <SearchIcon
+                        <LocationAdornment
                             sx={{ color: "rgb(var(--lightergreen))" }}
                         />
                     }
