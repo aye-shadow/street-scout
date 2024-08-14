@@ -1,4 +1,5 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,23 +10,23 @@ import BoldWord from "@/components/ui/BoldWord";
 import Link from "next/link";
 
 export default function Home() {
-  const localFoodVendors = [
-    {
-      name: "Spice Delight",
-      description: "Tasty Indian dishes, from curries to biryanis.",
-      imageURL: "/indian.jpg",
-    },
-    {
-      name: "Arabian Nights",
-      description: "Authentic Middle Eastern eats, kebabs to baklavas.",
-      imageURL: "/arabic.jpg",
-    },
-    {
-      name: "Sweet Treats Bakery",
-      description: "Fresh bakery goods, breads to cakes and pastries.",
-      imageURL: "/bakery.jpg",
-    },
-  ];
+    const localFoodVendors = [
+        {
+            name: "Spice Delight",
+            description: "Tasty Indian dishes, from curries to biryanis.",
+            imageURL: "/indian.jpg",
+        },
+        {
+            name: "Arabian Nights",
+            description: "Authentic Middle Eastern eats, kebabs to baklavas.",
+            imageURL: "/arabic.jpg",
+        },
+        {
+            name: "Sweet Treats Bakery",
+            description: "Fresh bakery goods, breads to cakes and pastries.",
+            imageURL: "/bakery.jpg",
+        },
+    ];
 
   return (
     <>
