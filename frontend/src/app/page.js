@@ -3,68 +3,33 @@ import Link from "next/link";
 import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import CustomButton from "@/components/ui/CustomButton";
 import SearchBar from "@/components/ui/SearchBar";
 import BoldWord from "@/components/ui/BoldWord";
-import Link from "next/link";
+import BigImage from "@/components/ui/BigImage";
 
 export default function Home() {
-    const localFoodVendors = [
-        {
-            name: "Spice Delight",
-            description: "Tasty Indian dishes, from curries to biryanis.",
-            imageURL: "/indian.jpg",
-        },
-        {
-            name: "Arabian Nights",
-            description: "Authentic Middle Eastern eats, kebabs to baklavas.",
-            imageURL: "/arabic.jpg",
-        },
-        {
-            name: "Sweet Treats Bakery",
-            description: "Fresh bakery goods, breads to cakes and pastries.",
-            imageURL: "/bakery.jpg",
-        },
-    ];
+  const localFoodVendors = [
+    {
+      name: "Spice Delight",
+      description: "Tasty Indian dishes, from curries to biryanis.",
+      imageURL: "/indian.jpg",
+    },
+    {
+      name: "Arabian Nights",
+      description: "Authentic Middle Eastern eats, kebabs to baklavas.",
+      imageURL: "/arabic.jpg",
+    },
+    {
+      name: "Sweet Treats Bakery",
+      description: "Fresh bakery goods, breads to cakes and pastries.",
+      imageURL: "/bakery.jpg",
+    },
+  ];
 
   return (
     <>
-      <Box
-        width="100%"
-        height="100vh"
-        position={"relative"}
-        marginBottom={10}
-        overflow={"hidden"}
-        borderRadius={"10px"}
-        display={"flex"}
-        alignItems={"center"}
-        gap={3}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        padding={3}
-      >
-        <Image
-          src="/landing.jpg"
-          sizes="100vw"
-          alt="Street Scout"
-          fill={true}
-          className="w-auto h-auto z-0 relative"
-          style={{ objectFit: "cover", objectPosition: "85% 50%" }}
-        />
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          width="100%"
-          height="100%"
-          bgcolor="rgba(0, 0, 0, 0)" // Start fully transparent
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%)",
-            pointerEvents: "none", // Ensure clicks pass through the overlay
-          }}
-        />
+      <BigImage imageUrl={"/landing.jpg"}>
         <FontProvider>
           <Typography
             fontSize={"250%"}
@@ -87,7 +52,7 @@ export default function Home() {
           }
           endAdornComp={<CustomButton text="Find Vendors" size={15} />}
         />
-      </Box>
+      </BigImage>
       <FontProvider>
         <Typography
           variant="h3"
@@ -95,6 +60,7 @@ export default function Home() {
           position={"relative"}
           marginBottom={3}
           color={"var(--darkgreen)"}
+          marginTop={4}
         >
           Why choose Street Scout?
         </Typography>
