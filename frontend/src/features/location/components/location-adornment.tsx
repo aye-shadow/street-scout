@@ -1,14 +1,14 @@
 "use client";
 
 import React from 'react';
-import {GpsFixed} from "@mui/icons-material";
-import {SvgIconProps} from "@mui/material";
+import {GpsFixed, LocationOn, LocationSearching} from "@mui/icons-material";
+import {SvgIcon, SvgIconProps} from "@mui/material";
 import {useGeolocation} from "@/features/location";
 
 interface Props extends SvgIconProps {}
 
 export function LocationAdornment ({ ...iconProps }: Props) {
-  const { getGeoLocation } = useGeolocation();
+  const { getGeoLocation, location } = useGeolocation();
 
   const handleClick = () => {
     getGeoLocation();
@@ -16,8 +16,9 @@ export function LocationAdornment ({ ...iconProps }: Props) {
   };
 
   return (
-    <GpsFixed
+    <SvgIcon
       {...iconProps}
+      component={location == null ? LocationSearching : LocationOn}
       cursor={"pointer"}
       onClick={handleClick}
     />
