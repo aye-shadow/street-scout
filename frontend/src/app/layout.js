@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.className} relative pb-4`}>
+      <body className={`${manrope.className} relative`} style={{padding: '1.5rem'}}>
         <Providers>
           <Container
             disableGutters
@@ -23,10 +23,8 @@ export default function RootLayout({ children }) {
               boxShadow: 3,
               backgroundColor: "rgb(var(--foreground))",
               position: "relative",
-              margin: "2.5rem",
               borderRadius: "0.5rem",
-              width: "calc(100% - 5rem)",
-              paddingBottom: '1rem',
+              paddingBottom: '2rem',
             }}
           >
             <NavBar />
