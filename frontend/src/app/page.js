@@ -4,7 +4,7 @@ import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
 import CustomButton from "@/components/ui/CustomButton";
 import BoldWord from "@/components/ui/BoldWord";
-import {LocationAdornment, SearchBar} from "@/features/search";
+import {LocationAdornment, LocationSearchBar} from "@/features/location";
 
 export default function Home() {
     const localFoodVendors = [
@@ -73,7 +73,7 @@ export default function Home() {
                         Where Local Finds Meet Hungry Minds
                     </Typography>
                 </FontProvider>
-                <SearchBar
+                <LocationSearchBar
                     fontSize={15}
                     bgColor="white"
                     placeholder={"Enter your location"}

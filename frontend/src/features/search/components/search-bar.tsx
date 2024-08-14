@@ -3,7 +3,7 @@
 import React, {ReactNode} from 'react';
 import {InputAdornment, TextField, TextFieldProps} from "@mui/material";
 
-type Props = TextFieldProps & {
+export type SearchBarProps = TextFieldProps & {
   fontSize?: number
   startAdornComp?: ReactNode
   endAdornComp?: ReactNode
@@ -16,7 +16,7 @@ export function SearchBar ({
     endAdornComp,
     bgColor = "transparent",
     ...textFieldProps
-  }: Props
+  }: SearchBarProps
 ) {
   return (
     <TextField
