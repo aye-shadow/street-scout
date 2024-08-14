@@ -33,6 +33,11 @@ export function SearchBar ({
         "& .MuiInputBase-input": {
           fontSize: `${fontSize}px`,
         },
+        ...(endAdornComp
+          ? {}
+          : {
+            display: { xs: "none", sm: "block" },
+          }),
       }}
       InputProps={{
         startAdornment: startAdornComp ? (
