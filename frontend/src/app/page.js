@@ -74,7 +74,7 @@ export default function Home() {
                     </Typography>
                 </FontProvider>
                 <SearchBar
-                    searchFontSize={15}
+                    fontSize={15}
                     bgColor="white"
                     placeholder={"Enter your location"}
                     startAdornComp={
