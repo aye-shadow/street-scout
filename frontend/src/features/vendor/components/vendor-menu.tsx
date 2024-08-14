@@ -14,7 +14,7 @@ import {
   TableRow,
   Typography
 } from "@mui/material";
-import {extractKeys, menuItemKeys} from "@/features/lib";
+import {extractKeys} from "@/features/lib";
 
 interface Props {
   vendorId: number
@@ -28,10 +28,12 @@ const columns = extractKeys<MenuItemDetails>({
 });
 
 export function VendorMenu({ vendorId }: Props) {
-  const page = useMenuTableStore(store => store.page)
-  const rows = useMenuTableStore(store => store.rowsPerPage)
-  const setPage = useMenuTableStore(store => store.setPage);
-  const setRows = useMenuTableStore(store => store.setRowsPerPage);
+  const {
+    page,
+    setPage,
+    rowsPerPage: rows,
+    setRowsPerPage: setRows
+  } = useMenuTableStore();
 
   const {
     data: vendor,
@@ -74,7 +76,7 @@ export function VendorMenu({ vendorId }: Props) {
               .slice(page * rows, page * rows + rows)
               .map((item, index) => (
                 <TableRow hover key={index}>
-                  {menuItemKeys.map((key, index) => (
+                  {columns.map((key, index) => (
                     <TableCell key={key} align={"center"}>
                       {stringify(item[key])}
                     </TableCell>
