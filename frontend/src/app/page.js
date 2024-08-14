@@ -1,12 +1,11 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import {Box, Grid, Stack, Typography} from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
-import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "@/components/ui/CustomButton";
-import SearchBar from "@/components/ui/SearchBar";
 import BoldWord from "@/components/ui/BoldWord";
 import BigImage from "@/components/ui/BigImage";
+import {LocationAdornment, LocationSearchBar} from "@/features/location";
 
 export default function Home() {
   const localFoodVendors = [
@@ -43,12 +42,12 @@ export default function Home() {
             Where Local Finds Meet Hungry Minds
           </Typography>
         </FontProvider>
-        <SearchBar
-          searchFontSize={15}
+        <LocationSearchBar
+          fontSize={15}
           bgColor="white"
-          placeholderText={"Enter your location"}
+          placeholder={"Enter your location"}
           startAdornComp={
-            <SearchIcon sx={{ color: "rgb(var(--lightergreen))" }} />
+            <LocationAdornment sx={{ color: "rgb(var(--lightergreen))" }} />
           }
           endAdornComp={<CustomButton text="Find Vendors" size={15} />}
         />
