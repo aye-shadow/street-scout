@@ -19,6 +19,9 @@ public class Vendor extends User {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "favouriteByCustomers")
+    private int favouriteByCustomers;
+
     @Column(name = "photos")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "vendor_photos",

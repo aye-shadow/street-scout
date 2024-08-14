@@ -51,6 +51,18 @@ public class VendorController {
         return ResponseEntity.status(HttpStatus.OK).body(vendor);
     }
 
+    @GetMapping("/top")
+    @Operation(
+            summary = "Get Top 3 Vendors",
+            description = "REST API to FETCH Top 3 Vendors ")
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK")
+    public ResponseEntity<VendorList> getTop3VendorsByFavourites() {
+        VendorList topVendors = vendorService.top3FavouriteByCustomer();
+        return ResponseEntity.status(HttpStatus.OK).body(topVendors);
+    }
+
     @PutMapping("/{vendorId}")
     @Operation(
             summary = "Update Vendor",

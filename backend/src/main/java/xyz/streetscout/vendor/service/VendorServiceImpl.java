@@ -4,7 +4,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.vendor.dto.*;
 import xyz.streetscout.vendor.entity.MenuItem;
@@ -13,6 +15,9 @@ import xyz.streetscout.vendor.mapper.MenuMapper;
 import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.MenuItemRepository;
 import xyz.streetscout.vendor.repository.VendorRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -88,5 +93,32 @@ public class VendorServiceImpl implements VendorService {
     @Override
     public void removeMenuItem(Long menuItemId) {
         menuItemRepository.deleteById(menuItemId);
+    }
+
+    @Override
+    public int addFavouriteByCustomer(Long vendorId) {
+        Vendor vendor = findById(vendorId);
+        VendorCount vendorCount = new VendorCount(vendor.getFavouriteByCustomers() + 1);
+        vendorMapper.updateFavouriteCount(vendorCount, vendor);
+        vendorRepository.save(vendor);
+        return vendor.getFavouriteByCustomers();
+    }
+
+    @Override
+    public int deleteFavouriteByCustomer(Long vendorId) {
+        Vendor vendor = findById(vendorId);
+        VendorCount vendorCount = new VendorCount(vendor.getFavouriteByCustomers() - 1);
+        vendorMapper.updateFavouriteCount(vendorCount, vendor);
+        vendorRepository.save(vendor);
+        return vendor.getFavouriteByCustomers();
+    }
+
+    @Override
+    public VendorList top3FavouriteByCustomer() {
+        List<Vendor> topVendors = vendorRepository.findTopVendorsByFavourites();
+        List<Vendor> top3Vendors = topVendors.stream()
+                .limit(3)
+                .collect(Collectors.toList());
+        return vendorMapper.toVendorList(new PageImpl<>(top3Vendors, PageRequest.of(0, 3), top3Vendors.size()));
     }
 }
