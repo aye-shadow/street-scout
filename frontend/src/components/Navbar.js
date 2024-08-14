@@ -43,6 +43,7 @@ export default function NavBar() {
       <Box display={"flex"} gap={2}>
         <FontProvider>
           <SearchBar
+            size={"small"}
             startAdornComp={
               <SearchIcon sx={{ color: "rgb(var(--lightergreen))" }} />
             }

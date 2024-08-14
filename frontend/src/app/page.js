@@ -4,8 +4,8 @@ import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "@/components/ui/CustomButton";
-import SearchBar from "@/components/ui/SearchBar";
 import BoldWord from "@/components/ui/BoldWord";
+import {SearchBar} from "@/features/search";
 
 export default function Home() {
     const localFoodVendors = [
@@ -77,7 +77,7 @@ export default function Home() {
                 <SearchBar
                     searchFontSize={15}
                     bgColor="white"
-                    placeholderText={"Enter your location"}
+                    placeholder={"Enter your location"}
                     startAdornComp={
                         <SearchIcon
                             sx={{ color: "rgb(var(--lightergreen))" }}

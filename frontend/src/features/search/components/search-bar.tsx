@@ -4,15 +4,17 @@ import React, {ReactNode} from 'react';
 import {InputAdornment, TextField, TextFieldProps} from "@mui/material";
 
 type Props = TextFieldProps & {
-  searchFontSize?: number
+  fontSize?: number
   startAdornComp?: ReactNode
   endAdornComp?: ReactNode
+  bgColor?: string;
 }
 
 export function SearchBar ({
-    searchFontSize = 12,
+    fontSize = 12,
     startAdornComp,
     endAdornComp,
+    bgColor = "transparent",
     ...textFieldProps
   }: Props
 ) {
@@ -20,16 +22,16 @@ export function SearchBar ({
     <TextField
       variant="outlined"
       placeholder="Search..."
-      size="small"
+      size="medium"
       sx={{
         "& .MuiOutlinedInput-root": {
-          backgroundColor: "transparent",
+          backgroundColor: bgColor,
           "&.Mui-focused fieldset": {
             borderColor: "rgb(var(--lightergreen))",
           },
         },
         "& .MuiInputBase-input": {
-          fontSize: `${searchFontSize}px`,
+          fontSize: `${fontSize}px`,
         },
       }}
       InputProps={{
