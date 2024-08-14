@@ -1,11 +1,9 @@
 "use client";
 
 import React, {ReactNode, useState} from 'react';
-import {CreateVendorForm, useAllVendors, VendorProfile} from "@/features/vendor";
+import {useAllVendors} from "@/features/vendor";
 import {VendorTable} from "@/features/vendor/components/vendor-table";
 import {useRouter} from "next/navigation";
-import {ShowModalButton} from "@/features/modal";
-import {Add} from "@mui/icons-material";
 
 interface Props {
   children?: ReactNode;
@@ -19,30 +17,12 @@ export function AllVendors ({}: Props) {
 
   const {
     data,
-    isLoading,
+    isPending,
     isError
   } = useAllVendors({page, rowsPerPage})
 
-  if (isLoading) {
-    return <VendorTable
-      title={"Vendors"}
-      data={[]}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      setPage={setPage}
-      setRowsPerPage={setRowsPerPage}
-    />
-  }
-
-  if (isError) {
-    return <VendorTable
-      title={"Vendors"}
-      data={[]}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      setPage={setPage}
-      setRowsPerPage={setRowsPerPage}
-    />
+  if (isPending) {
+    return <>Pending...</>
   }
 
   const {
@@ -51,13 +31,6 @@ export function AllVendors ({}: Props) {
 
   return (
     <>
-      <ShowModalButton
-        text={"Add Vendor"}
-        startIcon={<Add />}
-      >
-        <CreateVendorForm />
-      </ShowModalButton>
-
       <VendorTable
         title={"Vendors"}
         data={vendors}
@@ -66,7 +39,7 @@ export function AllVendors ({}: Props) {
         setPage={setPage}
         setRowsPerPage={setRowsPerPage}
         onRowClick={(vendor) => {
-          router.push("/test/vendor/" + vendor.id)
+          router.push("/vendor/" + vendor.id)
         }}
       />
     </>

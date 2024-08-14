@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
     name = "MenuItem",
     description = "Schema to hold Menu Item")
 public record MenuItemDTO(
+
         @Schema(description = "Item name", example = "Philly Cheese Steak")
         @NotBlank(message = "Name must not be empty")
         String name,

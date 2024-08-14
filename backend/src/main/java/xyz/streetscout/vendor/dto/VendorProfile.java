@@ -15,8 +15,8 @@ public record VendorProfile(
         String email,
         String description,
         List<String> photos,
-        Location location,
-        OperatingHours operatingHours,
+        LocationDTO location,
+        OperatingHoursDTO operatingHours,
         List<MenuItemDetails> menu,
         Boolean active
 ) { }

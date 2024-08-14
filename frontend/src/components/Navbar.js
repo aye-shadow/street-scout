@@ -50,8 +50,8 @@ export default function NavBar() {
               <SearchIcon sx={{ color: "rgb(var(--lightergreen))" }} />
             }
           />
-          <Link href="../signin" color={"inherit"}>
-            <CustomButton text={"Sign In"} size={12} />
+          <Link href="/signin" color={"inherit"}>
+            <CustomButton text={'Sign In'} />
           </Link>
         </FontProvider>
       </Box>

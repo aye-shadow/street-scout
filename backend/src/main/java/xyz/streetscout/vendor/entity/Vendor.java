@@ -6,6 +6,7 @@ import lombok.Setter;
 import xyz.streetscout.review.entity.Review;
 import xyz.streetscout.user.entity.User;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,13 @@ public class Vendor extends User {
             joinColumns = @JoinColumn(name = "vendor_id"))
     private List<String> photos;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-    @OneToOne
-    private OperatingHours operatingHours;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "op_hours_id", referencedColumnName = "id")
+    private OperatingHours operatingHours = OperatingHours.allDay();
 
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private List<MenuItem> menu = new ArrayList<>();
@@ -45,7 +48,13 @@ public class Vendor extends User {
     }
 
     public boolean isActive() {
-        return location != null && operatingHours == null;
+        if (location == null) return false;
+        if (operatingHours == null) return false;
+
+        LocalTime now = LocalTime.now();
+        return now.isAfter(operatingHours.getOpen()) &&
+                now.isBefore(operatingHours.getClose());
+
     }
 
     public void deactivate() {

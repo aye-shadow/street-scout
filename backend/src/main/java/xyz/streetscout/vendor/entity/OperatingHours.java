@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
 
 @Data
 @Entity
@@ -16,12 +19,24 @@ public class OperatingHours {
     private Long id;
 
     @Column(name = "open")
-    private LocalDateTime open;
+    private LocalTime open;
 
     @Column(name = "close")
-    private LocalDateTime close;
+    private LocalTime close;
 
-    @OneToOne
-    private Vendor vendor;
+    public static OperatingHours allDay() {
+        OperatingHours operatingHours = new OperatingHours();
+        operatingHours.open = LocalTime.of(0, 0);
+        operatingHours.close = LocalTime.of(23, 59);
+        return operatingHours;
+    }
 
+    @Override
+    public String toString() {
+        return "OperatingHours{" +
+                "id=" + id +
+                ", open=" + open +
+                ", close=" + close +
+                '}';
+    }
 }

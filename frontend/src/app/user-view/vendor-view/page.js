@@ -7,8 +7,17 @@ import {
     Grid,
     Container,
 } from "@mui/material";
+import {auth} from "@/features/lib/auth";
+import {redirect} from "next/navigation";
+import {VendorNameInput} from "@/features/vendor";
 
-export default function Home() {
+export default async function VendorView() {
+    const session = await auth();
+
+    if (!session) redirect("/signin");
+    if (session.user?.role !== "VENDOR") redirect("/user-view/customer-view");
+
+
     return (
         <Container
             maxWidth="lg"
@@ -50,14 +59,14 @@ export default function Home() {
                             Enter the name of your business here. Keep it short
                             and simple.
                         </Typography>
-                        <TextField
-                            fullWidth
-                            variant="filled"
-                            sx={{
-                                bgcolor: "#F3F695",
-                                "& .MuiInputBase-input": { color: "black" },
-                                borderRadius: 4,
-                            }}
+                        <VendorNameInput
+                          fullWidth
+                          variant="filled"
+                          sx={{
+                              bgcolor: "#F3F695",
+                              "& .MuiInputBase-input": { color: "black" },
+                              borderRadius: 4,
+                          }}
                         />
                     </Box>
 
