@@ -79,10 +79,10 @@ export default function Home() {
           fontSize={15}
           bgColor="white"
           placeholder={"Enter your location"}
-          startAdornComp={
+          startAdornment={
             <LocationAdornment sx={{ color: "rgb(var(--lightergreen))" }} />
           }
-          endAdornComp={<CustomButton text="Find Vendors" size={15} />}
+          endAdornment={<CustomButton text="Find Vendors" size={15} />}
         />
       </Box>
       <FontProvider>

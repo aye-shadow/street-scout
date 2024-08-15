@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import {GpsFixed, LocationOn, LocationSearching} from "@mui/icons-material";
+import {LocationOn, LocationSearching} from "@mui/icons-material";
 import {SvgIcon, SvgIconProps} from "@mui/material";
 import {useGeolocation} from "@/features/location";
 
