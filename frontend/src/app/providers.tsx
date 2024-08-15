@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-import {BaseModal} from "@/features/modal";
 import FontProvider from "@/theme/fontProvider";
 import {SessionProvider} from "next-auth/react";
 import {ReactQueryProvider} from "@/features/lib";

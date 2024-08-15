@@ -13,7 +13,7 @@ export interface UserProfile {}
 export interface LoginResponse {
   id: string;
   email: string;
-  role: string;
+  role: UserRole;
   token: string;
   expiresAt: Date;
 }

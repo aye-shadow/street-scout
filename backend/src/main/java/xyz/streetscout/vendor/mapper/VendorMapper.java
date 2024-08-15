@@ -3,6 +3,7 @@ package xyz.streetscout.vendor.mapper;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
+import xyz.streetscout.vendor.dto.VendorCount;
 import xyz.streetscout.vendor.dto.VendorList;
 import xyz.streetscout.vendor.dto.VendorProfile;
 import xyz.streetscout.vendor.dto.VendorUpdate;
@@ -22,4 +23,8 @@ public interface VendorMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(VendorUpdate vendorUpdate, @MappingTarget Vendor vendor);
+
+    @Mapping(target = "favouriteByCustomers", source = "count")
+    void updateFavouriteCount(VendorCount vendorCount, @MappingTarget Vendor vendor);
+
 }
