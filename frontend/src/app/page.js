@@ -1,3 +1,4 @@
+"use client";
 import { Box, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
@@ -84,7 +85,7 @@ export default function Home() {
                         />
                     }
                     endAdornComp={
-                        <Link href="/user-view/customer-view">
+                        <Link href="/user-view/vendor-view">
                             <CustomButton text="Find Vendors" size={15} />
                         </Link>
                     }

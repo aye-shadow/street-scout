@@ -1,17 +1,55 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import {
     Box,
     TextField,
     Typography,
     Button,
     Grid,
+    Link,
     Container,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    Autocomplete,
 } from "@mui/material";
 
 export default function Home() {
+    // Location functionality variables
+    const [locationOption, setLocationOption] = useState("manual");
+    const [manualLocation, setManualLocation] = useState("");
+    const [sharedLocation, setSharedLocation] = useState("");
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
+    // Manual Location Entry functionality
+
+    // Name functionality variables
+    const [name, setName] = useState("");
+
+    const handleLocationShare = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setSharedLocation(
+                        `Latitude: ${latitude}, Longitude: ${longitude}`
+                    );
+                    setLatitude(() => latitude);
+                    setLongitude(() => longitude);
+                },
+                (error) => {
+                    console.error("Error fetching location: ", error);
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
     return (
         <Container
-            maxWidth="lg"
+            // maxWidth="lg"
             sx={{
                 bgcolor: "#2b461c",
                 minHeight: "100vh",
@@ -22,18 +60,55 @@ export default function Home() {
             <Grid container spacing={4} sx={{ px: 4 }}>
                 {/* Left Column */}
                 <Grid item xs={12} md={6} sx={{ paddingRight: 5 }}>
-                    <Box sx={{ mb: 4, borderRadius: 4 }}>
-                        <TextField
-                            fullWidth
-                            label="Location"
-                            variant="filled"
-                            sx={{
-                                bgcolor: "#F3F695",
-                                "& .MuiInputBase-input": { color: "black" },
-                                "& .MuiInputLabel-root": { color: "black" },
-                                borderRadius: 4,
-                            }}
-                        />
+                    <Box
+                        // maxWidth="sm"
+                        sx={{
+                            color: "white",
+                            paddingBottom: 4,
+                        }}
+                    >
+                        <Typography variant="h5" gutterBottom>
+                            Enter Your Location
+                        </Typography>
+
+                        <RadioGroup
+                            value={locationOption}
+                            onChange={(e) => setLocationOption(e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        >
+                            <FormControlLabel
+                                value="manual"
+                                control={<Radio sx={{ color: "#F3F695" }} />}
+                                label="Enter location manually"
+                            />
+                            <FormControlLabel
+                                value="share"
+                                control={<Radio sx={{ color: "#F3F695" }} />}
+                                label="Use current location"
+                            />
+                        </RadioGroup>
+
+                        {locationOption === "manual" ? (
+                            <p>autocomplete component here</p>
+                        ) : (
+                            <Box>
+                                {sharedLocation ? (
+                                    <p>Shared Location!</p>
+                                ) : (
+                                    <Button
+                                        variant="contained"
+                                        onClick={handleLocationShare}
+                                        sx={{
+                                            bgcolor: "#F3F695",
+                                            color: "black",
+                                            mb: 2,
+                                        }}
+                                    >
+                                        Share My Location
+                                    </Button>
+                                )}
+                            </Box>
+                        )}
                     </Box>
 
                     <Box sx={{ mb: 4 }}>
@@ -56,7 +131,6 @@ export default function Home() {
                             sx={{
                                 bgcolor: "#F3F695",
                                 "& .MuiInputBase-input": { color: "black" },
-                                borderRadius: 4,
                             }}
                         />
                     </Box>
@@ -89,7 +163,7 @@ export default function Home() {
                                 variant="contained"
                                 sx={{ bgcolor: "#F3F695", color: "black" }}
                             >
-                                Upload a photo
+                                Upload photo
                             </Button>
                         </Box>
                     </Box>
@@ -134,6 +208,26 @@ export default function Home() {
                     </Box>
                 </Grid>
             </Grid>
+
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Link href="/user-view/vendor-view/vendor-detailed">
+                    <Button
+                        variant="contained"
+                        sx={{
+                            bgcolor: "#F3F695",
+                            color: "black",
+                        }}
+                    >
+                        Ready to start serving!
+                    </Button>
+                </Link>
+            </Box>
         </Container>
     );
 }
