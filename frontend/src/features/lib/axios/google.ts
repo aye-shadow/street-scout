@@ -5,4 +5,7 @@ export const mapsAPI = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  params: {
+    key: process.env.GOOGLE_MAPS_API_KEY
+  }
 });

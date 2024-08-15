@@ -74,7 +74,7 @@ information on food truck locations, menus, and wait times.
 ### Frontend
 
 - **Framework**: Next.js, MaterialUI
-- **State Management**: Redux/Context/Zustand for managing application state
+- **State Management**: Zustand for managing application state
 
 ### Backend
 - **Framework**: Spring Boot
@@ -247,13 +247,13 @@ Start the server
 
 1. **Define Requirements and Scope**
     - [] Gather detailed requirements from stakeholders.
-    - [] Identify key features such as real-time location tracking, menu display, user reviews, and notifications.
-    - [] Define user roles, including customers and vendors.
+    - [x] Identify key features such as real-time location tracking, menu display, user reviews, and notifications.
+    - [x] Define user roles, including customers and vendors.
 
 2. **Choose Technology Stack**
     - [x] Select Node.js for backend development.
-    - [x] Choose a database (e.g., MongoDB, PostgreSQL).
-    - [] Select a frontend framework (e.g., React, Angular).
+    - [x] Choose a database (PostgreSQL).
+    - [x] Select a frontend framework (React).
 
 3. **Design Database Schema**
     - [x] Create tables for vendors, users, menus, orders, reviews, and notifications.
