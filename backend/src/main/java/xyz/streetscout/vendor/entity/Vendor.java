@@ -42,6 +42,10 @@ public class Vendor extends User {
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private List<Review> reviews = new ArrayList<>();
 
+    public void setLocation(double lat, double lon) {
+        this.location = new Location(lat, lon);
+    }
+
     public void addReview(Review review) {
         if (reviews == null) {
             reviews = new ArrayList<>();

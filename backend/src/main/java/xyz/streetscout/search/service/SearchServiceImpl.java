@@ -26,7 +26,7 @@ public class SearchServiceImpl implements SearchService {
      * @return <code>VendorList</code>
      */
     @Override
-    public VendorList nearByVendors(LocationDTO location, int rangeInKm, PageRequest pageRequest) {
+    public VendorList nearByVendors(LocationDTO location, double rangeInKm, PageRequest pageRequest) {
         Page<Vendor> vendors = vendorRepository.findAll(
                 VendorSpecification.withinRange(location, rangeInKm),
                 pageRequest

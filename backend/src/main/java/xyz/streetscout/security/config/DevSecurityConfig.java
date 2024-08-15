@@ -50,7 +50,7 @@ public class DevSecurityConfig {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
+        httpSecurity.httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
 

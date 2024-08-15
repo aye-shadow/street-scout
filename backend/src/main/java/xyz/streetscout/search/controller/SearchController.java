@@ -26,7 +26,7 @@ public class SearchController {
             @RequestParam(name = "size", defaultValue = "10") int size,
             @RequestParam(name = "lat") double latitude,
             @RequestParam(name = "lng") double longitude,
-            @RequestParam(name = "range") int rangeInKm
+            @RequestParam(name = "range", defaultValue = "50") double rangeInKm
     ){
         PageRequest pageRequest = PageRequest.of(page, size);
         LocationDTO location = new LocationDTO(latitude, longitude);

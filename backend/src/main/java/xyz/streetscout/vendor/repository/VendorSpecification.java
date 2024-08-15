@@ -60,7 +60,6 @@ public class VendorSpecification {
                     cb.prod(cb.literal(2.0), angularDistanceInRadians)
             );
 
-
             // Compare distance with the provided range
             return cb.lessThanOrEqualTo(distance, rangeInKm);
 
