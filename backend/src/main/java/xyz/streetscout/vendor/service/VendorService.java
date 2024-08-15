@@ -16,4 +16,10 @@ public interface VendorService {
     MenuItemList addToMenu(Long vendorId, MenuItemDTO menuItem);
 
     void removeMenuItem(Long menuItemId);
+
+    int addFavouriteByCustomer(Long vendorId);
+
+    int deleteFavouriteByCustomer(Long vendorId);
+
+    VendorList topFavouriteByCustomer(PageRequest pageRequest);
 }

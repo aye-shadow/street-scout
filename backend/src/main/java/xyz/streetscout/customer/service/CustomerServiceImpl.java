@@ -11,6 +11,7 @@ import xyz.streetscout.customer.mapper.CustomerMapper;
 import xyz.streetscout.customer.repository.CustomerRepository;
 import xyz.streetscout.vendor.entity.Vendor;
 import xyz.streetscout.vendor.repository.VendorRepository;
+import xyz.streetscout.vendor.service.VendorService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
     private final CustomerRepository customerRepository;
     private final VendorRepository vendorRepository;
+    private final VendorService vendorService;
 
     /**
      * @return CustomerProfile
@@ -59,6 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerProfile addFavorite(Customer customer, Long vendorId) {
         Vendor vendor = findVendorById(vendorId);
+        vendorService.addFavouriteByCustomer(vendorId);
         customer.addFavorite(vendor);
         customer = customerRepository.save(customer);
         return customerMapper.toProfile(customer);
@@ -81,6 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void removeFavorite(Customer customer, Long vendorId) {
         Vendor vendor = findVendorById(vendorId);
+        vendorService.deleteFavouriteByCustomer(vendorId);
         customer.removeFavorite(vendor);
         customerRepository.save(customer);
     }
