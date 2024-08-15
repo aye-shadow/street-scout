@@ -1,6 +1,5 @@
 import BigImage from "@/components/ui/BigImage";
 import CustomButton from "@/components/ui/CustomButton";
-import SearchBar from "@/components/ui/SearchBar";
 import FontProvider from "@/theme/fontProvider";
 import { Typography } from "@mui/material";
 import Link from "next/link";

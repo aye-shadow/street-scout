@@ -1,19 +1,18 @@
-import {useMutation} from "@tanstack/react-query";
-import {signInUser} from "@/features/users";
+import { useMutation } from "@tanstack/react-query";
+import { signInUser } from "@/features/users";
 
-export function useSignIn()  {
-
+export function useSignIn() {
   return useMutation({
     mutationFn: async (formData: FormData) => {
-      return await signInUser(formData)
+      return await signInUser(formData);
     },
 
     onSuccess: (data) => {
-      console.log("✅signed in", data)
+      console.log("✅signed in", data);
     },
 
     onError: (error) => {
       console.log("error", error);
     },
   });
-};
+}
