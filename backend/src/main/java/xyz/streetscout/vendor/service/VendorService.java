@@ -21,5 +21,5 @@ public interface VendorService {
 
     int deleteFavouriteByCustomer(Long vendorId);
 
-    VendorList top3FavouriteByCustomer();
+    VendorList topFavouriteByCustomer(PageRequest pageRequest);
 }

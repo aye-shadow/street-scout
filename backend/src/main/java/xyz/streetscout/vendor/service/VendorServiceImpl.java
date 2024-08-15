@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.vendor.dto.*;
 import xyz.streetscout.vendor.entity.MenuItem;
@@ -114,11 +113,8 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
-    public VendorList top3FavouriteByCustomer() {
-        List<Vendor> topVendors = vendorRepository.findTopVendorsByFavourites();
-        List<Vendor> top3Vendors = topVendors.stream()
-                .limit(3)
-                .collect(Collectors.toList());
-        return vendorMapper.toVendorList(new PageImpl<>(top3Vendors, PageRequest.of(0, 3), top3Vendors.size()));
+    public VendorList topFavouriteByCustomer(PageRequest pageRequest) {
+        Page<Vendor> topVendors = vendorRepository.findAll(pageRequest);
+        return vendorMapper.toVendorList(topVendors);
     }
 }

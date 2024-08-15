@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,12 +55,16 @@ public class VendorController {
     @GetMapping("/top")
     @Operation(
             summary = "Get Top 3 Vendors",
-            description = "REST API to FETCH Top 3 Vendors ")
+            description = "REST API to FETCH Top Vendors by favorites")
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
-    public ResponseEntity<VendorList> getTop3VendorsByFavourites() {
-        VendorList topVendors = vendorService.top3FavouriteByCustomer();
+    public ResponseEntity<VendorList> getTop3VendorsByFavourites(
+            @RequestParam(defaultValue = "3") int size
+    ) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "favouriteByCustomers");
+        PageRequest pageRequest = PageRequest.of(0, size, sort);
+        VendorList topVendors = vendorService.topFavouriteByCustomer(pageRequest);
         return ResponseEntity.status(HttpStatus.OK).body(topVendors);
     }
 
