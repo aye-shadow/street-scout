@@ -5,15 +5,15 @@ import {InputAdornment, TextField, TextFieldProps} from "@mui/material";
 
 export type SearchBarProps = TextFieldProps & {
   fontSize?: number
-  startAdornComp?: ReactNode
-  endAdornComp?: ReactNode
+  startAdornment?: ReactNode
+  endAdornment?: ReactNode
   bgColor?: string;
 }
 
 export function SearchBar ({
     fontSize = 12,
-    startAdornComp,
-    endAdornComp,
+    startAdornment,
+    endAdornment,
     bgColor = "transparent",
     ...textFieldProps
   }: SearchBarProps
@@ -33,18 +33,18 @@ export function SearchBar ({
         "& .MuiInputBase-input": {
           fontSize: `${fontSize}px`,
         },
-        ...(endAdornComp
+        ...(endAdornment
           ? {}
           : {
             display: { xs: "none", sm: "block" },
           }),
       }}
       InputProps={{
-        startAdornment: startAdornComp ? (
-          <InputAdornment position="start">{startAdornComp}</InputAdornment>
+        startAdornment: startAdornment ? (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
         ) : null,
-        endAdornment: endAdornComp ? (
-          <InputAdornment position="end">{endAdornComp}</InputAdornment>
+        endAdornment: endAdornment ? (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
         ) : null,
       }}
       {...textFieldProps }

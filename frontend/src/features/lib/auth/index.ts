@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import {authConfig} from './auth.config';
-import {LoginResponse} from "@/features/users";
+import {LoginResponse, UserRole} from "@/features/users";
 import {z} from "zod";
 import {handleError} from "@/features/lib";
 import axios from "@/features/lib/axios";
@@ -58,7 +58,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.role = token.role as string;
+        session.user.role = token.role as UserRole;
         session.user.jwtToken = token.jwtToken as string;
         // @ts-expect-error
         session.user.expiresAt = token.expiresAt;
