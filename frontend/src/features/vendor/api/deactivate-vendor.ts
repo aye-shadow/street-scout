@@ -1,10 +1,11 @@
-import axios from "axios";
-import {BACKEND_API_URL} from "@/features/vendor";
+"use server"
+
+import axios from "@/features/lib/axios";
 
 export async function deactivateVendor(vendorId: number) {
   try {
     const { status, statusText } = await axios.delete(
-      `${BACKEND_API_URL}/api/vendor/${vendorId}`,
+      `/api/vendor/${vendorId}`,
     );
     console.log("⚡️deactivated vendor", vendorId, {status, statusText});
     return null;

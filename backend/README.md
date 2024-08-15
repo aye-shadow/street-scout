@@ -18,9 +18,8 @@ docker compose up -d
 ## [API Reference](http://localhost:8080/swagger-ui.html)
 
 ### [Auth](http://localhost:8080/auth)
-- `POST /auth/register` - Register user (VENDOR | CUSTOMER)
+- `POST /auth/register` - Register user
 - `POST /auth/login` - Login with credentials
-
 
 ### [Vendors](http://localhost:8080/api/vendors)
 - `GET /api/vendors` - List all vendors
@@ -32,10 +31,10 @@ docker compose up -d
 - `DELETE /api/vendors/:id/menu` - Remove item from menu
 
 ### [Customers](http://localhost:8080/api/customers)
-- `GET /api/users/:id` - Get user profile
-- `PUT /api/users/:id` - Update user profile
-- `POST /api/users/:id/favorites` - Add vendor to favorites
-- `DELETE /api/users/:id/favorites/:vendorId` - Remove vendor from favorites
+- `GET /api/customers/profile` - Get customer profile
+- `PUT /api/customers/profile` - Update customer profile
+- `POST /api/customers/favorites` - Add vendor to favorites
+- `DELETE /api/customers/favorites/:vendorId` - Remove vendor from favorites
 
 ### [Reviews](http://localhost:8080/api/reviews)
 - `GET /api/vendors/:id/reviews` - List reviews for a vendor
@@ -90,3 +89,4 @@ docker compose up -d
 - `price`: number;
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+

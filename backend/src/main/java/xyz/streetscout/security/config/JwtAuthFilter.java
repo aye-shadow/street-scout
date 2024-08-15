@@ -17,6 +17,8 @@ import xyz.streetscout.security.JwtUtils;
 
 import java.io.IOException;
 
+import static xyz.streetscout.user.constants.AuthConstants.AUTHORIZATION_HEADER;
+
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -28,16 +30,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
-        final String jwtToken;
+        final String jwtToken = request.getHeader(AUTHORIZATION_HEADER);
         final String userEmail;
 
-        if (authHeader == null || authHeader.isBlank()) {
+        if (jwtToken == null || jwtToken.isBlank()) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        jwtToken = authHeader.substring(7);
+        // Malformed protected header JSON: Unable to deserialize: Unexpected character ('�' (code 65533 / 0xfffd)):
+//        jwtToken = authHeader.substring(7);
         userEmail = jwtUtils.extractUsername(jwtToken);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {

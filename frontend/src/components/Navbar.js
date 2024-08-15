@@ -4,7 +4,7 @@ import { Box, Link, Typography } from "@mui/material";
 import FontProvider from "../theme/fontProvider";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomButton from "./ui/CustomButton";
-import SearchBar from "./ui/SearchBar";
+import {SearchBar} from "@/features/search";
 
 export default function NavBar() {
   return (
@@ -43,15 +43,13 @@ export default function NavBar() {
       <Box display={"flex"} gap={2}>
         <FontProvider>
           <SearchBar
-            searchFontSize={12}
-            searchBarSize={"small"}
-            placeholderText={"Search..."}
-            startAdornComp={
+            size={"small"}
+            startAdornment={
               <SearchIcon sx={{ color: "rgb(var(--lightergreen))" }} />
             }
           />
-          <Link href="../signin" color={"inherit"}>
-            <CustomButton text={"Sign In"} size={12} />
+          <Link href="/signin" color={"inherit"}>
+            <CustomButton text={'Sign In'} />
           </Link>
         </FontProvider>
       </Box>

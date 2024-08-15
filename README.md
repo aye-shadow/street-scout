@@ -51,7 +51,7 @@
             <li><a href="#future-features">Future Features</a></li>
         </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contributors">Contributors</a></li>
 
   </ol>
 </details>
@@ -61,6 +61,10 @@
 <!-- Overview -->
 ## Overview
 
+Street Scout is designed to connect food enthusiasts with local food trucks 
+in real-time, enhancing the dining experience by providing users with up-to-date 
+information on food truck locations, menus, and wait times.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -68,15 +72,16 @@
 ## Technical Stack
 
 ### Frontend
+
 - **Framework**: Next.js, MaterialUI
-- **State Management**: Redux/Context/Zustand for managing application state
+- **State Management**: Zustand for managing application state
 
 ### Backend
 - **Framework**: Spring Boot
 - **Database**: PostgreSQL
 
 ### Hosting and Deployment
-- **Cloud Provider**: Vercel, AWS, Heroku, or DigitalOcean for hosting the application
+- **Cloud Provider**: Vercel, AWS for hosting the application
 - **Containerization**: Docker for containerizing the application for easier deployment and scalability
 
 
@@ -86,7 +91,31 @@
 
 <!-- Core Features -->
 ## Core Features
-- **TODO**: 
+
+1. **Real-Time Location Tracking**:
+   - Map Interface: A user-friendly map that displays the current locations of food trucks.
+   - GPS Integration: Utilize GPS technology to provide accurate positioning and navigation to the nearest food trucks.
+2. **Menu Display**:
+   - Dynamic Menus: Each food truck can upload and update their menu items, including prices and descriptions.
+   - Specials and Promotions: Highlight daily specials or promotions to attract customers.
+3. **Estimated Wait Times**:
+   - Live Updates: Provide estimated wait times based on current customer volume and order processing times.
+   - Queue Management: Allow users to see how busy a truck is before deciding to visit.
+4. **Favorites and Notifications**:
+   - Favorite Trucks: Users can mark their favorite food trucks to receive notifications.
+   - Alerts: Push notifications when favorite trucks are nearby or when new vendors join the platform.
+5. **User Reviews and Ratings**:
+   - Customer Feedback: Users can leave reviews and rate their experiences, helping others make informed decisions.
+   - Vendor Response: Food truck owners can respond to reviews, fostering community engagement.
+6. **Search and Filter Options**:
+   - Cuisine Types: Users can filter food trucks by cuisine (e.g., Mexican, Asian, vegan).
+   - Dietary Preferences: Options for filtering based on dietary needs (gluten-free, vegetarian, etc.).
+7. **Event Integration**:
+   - Local Events: Highlight food trucks participating in local festivals, markets, or events.
+   - Event Notifications: Notify users of upcoming food truck gatherings or special events.
+8. **Social Sharing**:
+   - Share Experiences: Users can share their food truck experiences on social media directly from the app.
+   - Community Engagement: Encourage users to post photos and reviews of their meals.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -95,6 +124,12 @@
 <!-- Setup -->
 ## Setup
 
+Clone the project
+
+```bash
+  git clone https://github.com/aye-shadow/street-scout
+```
+
 ### [Backend](./backend/README.md)
 Copy environment variables to the [.env](.env) file
 
@@ -102,7 +137,7 @@ Copy environment variables to the [.env](.env) file
 cp .env.example .env
 ```
 
-Start the services
+Start the backend and database
 
 ```bash
 docker compose up -d
@@ -110,17 +145,42 @@ docker compose up -d
 
 ### [Frontend](./frontend/README.md)
 
+Go to the project directory
+
+```bash
+  cd frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
-<!-- API Reference -->
+## [API Reference](http://localhost:8080/swagger-ui.html)
+
+### [Auth](http://localhost:8080/auth)
+- `POST /auth/register` - Register user
+- `POST /auth/login` - Login with credentials
+
 ### [Vendors](http://localhost:8080/api/vendors)
 - `GET /api/vendors` - List all vendors
-- `GET /api/vendors/:id` - Get vendor details
 - `POST /api/vendors` - Create new vendor
+- `GET /api/vendors/:id` - Get vendor details
 - `PUT /api/vendors/:id` - Update vendor details
 - `DELETE /api/vendors/:id` - Deactivate vendor
+- `POST /api/vendors/:id/menu` - Add item to menu
+- `DELETE /api/vendors/:id/menu` - Remove item from menu
 
 ### [Customers](http://localhost:8080/api/customers)
 - `GET /api/users/:id` - Get user profile
@@ -136,7 +196,6 @@ docker compose up -d
 
 ### [Search](http://localhost:8080/api/search)
 - `GET /api/search?q=query&lat=latitude&lng=longitude` - Search vendors by query and location
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,7 +245,59 @@ docker compose up -d
 <!-- Implementation Steps -->
 ## Implementation Steps
 
-1. TODO
+1. **Define Requirements and Scope**
+    - [] Gather detailed requirements from stakeholders.
+    - [x] Identify key features such as real-time location tracking, menu display, user reviews, and notifications.
+    - [x] Define user roles, including customers and vendors.
+
+2. **Choose Technology Stack**
+    - [x] Select Node.js for backend development.
+    - [x] Choose a database (PostgreSQL).
+    - [x] Select a frontend framework (React).
+
+3. **Design Database Schema**
+    - [x] Create tables for vendors, users, menus, orders, reviews, and notifications.
+    - [] Ensure proper normalization and relationships between tables.
+
+4. **Implement Real-Time Location Tracking**
+    - [] Integrate GPS functionality using Google Maps API or Mapbox.
+    - [] Develop a map interface to display food truck locations.
+
+5. **Develop Menu Display Feature**
+    - [] Create a user interface for vendors to update menus.
+    - [] Implement a dynamic menu display for customers.
+
+6. **Implement Estimated Wait Times**
+    - [] Develop algorithms to calculate wait times based on current orders.
+    - [] Display estimated wait times on vendor profiles.
+
+7. **Implement Favorites and Notifications**
+    - [] Develop a user account system for saving favorite vendors.
+    - [] Set up a notification system for alerts about nearby vendors.
+
+8. **Develop User Reviews and Ratings**
+    - [] Implement a review and rating system for users.
+    - [] Display reviews and ratings on vendor profiles.
+
+9. **Implement Search and Filter Options**
+    - [] Develop search functionality for vendors by name and cuisine type.
+    - [] Provide filter options for dietary preferences and distance.
+
+10. **Integrate Event Features**
+    - [] Create a database for local events and participating vendors.
+    - [] Implement event notifications for users.
+
+11. **Add Social Sharing Capabilities**
+    - [] Integrate social media sharing features.
+    - [] Encourage community engagement through user-generated content.
+
+12. **Backend Development and Integration**
+    - [] Set up server infrastructure to handle API requests.
+    - [] Ensure secure data transactions and user authentication.
+
+13. **Testing and Deployment**
+    - [] Conduct thorough testing of all features.
+    - [] Deploy the app on Android and iOS platforms. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,9 +325,9 @@ docker compose up -d
 <!-- CONTRIBUTORS -->
 ## Contributors
 
-
-[Street Scout][repo-url]
-
+<a href="https://github.com/aye-shadow/street-scout/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=aye-shadow/street-scout" />
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

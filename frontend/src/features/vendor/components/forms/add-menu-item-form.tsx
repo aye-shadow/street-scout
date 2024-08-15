@@ -6,12 +6,14 @@ import {MenuItemRequest, useAddMenuItem, VendorProfile} from "@/features/vendor"
 import {useModalStore} from "@/features/modal";
 
 interface Props {
-  vendor: VendorProfile;
+  vendorId: number;
 }
 
-export function AddMenuItemForm ({ vendor }: Props) {
+export function AddMenuItemForm ({ vendorId }: Props) {
   const hideModal = useModalStore(state => state.hide);
-  const menuItemMutation = useAddMenuItem(hideModal);
+  const {
+    mutate: createItem
+  } = useAddMenuItem(hideModal);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,29 +25,27 @@ export function AddMenuItemForm ({ vendor }: Props) {
     }
 
     console.log("⚡️ Creating menu item", payload)
-    menuItemMutation.mutate({
-      vendorId: vendor.id,
+    createItem({
+      vendorId,
       payload
     })
 
   };
 
   return (
-    <Box>
-      <form onSubmit={e => handleSubmit(e)}>
-        <FormControl>
-          <FormLabel htmlFor={"name"}>Enter Name</FormLabel>
-          <TextField name={"name"} />
+    <Box component={"form"} onSubmit={e => handleSubmit(e)}>
+      <FormControl>
+        <FormLabel htmlFor={"name"}>Enter Name</FormLabel>
+        <TextField name={"name"} />
 
-          <FormLabel htmlFor={"description"}>Enter description</FormLabel>
-          <TextField name={"description"} />
+        <FormLabel htmlFor={"description"}>Enter description</FormLabel>
+        <TextField name={"description"} />
 
-          <FormLabel htmlFor={"price"}>Enter Price</FormLabel>
-          <TextField name={"price"} type={"text"} />
+        <FormLabel htmlFor={"price"}>Enter Price</FormLabel>
+        <TextField name={"price"} type={"text"} />
 
-          <Button type="submit">Submit</Button>
-        </FormControl>
-      </form>
+        <Button type="submit">Submit</Button>
+      </FormControl>
     </Box>
   );
 };

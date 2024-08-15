@@ -11,6 +11,7 @@ import xyz.streetscout.customer.mapper.CustomerMapper;
 import xyz.streetscout.customer.repository.CustomerRepository;
 import xyz.streetscout.vendor.entity.Vendor;
 import xyz.streetscout.vendor.repository.VendorRepository;
+import xyz.streetscout.vendor.service.VendorService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,24 +23,23 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
     private final CustomerRepository customerRepository;
     private final VendorRepository vendorRepository;
+    private final VendorService vendorService;
 
     /**
      * @return CustomerProfile
      */
     @Override
-    public CustomerProfile getCustomerProfile(Long customerId) {
-        Customer customer = findById(customerId);
-        return customerMapper.toProfile(customer);
+    public CustomerProfile getCustomerProfile(Customer customerDetails) {
+        return customerMapper.toProfile(customerDetails);
     }
 
     /**
-     * @param customerUpdate CustomerUpdate details
+     * @param customer       <code>Customer</code> original
+     * @param customerUpdate <code>CustomerUpdate</code> updated info
      * @return CustomerProfile
      */
     @Override
-    public CustomerProfile updateCustomerProfile(Long customerId, CustomerUpdate customerUpdate) {
-        Customer customer = findById(customerId);
-
+    public CustomerProfile updateCustomerProfile(Customer customer, CustomerUpdate customerUpdate) {
         if (customerUpdate.favouriteVendors() != null && !customerUpdate.favouriteVendors().isEmpty()) {
             Set<String> updatedVendors = customer.getFavouriteVendors();
             updatedVendors.addAll(customerUpdate.favouriteVendors());
@@ -54,14 +54,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * @param customerId Customer id
-     * @param vendorId   Vendor id
+     * @param customer Customer id
+     * @param vendorId Vendor id
      * @return FavoritesList
      */
     @Override
-    public CustomerProfile addFavorite(Long customerId, Long vendorId) {
-        Customer customer = findById(customerId);
+    public CustomerProfile addFavorite(Customer customer, Long vendorId) {
         Vendor vendor = findVendorById(vendorId);
+        vendorService.addFavouriteByCustomer(vendorId);
         customer.addFavorite(vendor);
         customer = customerRepository.save(customer);
         return customerMapper.toProfile(customer);
@@ -78,13 +78,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * @param customerId Customer id
-     * @param vendorId   Vendor id
+     * @param customer Customer id
+     * @param vendorId Vendor id
      */
     @Override
-    public void removeFavorite(Long customerId, Long vendorId) {
-        Customer customer = findById(customerId);
+    public void removeFavorite(Customer customer, Long vendorId) {
         Vendor vendor = findVendorById(vendorId);
+        vendorService.deleteFavouriteByCustomer(vendorId);
         customer.removeFavorite(vendor);
         customerRepository.save(customer);
     }

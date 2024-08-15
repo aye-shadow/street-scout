@@ -26,6 +26,12 @@ export default function SearchBar({
           "& .MuiInputBase-input": {
             fontSize: `${searchFontSize}px`,
           },
+          // Apply display style conditionally based on endAdornComp
+          ...(endAdornComp
+            ? {}
+            : {
+                display: { xs: "none", sm: "block" },
+              }),
         }}
         InputProps={{
           startAdornment: startAdornComp ? (
