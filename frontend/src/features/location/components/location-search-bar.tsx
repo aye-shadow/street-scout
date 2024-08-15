@@ -3,19 +3,19 @@
 import React from 'react';
 import {SearchBar, SearchBarProps} from "@/features/search";
 import {Autocomplete, InputAdornment} from "@mui/material";
-import {useGeolocation} from "@/features/location";
 
 type Props = SearchBarProps & {
 
 }
 
-export function LocationSearchBar (
-  { startAdornment,
+export function LocationSearchBar ({
+    startAdornment,
     endAdornment,
     inputProps,
     InputProps,
     ...searchBarProps
   }: Props) {
+
   const options = [];
 
   return (
