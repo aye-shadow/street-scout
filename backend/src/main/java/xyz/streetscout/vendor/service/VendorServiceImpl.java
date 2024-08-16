@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import xyz.streetscout.vendor.dto.*;
@@ -14,9 +13,6 @@ import xyz.streetscout.vendor.mapper.MenuMapper;
 import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.MenuItemRepository;
 import xyz.streetscout.vendor.repository.VendorRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
