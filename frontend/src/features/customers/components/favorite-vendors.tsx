@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {Box, Container, Grid, Link, Typography} from "@mui/material";
 
 interface Props {}

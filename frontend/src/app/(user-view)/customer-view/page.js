@@ -15,7 +15,8 @@ import {
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {FavoriteVendors, VendorReferralButton} from "@/features/customers";
+import {FavoriteVendors, ShareLocationButton, VendorReferralButton} from "@/features/customers";
+import {useGeolocation, useLocationStore, useNearbyVendors} from "@/features/location";
 
 export default function CustomerPage() {
     const [vendors, setVendors] = useState([
@@ -28,10 +29,6 @@ export default function CustomerPage() {
         "Hopshaus",
         "in-n-out",
     ]);
-
-    const [loadingAllVendors, setLoadingAllVendors] = useState(true);
-    const [loadingFavouriteVendors, setLoadingFavouriteVendors] =
-        useState(true);
 
     // Search functionality for Location
     const [location, setLocation] = useState("");
@@ -142,23 +139,7 @@ export default function CustomerPage() {
                             paddingInline: 5,
                         }}
                     >
-                        <Button
-                            variant="contained"
-                            onClick={handleGetLocation}
-                            sx={{
-                                bgcolor: "#F3F695",
-                                color: "black",
-                                border: "2px solid #D9EF11",
-                                borderRadius: 5,
-                                "&:hover": {
-                                    bgcolor: "#B2FF66",
-                                    color: "black",
-                                    border: "2px solid white",
-                                },
-                            }}
-                        >
-                            Share Location
-                        </Button>
+                        <ShareLocationButton />
                         <TextField
                             label="Search Vendors"
                             variant="outlined"
