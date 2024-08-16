@@ -22,7 +22,7 @@ public class AwsS3Service {
 
     private final AmazonS3 s3Client;
 
-    public String saveImageToS3(MultipartFile photo) throws Exception {
+    public String saveImageToS3(MultipartFile photo) {
 
         try {
 

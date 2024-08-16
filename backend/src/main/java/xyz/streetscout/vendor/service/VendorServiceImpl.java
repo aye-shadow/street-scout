@@ -54,11 +54,11 @@ public class VendorServiceImpl implements VendorService {
      * @return <code>VendorProfile</code> with updated values
      */
     @Override
-    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) {
         Vendor vendor = findById(vendorId);
         vendorMapper.update(vendorUpdate, vendor);
-        String imageUrl= awsS3Service.saveImageToS3(vendorUpdate.photo());
-        vendorMapper.updatePhotoUrl(imageUrl, vendor);
+        String imageUrl = awsS3Service.saveImageToS3(vendorUpdate.photo());
+        vendor.setVendorPhotoUrl(imageUrl);
         vendor = vendorRepository.save(vendor);
         return vendorMapper.toVendorProfile(vendor);
     }
