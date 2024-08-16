@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-export function ReactQueryProvider ({children }: Props) {
+export default function ReactQueryProvider ({children }: Props) {
   const [queryClient] = useState(
     () =>
       new QueryClient({

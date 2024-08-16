@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
-import { Button } from "@mui/material";
+import {Button} from "@mui/material";
 import FontProvider from "@/theme/fontProvider";
+import {useNearbyVendors} from "@/features/location";
 
 export default function CustomButton({ text, size = '12px', buttonType = 'button' }) {
+  const { fetchNearby } = useNearbyVendors()
   return (
     <FontProvider>
       <Button
@@ -17,6 +21,7 @@ export default function CustomButton({ text, size = '12px', buttonType = 'button
           },
         }}
         type={buttonType}
+        onClick={() => fetchNearby()}
       >
         {text}
       </Button>
