@@ -3,18 +3,22 @@ import {Location} from "@/features/vendor";
 
 
 interface ILocationStore {
-  location: Location | null;
-  setLocation: (location: Location) => void;
+  location: Location;
   loading: boolean;
-  setLoading: (loading: boolean) => void;
   error: string;
+  range: number;
+  setLocation: (location: Location) => void;
+  setLoading: (loading: boolean) => void;
   setError: (error: string) => void;
+  setRange: (range: number) => void;
 }
 
 export const useLocationStore = create<ILocationStore>((set, get) => ({
-  location: null,
+  location: { latitude: 0, longitude: 0 },
   loading: false,
   error: "",
+  range: 50,
+  setRange: (range: number) => set({ range }),
   setLoading: (loading: boolean) => set({ loading }),
   setError: (error: string) => set({ error }),
   setLocation: (location: Location) => set({ location }),

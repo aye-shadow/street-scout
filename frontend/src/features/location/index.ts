@@ -1,4 +1,4 @@
-export * from "./api/fetch-nearby-places"
+export * from "./api/fetch-nearby-vendors"
 
 export * from "./components/location-search-bar"
 export * from "./components/location-adornment"
