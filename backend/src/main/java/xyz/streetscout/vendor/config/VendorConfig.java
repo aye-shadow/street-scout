@@ -29,14 +29,6 @@ public class VendorConfig {
 
         vendorRepository.saveAll(List.of(
             featuredVendor(
-                    "Chow Town",
-                    "chowtown@streetscout.xyz",
-                    "Tasty dishes.",
-                    "https://street-scout-images.s3.amazonaws.com/54fdbacb-cc16-484d-ab9f-85efa3bc2cdd_login.png",
-                    new Location(46.14263014490314, -70.24882355824539),
-                    passwordEncoder
-            ),
-            featuredVendor(
                     "Spice Delight",
                     "spicedelight@streetscout.xyz",
                     "Tasty Indian dishes, from curries to biryanis.",
@@ -58,6 +50,14 @@ public class VendorConfig {
                     "Fresh bakery goods, breads to cakes and pastries.",
                     "https://street-scout-images.s3.amazonaws.com/60d745ad-d5a7-493b-a6c4-7132ed0cf4ce_bakery.jpg",
                     new Location(46.8182, 8.2275),
+                    passwordEncoder
+            ),
+            featuredVendor(
+                    "Chow Town",
+                    "chowtown@streetscout.xyz",
+                    "Tasty dishes.",
+                    "https://street-scout-images.s3.amazonaws.com/54fdbacb-cc16-484d-ab9f-85efa3bc2cdd_login.png",
+                    new Location(46.14263014490314, -70.24882355824539),
                     passwordEncoder
             )
         ));
