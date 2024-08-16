@@ -30,3 +30,23 @@ aws:
       key: ${AWS_SECRET_ACCESS_KEY}
     bucket:
       name: ${AWS_S3_BUCKET_NAME}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
