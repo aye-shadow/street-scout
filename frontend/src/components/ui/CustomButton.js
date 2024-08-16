@@ -10,11 +10,12 @@ export default function CustomButton({
   size = "12px",
   buttonType = "button",
   hundredWidth = false,
-  onClick,
+  onClick = () => console.log(''),
   ...buttonProps // Spread additional Button props
 }) {
   const { fetchNearby } = useNearbyVendors();
-  const handleClick = onClick || fetchNearby;
+  const isConsoleLog = onClick && onClick.toString() === 'function console.log() { [native code] }';
+  const handleClick = isConsoleLog ? fetchNearby : onClick;
 
   return (
     <FontProvider>
