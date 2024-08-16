@@ -24,6 +24,9 @@ export default function ReferVendor() {
     const [location, setLocation] = useState("");
     const [menuItems, setMenuItems] = useState([{ itemName: "", price: "" }]);
     const [menuPhoto, setMenuPhoto] = useState(null);
+    const [sharedLocation, setSharedLocation] = useState("");
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
 
     // Handle adding new menu item
     const handleAddMenuItem = () => {
@@ -58,12 +61,21 @@ export default function ReferVendor() {
     // Handle location fetching
     const handleGetLocation = () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const { latitude, longitude } = position.coords;
-                setLocation(`Lat: ${latitude}, Long: ${longitude}`);
-            });
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                    setSharedLocation(`Lat: ${latitude}, Lon: ${longitude}`);
+                    // Optionally, you can convert lat/lon to a readable address using a geocoding API
+                },
+                (error) => {
+                    console.error("Error fetching location:", error);
+                    setSharedLocation("Unable to retrieve location.");
+                }
+            );
         } else {
-            alert("Geolocation is not supported by this browser.");
+            setSharedLocation("Geolocation is not supported by this browser.");
         }
     };
 
@@ -120,15 +132,6 @@ export default function ReferVendor() {
                             />
                         </Box>
                         <Box sx={{ marginBottom: 2, display: "flex", gap: 2 }}>
-                            <TextField
-                                label="Location"
-                                variant="outlined"
-                                fullWidth
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                                required
-                                sx={{ height: "56px" }}
-                            />
                             <Button
                                 variant="contained"
                                 onClick={handleGetLocation}
@@ -145,7 +148,7 @@ export default function ReferVendor() {
                                     },
                                 }}
                             >
-                                Use Current Location
+                                Share Location
                             </Button>
                         </Box>
                         <Typography

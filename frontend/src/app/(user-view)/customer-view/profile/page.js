@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
     Box,
@@ -9,6 +10,7 @@ import {
     Container,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useEffect } from "react";
 
 const UserProfile = () => {
     // Sample user data
@@ -18,6 +20,31 @@ const UserProfile = () => {
         id: "123456",
         role: "Customer",
     };
+
+    const [userData, setUserData] = React.useState(user);
+
+    useEffect(() => {
+        // Define an async function to fetch data
+        const fetchUserProfile = async () => {
+            //TODO mention full request bodies with method (GET, POST, etc)
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/customers/profile"
+                );
+
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                console.log("response successful");
+                const data = await JSON.parse(response);
+                setUserData(data); // Update state with fetched data
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+    }, []);
 
     return (
         <Container sx={{ marginTop: 4, paddingBottom: 5 }}>
