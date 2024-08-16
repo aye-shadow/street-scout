@@ -22,4 +22,10 @@ public class Location {
     @OneToOne
     private Vendor vendor;
 
+    public Location() {}
+
+    public Location(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
