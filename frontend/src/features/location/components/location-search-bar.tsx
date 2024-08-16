@@ -16,12 +16,12 @@ export function LocationSearchBar ({
   }: Props)
 {
   const [value, setValue] = useState("")
-  // const {nearbyVendors} = useNearbyVendors()
+  const {nearbyVendors} = useNearbyVendors()
 
   return (
     <Autocomplete
       id={"location-search-bar"}
-      options={[]}
+      options={nearbyVendors.map(v => v.name)}
       autoComplete
       includeInputInList
       onInputChange={(e, val) => setValue(val)}

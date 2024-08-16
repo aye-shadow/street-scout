@@ -3,6 +3,7 @@
 import {useCallback, useState} from "react";
 import {Location} from "@/features/vendor";
 import {useLocationStore} from "@/features/location";
+import {toast} from "sonner";
 
 export function useGeolocation()  {
   const {setError, setLoading, setLocation } = useLocationStore()
@@ -27,6 +28,7 @@ export function useGeolocation()  {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         });
+        toast("Location updated successfully")
       },
       (error) => {
         setError(`Error: ${error.message}`);
