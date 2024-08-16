@@ -5,7 +5,7 @@ import { Box, Typography, Grid, Paper, Link, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MenuCard = () => {
     const menuItems = [
@@ -83,6 +83,47 @@ const Gallery = () => {
 };
 
 const VendorCard = () => {
+    const [vendorId, setVendorId] = useState(0);
+
+    useEffect(() => {
+        // 1. Get Vendor ID from URL
+        // Get query parameters from URL
+        const query = new URLSearchParams(window.location.search);
+        const key = query.get("key");
+
+        // Fetch data or perform actions based on the key
+        // TODO uncomment this and make call to api
+        /*if (key) {
+            // Example fetch call
+            fetch(`/api/vendors/${key}`)
+                .then((response) => response.json())
+                .then((data) => setVendorId(data));
+        }*/
+
+        // TODO uncomment this and make call to api
+        /* // 2. Retrieve details for vendor using the vendor id
+        // Define an async function to fetch data
+        const fetchUserProfile = async () => {
+            //TODO mention full request bodies with method (GET, POST, etc)
+            try {
+                const response = await fetch(
+                    `http://localhost:8080/vendors/${vendorId}`
+                );
+
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                console.log("response successful");
+                const data = await JSON.parse(response);
+                setUserData(data); // Update state with fetched data
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };*/
+    }, []);
+
     // State to track if the icon is favorited
     const [isFavorite, setIsFavorite] = useState(false);
 
@@ -117,7 +158,7 @@ const VendorCard = () => {
                     position: "relative",
                 }}
             >
-                <Link href="/user-view/customer-view">
+                <Link href="/customer-view">
                     <Button
                         variant="contained"
                         color="primary"
