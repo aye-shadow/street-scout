@@ -22,7 +22,7 @@ import Image from "next/image";
 interface Props {}
 
 export function RegisterForm(props: Props) {
-  const [role, setRole] = useState<UserRole>("Vendor");
+  const [role, setRole] = useState<UserRole>("Customer");
 
   const hideModal = useModalStore((state) => state.hide);
   const userMutation = useRegisterUser(hideModal);
@@ -82,19 +82,6 @@ export function RegisterForm(props: Props) {
             </Box>
 
             <Box>
-              <FormLabel htmlFor={"password-confirm"}>
-                Confirm password
-              </FormLabel>
-              <TextField
-                id={"password-confirm"}
-                name={"password-confirm"}
-                type={"password"}
-                size="small"
-                fullWidth
-              />
-            </Box>
-
-            <Box>
               <FormLabel htmlFor={"email"}>Enter Email</FormLabel>
               <TextField
                 id={"email"}
@@ -105,7 +92,7 @@ export function RegisterForm(props: Props) {
               />
             </Box>
 
-            <Box marginBottom={"0.75rem"}>
+            <Box>
               <FormLabel htmlFor={"password"}>Enter password</FormLabel>
               <TextField
                 id={"password"}
@@ -113,6 +100,19 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 fullWidth
                 size="small"
+              />
+            </Box>
+
+            <Box marginBottom={"0.75rem"}>
+              <FormLabel htmlFor={"password-confirm"}>
+                Confirm password
+              </FormLabel>
+              <TextField
+                id={"password-confirm"}
+                name={"password-confirm"}
+                type={"password"}
+                size="small"
+                fullWidth
               />
             </Box>
 
@@ -150,7 +150,7 @@ export function RegisterForm(props: Props) {
             <Divider textAlign="right" sx={{ fontSize: "10px" }}>
               Already have an account?{" "}
               <BoldWord>
-                <Link href="/signin">Sign Ip</Link>
+                <Link href="/signin">Sign In</Link>
               </BoldWord>
             </Divider>
           </FormControl>
