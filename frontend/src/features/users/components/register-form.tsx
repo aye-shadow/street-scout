@@ -34,7 +34,7 @@ export function RegisterForm(props: Props) {
       email: formData.get("email") as string,
       name: formData.get("name") as string,
       password: formData.get("password") as string,
-      role: formData.get("role") as UserRole,
+      role,
     };
 
     console.log("⚡️Registering User", userInfo);

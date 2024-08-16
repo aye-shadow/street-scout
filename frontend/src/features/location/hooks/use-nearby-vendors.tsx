@@ -9,7 +9,7 @@ export function useNearbyVendors()  {
     queryFn: async () => {
       return fetchNearbyVendors(location, range);
     },
-    enabled: !!location // todo: location is null but makes api call anyways?
+    enabled: !!location
   });
 
   return { isPending, fetchNearby, nearbyVendors: data?.vendors || [] };
