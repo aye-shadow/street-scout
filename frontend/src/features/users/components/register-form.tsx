@@ -94,31 +94,6 @@ export function RegisterForm(props: Props) {
             </Box>
 
             <Box>
-              <FormLabel htmlFor={"email"}>Enter Email</FormLabel>
-              <TextField
-                id={"email"}
-                name={"email"}
-                type={"email"}
-                size="small"
-                fullWidth
-              />
-            </Box>
-
-            <Box>
-              <FormLabel htmlFor={"password-confirm"}>
-                Confirm password
-              </FormLabel>
-              <TextField
-                id={"password-confirm"}
-                name={"password-confirm"}
-                type={"password"}
-                size="small"
-                fullWidth
-                value=''
-              />
-            </Box>
-
-            <Box>
               <FormLabel htmlFor={"password"}>Enter password</FormLabel>
               <TextField
                 id={"password"}
@@ -126,19 +101,6 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 fullWidth
                 size="small"
-              />
-            </Box>
-
-            <Box marginBottom={"0.75rem"}>
-              <FormLabel htmlFor={"password-confirm"}>
-                Confirm password
-              </FormLabel>
-              <TextField
-                id={"password-confirm"}
-                name={"password-confirm"}
-                type={"password"}
-                size="small"
-                fullWidth
               />
             </Box>
 
