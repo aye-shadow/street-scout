@@ -41,5 +41,3 @@ api.interceptors.request.use(
 // );
 
 export default api
-
-export * from "./google"
