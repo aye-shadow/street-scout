@@ -2,6 +2,7 @@
 
 import React, {ReactNode, useState} from 'react';
 import {TextField, TextFieldProps} from "@mui/material";
+import {useVendorSearchStore} from "@/features/search";
 
 interface Props {
   data?: any;
@@ -9,23 +10,16 @@ interface Props {
 }
 
 export function VendorSearchInput (props: TextFieldProps) {
-  const [vendorSearchQuery, setVendorSearchQuery] = useState("");
 
-  // Function to handle search input change
-  const handleVendorSearchQueryChange = (e) => {
-    setVendorSearchQuery(e.target.value);
-  };
-  // const filteredVendorResults = vendors.filter((vendor) =>
-  //   vendor.toLowerCase().includes(vendorSearchQuery.toLowerCase())
-  // );
+  const {query, setQuery} = useVendorSearchStore()
 
   return (
     <TextField
       {...props}
       label="Search Vendors"
       variant="outlined"
-      value={vendorSearchQuery}
-      onChange={handleVendorSearchQueryChange}
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
       sx={{
         backgroundColor: "#F3F695",
         width: "40%",
