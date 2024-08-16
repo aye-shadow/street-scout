@@ -18,6 +18,7 @@ import CustomButton from "@/components/ui/CustomButton";
 import BoldWord from "@/components/ui/BoldWord";
 import Link from "next/link";
 import Image from "next/image";
+import {toast} from "sonner";
 
 interface Props {}
 
@@ -37,6 +38,7 @@ export function RegisterForm(props: Props) {
       role,
     };
 
+    toast("Registering user " + userInfo.email)
     console.log("⚡️Registering User", userInfo);
     userMutation.mutate(userInfo);
   };
