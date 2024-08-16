@@ -29,7 +29,4 @@ public interface VendorMapper {
     @Mapping(target = "favouriteByCustomers", source = "count")
     void updateFavouriteCount(VendorCount vendorCount, @MappingTarget Vendor vendor);
 
-    @Mapping(target = "vendorPhotoUrl", source = "photo")
-    void updatePhotoUrl(String photo, @MappingTarget Vendor vendor);
-
 }
