@@ -9,4 +9,7 @@ module.exports = {
       ],
     };
   },
+  images: {
+    domains: ["street-scout-images.s3.amazonaws.com"],
+  },
 };
