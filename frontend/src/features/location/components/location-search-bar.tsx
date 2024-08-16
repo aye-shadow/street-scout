@@ -1,21 +1,18 @@
 "use client";
 
-import React from 'react';
-import {SearchBar, SearchBarProps} from "@/features/search";
-import {Autocomplete, InputAdornment} from "@mui/material";
+import React from "react";
+import { SearchBar, SearchBarProps } from "@/features/search";
+import { Autocomplete, InputAdornment } from "@mui/material";
 
-type Props = SearchBarProps & {
+type Props = SearchBarProps & {};
 
-}
-
-export function LocationSearchBar ({
-    startAdornment,
-    endAdornment,
-    inputProps,
-    InputProps,
-    ...searchBarProps
-  }: Props) {
-
+export function LocationSearchBar({
+  startAdornment,
+  endAdornment,
+  inputProps,
+  InputProps,
+  ...searchBarProps
+}: Props) {
   const options = [];
 
   return (
@@ -26,7 +23,7 @@ export function LocationSearchBar ({
           {...searchBarProps}
           inputProps={{
             ...inputProps,
-            ...params.inputProps
+            ...params.inputProps,
           }}
           InputProps={{
             ...InputProps,
@@ -42,4 +39,4 @@ export function LocationSearchBar ({
       )}
     />
   );
-};
+}

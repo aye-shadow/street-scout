@@ -78,7 +78,7 @@ export function RegisterForm(props: Props) {
 
             <Box>
               <FormLabel htmlFor={"name"}>Enter Name</FormLabel>
-              <TextField name={"name"} size="small" fullWidth />
+              <TextField name={"name"} size="small" fullWidth value='' />
             </Box>
 
             <Box>
@@ -91,6 +91,7 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 size="small"
                 fullWidth
+                value=''
               />
             </Box>
 
@@ -102,6 +103,7 @@ export function RegisterForm(props: Props) {
                 type={"email"}
                 size="small"
                 fullWidth
+                value=''
               />
             </Box>
 
@@ -113,6 +115,7 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 fullWidth
                 size="small"
+                value=''
               />
             </Box>
 
@@ -150,7 +153,7 @@ export function RegisterForm(props: Props) {
             <Divider textAlign="right" sx={{ fontSize: "10px" }}>
               Already have an account?{" "}
               <BoldWord>
-                <Link href="/signin">Sign Ip</Link>
+                <Link href="/signin">Sign In</Link>
               </BoldWord>
             </Divider>
           </FormControl>
