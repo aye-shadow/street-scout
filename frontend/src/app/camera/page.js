@@ -5,11 +5,16 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import ButtonGroup from "./_components/buttonGroup";
 import StepperIcon from "./_components/stepperIcon";
+import CustomButton from "@/components/ui/CustomButton";
+import EnterManually from "./_components/enterManually";
+import UploadImage from "./_components/uploadImage";
+import OpenCamera from "./_components/openCamera";
 
 const steps = ["Upload Menu", "Verify"];
 
 export default function Camera() {
   const [activeStep, setActiveStep] = useState(0);
+  const [method, setMethod] = useState("Enter Manually"); // Lifted state
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -17,6 +22,13 @@ export default function Camera() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleMethodChange = (event, newAlignment) => {
+    // Lifted function
+    if (newAlignment !== null) {
+      setMethod(newAlignment);
+    }
   };
 
   return (
@@ -48,7 +60,22 @@ export default function Camera() {
             {(() => {
               switch (activeStep) {
                 case 0:
-                  return <ButtonGroup />;
+                  return (
+                    <Box
+                      width={"600px"}
+                      position={"relative"}
+                      margin={"auto"}
+                      paddingTop={"1rem"}
+                    >
+                      {method === "Enter Manually" && <EnterManually />}
+                      {method === "Upload Image" && <UploadImage />}
+                      {method === "Camera" && <OpenCamera />}
+                      <ButtonGroup
+                        method={method}
+                        handleMethodChange={handleMethodChange}
+                      />
+                    </Box>
+                  );
                 case 1:
                   return (
                     <Typography sx={{ mt: 2, mb: 1 }}>
@@ -64,20 +91,20 @@ export default function Camera() {
               }
             })()}
 
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
+            <Box
+              sx={{ display: "flex", flexDirection: "row", pt: 2 }}
+              justifyContent={"space-between"}
+            >
+              <CustomButton
+                text="Back"
                 onClick={handleBack}
                 sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
+                disabled={activeStep === 0}
+              />
+              <CustomButton
+                text={activeStep === steps.length - 1 ? "Finish" : "Next"}
+                onClick={handleNext}
+              />
             </Box>
           </>
         )}

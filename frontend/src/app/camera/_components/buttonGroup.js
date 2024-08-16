@@ -1,19 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 
-export default function ButtonGroup() {
-  const [method, setMethod] = useState("Enter Manually");
-
-  const handleMethodChange = (event, newAlignment) => {
-    if (newAlignment !== null) {
-      setMethod(newAlignment);
-    }
-  };
-
+export default function ButtonGroup({ method, handleMethodChange }) {
   return (
     <>
-      <Typography sx={{ mt: 2, mb: 1 }}>Upload Menu Instructions...</Typography>
       <ToggleButtonGroup
         id="user-role-select"
         value={method}
@@ -24,6 +15,7 @@ export default function ButtonGroup() {
         fullWidth
         sx={{
           marginBottom: "0.75rem",
+          marginTop: "1rem",
           "& .MuiToggleButton-root": {
             color: "black", // Default text color
             borderColor: "rgb(var(--lightergreen))", // Border color
