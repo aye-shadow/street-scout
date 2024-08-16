@@ -26,6 +26,7 @@ public class VendorServiceImpl implements VendorService {
     private final MenuMapper menuMapper = MenuMapper.INSTANCE;
     private final VendorRepository vendorRepository;
     private final MenuItemRepository menuItemRepository;
+    private final AwsS3Service awsS3Service;
 
     /**
      * @return <code>VendorList</code>
@@ -56,9 +57,11 @@ public class VendorServiceImpl implements VendorService {
      * @return <code>VendorProfile</code> with updated values
      */
     @Override
-    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) {
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
         Vendor vendor = findById(vendorId);
         vendorMapper.update(vendorUpdate, vendor);
+        String imageUrl= awsS3Service.saveImageToS3(vendorUpdate.photo());
+        vendorMapper.updatePhotoUrl(imageUrl, vendor);
         vendor = vendorRepository.save(vendor);
         return vendorMapper.toVendorProfile(vendor);
     }
