@@ -9,7 +9,7 @@ public interface VendorService {
 
     VendorProfile getVendorById(Long vendorId);
 
-    VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate);
+    VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception;
 
     void deactivateVendor(Long vendorId);
 
