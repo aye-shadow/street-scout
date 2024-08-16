@@ -4,9 +4,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import xyz.streetscout.aws.service.AwsS3Service;
 import xyz.streetscout.vendor.dto.*;
 import xyz.streetscout.vendor.entity.MenuItem;
 import xyz.streetscout.vendor.entity.Vendor;
@@ -14,9 +14,6 @@ import xyz.streetscout.vendor.mapper.MenuMapper;
 import xyz.streetscout.vendor.mapper.VendorMapper;
 import xyz.streetscout.vendor.repository.MenuItemRepository;
 import xyz.streetscout.vendor.repository.VendorRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -57,11 +54,11 @@ public class VendorServiceImpl implements VendorService {
      * @return <code>VendorProfile</code> with updated values
      */
     @Override
-    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) throws Exception {
+    public VendorProfile updateVendor(Long vendorId, VendorUpdate vendorUpdate) {
         Vendor vendor = findById(vendorId);
         vendorMapper.update(vendorUpdate, vendor);
-        String imageUrl= awsS3Service.saveImageToS3(vendorUpdate.photo());
-        vendorMapper.updatePhotoUrl(imageUrl, vendor);
+        String imageUrl = awsS3Service.saveImageToS3(vendorUpdate.photo(), vendor.getName());
+        vendor.setVendorPhotoUrl(imageUrl);
         vendor = vendorRepository.save(vendor);
         return vendorMapper.toVendorProfile(vendor);
     }
