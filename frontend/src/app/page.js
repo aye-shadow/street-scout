@@ -1,11 +1,11 @@
-import {Box, Grid, Stack, Typography} from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import FontProvider from "@/theme/fontProvider";
 import CustomButton from "@/components/ui/CustomButton";
 import BoldWord from "@/components/ui/BoldWord";
 import BigImage from "@/components/ui/BigImage";
-import {LocationAdornment, LocationSearchBar} from "@/features/location";
+import { LocationAdornment, LocationSearchBar } from "@/features/location";
 
 export default function Home() {
   const localFoodVendors = [
@@ -65,15 +65,15 @@ export default function Home() {
         </Typography>
         <Typography variant="body1" position={"relative"} marginBottom={3}>
           Street Scout is a platform that connects{" "}
-          <BoldWord text="local food vendors" /> that you can't normally find on
-          Google Maps with customers in their area. We provide a platform for
+          <BoldWord>local food vendors</BoldWord> that you can't normally find
+          on Google Maps with customers in their area. We provide a platform for
           vendors to list their products and for customers to find the best
           local food vendors in their area.
         </Typography>
         <Typography position={"relaitve"} marginBottom={6}>
-          Whether you're looking for a <BoldWord text="quick snack" /> on the
+          Whether you're looking for a <BoldWord>quick snack</BoldWord> on the
           way home for college, or just craving some{" "}
-          <BoldWord text="spicy street food" /> on a weekend, we have you
+          <BoldWord>spicy street food</BoldWord> on a weekend, we have you
           covered!
         </Typography>
         <Typography
