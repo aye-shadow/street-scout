@@ -24,8 +24,7 @@ interface Props {}
 export function RegisterForm(props: Props) {
   const [role, setRole] = useState<UserRole>("VENDOR");
 
-  const hideModal = useModalStore((state) => state.hide);
-  const userMutation = useRegisterUser(hideModal);
+  const userMutation = useRegisterUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
