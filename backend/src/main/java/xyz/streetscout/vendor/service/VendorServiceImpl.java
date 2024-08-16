@@ -58,7 +58,7 @@ public class VendorServiceImpl implements VendorService {
         Vendor vendor = findById(vendorId);
         vendorMapper.update(vendorUpdate, vendor);
         String imageUrl = awsS3Service.saveImageToS3(vendorUpdate.photo());
-        vendor.setVendorPhotoUrl(imageUrl);
+        vendor.setPhotoUrl(imageUrl);
         vendor = vendorRepository.save(vendor);
         return vendorMapper.toVendorProfile(vendor);
     }
