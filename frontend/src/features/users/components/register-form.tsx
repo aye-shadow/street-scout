@@ -94,6 +94,17 @@ export function RegisterForm(props: Props) {
             </Box>
 
             <Box>
+              <FormLabel htmlFor={"password"}>Enter password</FormLabel>
+              <TextField
+                id={"password"}
+                name={"password"}
+                type={"password"}
+                fullWidth
+                size="small"
+              />
+            </Box>
+
+            <Box marginBottom={"0.75rem"}>
               <FormLabel htmlFor={"password-confirm"}>
                 Confirm password
               </FormLabel>
@@ -103,17 +114,6 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 size="small"
                 fullWidth
-              />
-            </Box>
-
-            <Box marginBottom={"0.75rem"}>
-              <FormLabel htmlFor={"password"}>Enter password</FormLabel>
-              <TextField
-                id={"password"}
-                name={"password"}
-                type={"password"}
-                fullWidth
-                size="small"
               />
             </Box>
 
@@ -147,7 +147,12 @@ export function RegisterForm(props: Props) {
               <ToggleButton value="VENDOR">Vendor</ToggleButton>
             </ToggleButtonGroup>
 
-            <CustomButton text="Sign Up" buttonType="submit" size="14px" />
+            <CustomButton
+              text="Sign Up"
+              buttonType="submit"
+              size="14px"
+              onClick={() => console.log("Button clicked!")}
+            />
             <Divider textAlign="right" sx={{ fontSize: "10px" }}>
               Already have an account?{" "}
               <BoldWord>

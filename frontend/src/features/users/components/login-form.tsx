@@ -103,6 +103,7 @@ export function LoginForm(props: Props) {
                   type={"email"}
                   size="small"
                   fullWidth
+                  value=''
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Box>
@@ -115,6 +116,7 @@ export function LoginForm(props: Props) {
                   type={"password"}
                   fullWidth
                   size="small"
+                  value=''
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Box>

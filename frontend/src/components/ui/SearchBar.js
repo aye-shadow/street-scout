@@ -13,6 +13,7 @@ export default function SearchBar({
   return (
     <FontProvider>
       <TextField
+        value=''
         placeholder={`${placeholderText}`}
         variant="outlined"
         size={searchBarSize ? searchBarSize : "medium"}

@@ -36,13 +36,13 @@ export function AddMenuItemForm ({ vendorId }: Props) {
     <Box component={"form"} onSubmit={e => handleSubmit(e)}>
       <FormControl>
         <FormLabel htmlFor={"name"}>Enter Name</FormLabel>
-        <TextField name={"name"} />
+        <TextField name={"name"} value='' />
 
         <FormLabel htmlFor={"description"}>Enter description</FormLabel>
-        <TextField name={"description"} />
+        <TextField name={"description"} value='' />
 
         <FormLabel htmlFor={"price"}>Enter Price</FormLabel>
-        <TextField name={"price"} type={"text"} />
+        <TextField name={"price"} type={"text"} value='' />
 
         <Button type="submit">Submit</Button>
       </FormControl>

@@ -5,9 +5,7 @@ import {SearchBar, SearchBarProps} from "@/features/search";
 import {Autocomplete, InputAdornment} from "@mui/material";
 import {useNearbyVendors} from "@/features/location";
 
-type Props = SearchBarProps & {
-
-}
+type Props = SearchBarProps & {};
 
 export function LocationSearchBar ({
     startAdornment,
@@ -32,7 +30,7 @@ export function LocationSearchBar ({
           {...searchBarProps}
           inputProps={{
             ...inputProps,
-            ...params.inputProps
+            ...params.inputProps,
           }}
           InputProps={{
             ...InputProps,
@@ -48,4 +46,4 @@ export function LocationSearchBar ({
       )}
     />
   );
-};
+}

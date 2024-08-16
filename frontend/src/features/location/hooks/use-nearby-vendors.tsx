@@ -9,7 +9,7 @@ export function useNearbyVendors()  {
     queryFn: async () => {
       return fetchNearbyVendors(location, range);
     },
-    enabled: !!location
+    enabled: !!location,
   });
 
   return { isPending, fetchNearby, nearbyVendors: data?.vendors || [] };
