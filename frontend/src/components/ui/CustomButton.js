@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "@mui/material";
+import {Button} from "@mui/material";
 import FontProvider from "@/theme/fontProvider";
 import {useNearbyVendors} from "@/features/location";
 

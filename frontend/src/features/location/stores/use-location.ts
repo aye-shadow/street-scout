@@ -3,7 +3,7 @@ import {Location} from "@/features/vendor";
 
 
 interface ILocationStore {
-  location: Location;
+  location: Location | null;
   loading: boolean;
   error: string;
   range: number;
@@ -14,7 +14,7 @@ interface ILocationStore {
 }
 
 export const useLocationStore = create<ILocationStore>((set, get) => ({
-  location: { latitude: 0, longitude: 0 },
+  location: null,
   loading: false,
   error: "",
   range: 50,

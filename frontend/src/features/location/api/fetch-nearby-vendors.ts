@@ -11,9 +11,9 @@ export async function fetchNearbyVendors(loc: Location, range: number) {
   params.append("range", String(range))
   const url = `/api/search/nearby?${params.toString()}`
 
-  console.log("fetchNearbyVendors", url)
   try {
     const { data } = await axios.get<VendorList>(url);
+    console.log("fetchNearbyVendors", data);
     return data;
   } catch (error: any) {
     return handleError(error);

@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, {useState} from 'react';
 import {SearchBar, SearchBarProps} from "@/features/search";
 import {Autocomplete, InputAdornment} from "@mui/material";
 import {useNearbyVendors} from "@/features/location";
@@ -15,13 +15,18 @@ export function LocationSearchBar ({
     inputProps,
     InputProps,
     ...searchBarProps
-  }: Props) {
-
+  }: Props)
+{
+  const [value, setValue] = useState("")
   const {nearbyVendors} = useNearbyVendors()
 
   return (
     <Autocomplete
+      id={"location-search-bar"}
       options={nearbyVendors.map(v => v.name)}
+      autoComplete
+      includeInputInList
+      onInputChange={(e, val) => setValue(val)}
       renderInput={(params) => (
         <SearchBar
           {...searchBarProps}
