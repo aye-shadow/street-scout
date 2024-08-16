@@ -6,14 +6,20 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState, useEffect } from "react";
+import {MenuItemDetails, useVendor} from "@/features/vendor";
 
-const MenuCard = () => {
-    const menuItems = [
-        { item: "Momo", price: 100 },
-        { item: "Pizza", price: 200 },
-        { item: "Bread", price: 200 },
-        { item: "Pepsi", price: 60 },
+const MenuCard = ({ params: { vendorId }}) => {
+  const vendor = useVendor(vendorId);
+
+  const menuItems = (vendor?.menu)
+    ? vendor.menu
+    : [
+        { name: "Momo", price: 100 },
+        { name: "Pizza", price: 200 },
+        { name: "Bread", price: 200 },
+        { name: "Pepsi", price: 60 },
     ];
+
 
     return (
         <Paper elevation={3}>
@@ -31,10 +37,10 @@ const MenuCard = () => {
                         </Typography>
                     </Grid>
                     {menuItems.map((item) => (
-                        <React.Fragment key={item.item}>
+                        <React.Fragment key={item.name}>
                             <Grid item xs={6}>
                                 <Typography variant="body2">
-                                    {item.item}
+                                    {item.name}
                                 </Typography>
                             </Grid>
                             <Grid item xs={6}>
