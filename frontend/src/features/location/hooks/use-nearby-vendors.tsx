@@ -13,6 +13,5 @@ export function useNearbyVendors()  {
     enabled: !!location && !loading
   });
 
-  console.log("useNearByVendors", {data, location})
   return { isPending, fetchNearby, nearbyVendors: data?.vendors || [] };
 };

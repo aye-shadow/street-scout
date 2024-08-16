@@ -18,9 +18,7 @@ const Providers = ({ children }: Props) => {
     <SessionProvider>
       <ReactQueryProvider>
         <FontProvider>
-          <GoogleMapsLoader>
-            {children}
-          </GoogleMapsLoader>
+          {children}
         </FontProvider>
       </ReactQueryProvider>
     </SessionProvider>
