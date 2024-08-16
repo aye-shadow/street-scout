@@ -24,8 +24,6 @@ public class VendorConfig {
     }
 
     private static void createVendor(VendorRepository vendorRepository, PasswordEncoder passwordEncoder) {
-        Vendor vendor = new Vendor();
-        vendor.setLocation(46.14263014490314, -70.24882355824539);
 
         vendorRepository.saveAll(List.of(
             featuredVendor(

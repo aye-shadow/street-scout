@@ -37,13 +37,16 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
+                                "/error",
+                                "/actuator/**",
                                 "/auth/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
-                                "/api/vendors/top",
+                                "/api/vendors/**",
+                                "/api/customers/**",
                                 "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/api/vendors/**").hasAnyAuthority("VENDOR","ADMIN")
+//                        .requestMatchers("/api/vendors/**").hasAnyAuthority("VENDOR","ADMIN")
                         .requestMatchers("/api/customers/**").hasAnyAuthority("CUSTOMER","ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

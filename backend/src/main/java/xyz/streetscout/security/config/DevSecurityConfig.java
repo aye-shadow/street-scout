@@ -32,13 +32,13 @@ public class DevSecurityConfig {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
+                                "/actuator/**",
                                 "/error",
                                 "/auth/**",
                                 "/swagger-ui.html",
@@ -53,7 +53,6 @@ public class DevSecurityConfig {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        httpSecurity.httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
 
