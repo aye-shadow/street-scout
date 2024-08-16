@@ -2,7 +2,13 @@ import React from "react";
 import { Button } from "@mui/material";
 import FontProvider from "@/theme/fontProvider";
 
-export default function CustomButton({ text, size = '12px', buttonType = 'button', hundredWidth = false }) {
+export default function CustomButton({
+  text,
+  size = '12px',
+  buttonType = 'button',
+  hundredWidth = false,
+  onClick // optional onClick prop
+}) {
   return (
     <FontProvider>
       <Button
@@ -18,6 +24,7 @@ export default function CustomButton({ text, size = '12px', buttonType = 'button
         }}
         type={buttonType}
         fullWidth={hundredWidth}
+        onClick={onClick} // pass onClick prop (or undefined)
       >
         {text}
       </Button>

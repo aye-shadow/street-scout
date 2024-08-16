@@ -3,7 +3,7 @@ module.exports = {
     return {
       beforeFiles: [
         {
-          source: "/signin",
+          source: "/vendor-view/camera",
           destination: "/camera",
         },
       ],

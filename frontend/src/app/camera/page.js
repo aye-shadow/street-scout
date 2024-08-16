@@ -48,14 +48,7 @@ export default function Camera() {
             {(() => {
               switch (activeStep) {
                 case 0:
-                  return (
-                    <>
-                      <Typography sx={{ mt: 2, mb: 1 }}>
-                        Upload Menu Instructions...
-                      </Typography>
-                      <ButtonGroup />
-                    </>
-                  );
+                  return <ButtonGroup />;
                 case 1:
                   return (
                     <Typography sx={{ mt: 2, mb: 1 }}>
