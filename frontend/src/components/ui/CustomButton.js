@@ -1,22 +1,34 @@
 import React from "react";
 import { Button } from "@mui/material";
 import FontProvider from "@/theme/fontProvider";
+import { useNearbyVendors } from "@/features/location";
 
-export default function CustomButton({ text, size = '12px', buttonType = 'button' }) {
+export default function CustomButton({
+  text,
+  size = "12px",
+  buttonType = "button",
+  hundredWidth = false,
+  onClick,
+  ...buttonProps // Spread additional Button props
+}) {
+  const { fetchNearby } = useNearbyVendors();
+  const handleClick = onClick || fetchNearby;
+
   return (
     <FontProvider>
       <Button
-        variant="secondary"
-        color="white"
         sx={{
           backgroundColor: "rgb(var(--lightergreen))",
           color: "white",
-          fontSize: size, // default size is 12px
+          fontSize: size,
           "&:hover": {
             backgroundColor: "rgba(var(--lightergreen), 0.7)",
           },
         }}
         type={buttonType}
+        onClick={handleClick}
+        fullWidth={hundredWidth}
+        {...buttonProps} // Spread additional Button props
       >
         {text}
       </Button>
