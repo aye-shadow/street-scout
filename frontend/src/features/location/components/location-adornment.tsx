@@ -20,4 +20,4 @@ export function LocationAdornment ({ ...iconProps }: Props) {
       onClick={getGeoLocation}
     />
   );
-};
+}

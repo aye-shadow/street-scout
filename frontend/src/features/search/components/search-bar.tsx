@@ -20,6 +20,7 @@ export function SearchBar ({
 ) {
   return (
     <TextField
+      value=''
       variant="outlined"
       placeholder="Search..."
       size="medium"
