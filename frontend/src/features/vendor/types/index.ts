@@ -12,6 +12,7 @@ export interface VendorProfile {
   name: string;
   email: string;
   description: string;
+  photoUrl: string;
   photos: string[];
   location?: Location;
   operatingHours?: OperatingHours;
