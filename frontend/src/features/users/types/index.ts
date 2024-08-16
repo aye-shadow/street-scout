@@ -1,4 +1,4 @@
-export type UserRole = "CUSTOMER" | "VENDOR";
+export type UserRole = "Customer" | "Vendor" | "VENDOR" | "CUSTOMER";
 
 export interface UserRegistration {
   email: string;
