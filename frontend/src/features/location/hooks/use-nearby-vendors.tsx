@@ -4,7 +4,6 @@ import {VendorList} from "@/features/vendor";
 
 export function useNearbyVendors()  {
   const { location, range } = useLocationStore();
-  console.log("useNearbyVendors", {location})
   const { refetch: fetchNearby, data, isPending, } = useQuery<VendorList>({
     queryKey: ["nearbyVendors"],
     queryFn: async () => {

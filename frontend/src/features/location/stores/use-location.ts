@@ -14,8 +14,7 @@ interface ILocationStore {
 }
 
 export const useLocationStore = create<ILocationStore>((set, get) => ({
-  // location: null,
-  location: { latitude: 0, longitude: 0 }, // todo: null pointer exceptions. this will make unnecessary api calls for now (useNearbyVendors)
+  location: null,
   loading: false,
   error: "",
   range: 50,
