@@ -76,7 +76,7 @@ public class VendorController {
             responseCode = "200",
             description = "HTTP Status OK")
     public ResponseEntity<VendorProfile> updateVendor(
-            @Valid @RequestBody VendorUpdate vendorUpdate,
+            @Valid @ModelAttribute VendorUpdate vendorUpdate,
             @PathVariable Long vendorId
     ) throws Exception {
         VendorProfile vendor = vendorService.updateVendor(vendorId,vendorUpdate);

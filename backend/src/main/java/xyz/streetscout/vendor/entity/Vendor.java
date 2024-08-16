@@ -19,11 +19,11 @@ public class Vendor extends User {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "favouriteByCustomers")
+    @Column(name = "favourite_by_customers")
     private int favouriteByCustomers;
 
-    @Column(name = "vendorPhotoUrl")
-    private String vendorPhotoUrl;
+    @Column(name = "photo_url")
+    private String photoUrl;
 
     @Column(name = "photos")
     @ElementCollection(fetch = FetchType.LAZY)
