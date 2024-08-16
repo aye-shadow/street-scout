@@ -21,6 +21,7 @@
     "nextup-platforms": "0.1.4-dev2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sonner": "^1.5.0",
     "use-places-autocomplete": "^4.0.1",
     "zod": "^3.23.8",
     "zustand": "^4.5.4"
