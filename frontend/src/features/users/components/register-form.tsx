@@ -22,7 +22,7 @@ import Image from "next/image";
 interface Props {}
 
 export function RegisterForm(props: Props) {
-  const [role, setRole] = useState<UserRole>("Vendor");
+  const [role, setRole] = useState<UserRole>("VENDOR");
 
   const hideModal = useModalStore((state) => state.hide);
   const userMutation = useRegisterUser(hideModal);
@@ -38,7 +38,7 @@ export function RegisterForm(props: Props) {
       role: formData.get("role") as UserRole,
     };
 
-    console.log("⚡️ Adding Vendor", userInfo);
+    console.log("⚡️Registering User", userInfo);
     userMutation.mutate(userInfo);
   };
 
@@ -142,8 +142,8 @@ export function RegisterForm(props: Props) {
                 },
               }}
             >
-              <ToggleButton value="Customer">Customer</ToggleButton>
-              <ToggleButton value="Vendor">Vendor</ToggleButton>
+              <ToggleButton value="CUSTOMER">Customer</ToggleButton>
+              <ToggleButton value="VENDOR">Vendor</ToggleButton>
             </ToggleButtonGroup>
 
             <CustomButton text="Sign Up" buttonType="submit" size="14px" />
