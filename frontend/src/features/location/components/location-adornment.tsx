@@ -1,25 +1,23 @@
 "use client";
 
-import React from "react";
-import { LocationOn, LocationSearching } from "@mui/icons-material";
-import { SvgIcon, SvgIconProps } from "@mui/material";
-import { useGeolocation } from "@/features/location";
+import React, {useEffect, useState} from 'react';
+import {LocationOn, LocationSearching} from "@mui/icons-material";
+import {CircularProgress, SvgIcon, SvgIconProps} from "@mui/material";
+import {useGeolocation, useLocationStore} from "@/features/location";
 
 interface Props extends SvgIconProps {}
 
-export function LocationAdornment({ ...iconProps }: Props) {
-  const { getGeoLocation, location } = useGeolocation();
-
-  const handleClick = () => {
-    getGeoLocation();
-  };
+export function LocationAdornment ({ ...iconProps }: Props) {
+  const { getGeoLocation } = useGeolocation();
+  const location = useLocationStore(state => state.location);
+  const loading = useLocationStore(state => state.loading);
 
   return (
     <SvgIcon
       {...iconProps}
-      component={location == null ? LocationSearching : LocationOn}
+      component={loading ? CircularProgress : (location == null ? LocationSearching : LocationOn)}
       cursor={"pointer"}
-      onClick={handleClick}
+      onClick={getGeoLocation}
     />
   );
 }

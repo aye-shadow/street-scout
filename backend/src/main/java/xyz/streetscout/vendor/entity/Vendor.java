@@ -22,6 +22,9 @@ public class Vendor extends User {
     @Column(name = "favouriteByCustomers")
     private int favouriteByCustomers;
 
+    @Column(name = "vendorPhotoUrl")
+    private String vendorPhotoUrl;
+
     @Column(name = "photos")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "vendor_photos",
@@ -41,6 +44,10 @@ public class Vendor extends User {
 
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private List<Review> reviews = new ArrayList<>();
+
+    public void setLocation(double lat, double lon) {
+        this.location = new Location(lat, lon);
+    }
 
     public void addReview(Review review) {
         if (reviews == null) {

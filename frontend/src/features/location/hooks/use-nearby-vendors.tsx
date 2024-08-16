@@ -1,20 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchNearbyPlaces, useGeolocation } from "@/features/location";
+import {useQuery} from "@tanstack/react-query";
+import {fetchNearbyVendors, useLocationStore} from "@/features/location";
+import {VendorList} from "@/features/vendor";
 
-export function useNearbyVendors() {
-  const { location, getGeoLocation } = useGeolocation();
-
-  const {
-    refetch: fetchNearby,
-    data: nearbyVendors,
-    isPending,
-  } = useQuery({
-    queryKey: ["nearbyPlaces"],
+export function useNearbyVendors()  {
+  const { location, range } = useLocationStore();
+  const { refetch: fetchNearby, data, isPending, } = useQuery<VendorList>({
+    queryKey: ["nearbyVendors"],
     queryFn: async () => {
-      return fetchNearbyPlaces(location);
+      return fetchNearbyVendors(location, range);
     },
     enabled: !!location,
   });
 
-  return { location, getGeoLocation, isPending, fetchNearby, nearbyVendors };
-}
+  return { isPending, fetchNearby, nearbyVendors: data?.vendors || [] };
+};

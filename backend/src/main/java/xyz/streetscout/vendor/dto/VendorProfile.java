@@ -14,6 +14,7 @@ public record VendorProfile(
         String name,
         String email,
         String description,
+        String vendorPhotoUrl,
         List<String> photos,
         LocationDTO location,
         OperatingHoursDTO operatingHours,
