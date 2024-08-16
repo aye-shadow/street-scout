@@ -7,20 +7,18 @@ import {useVendorSearchStore} from "@/features/search";
 interface Props {}
 
 export function FilteredVendors (props: Props) {
-  const filteredVendorResults = useVendorSearchStore(state => state.filteredVendors);
+  const filterVendors = useVendorSearchStore(state => state.filteredVendors);
   return (
     <Grid
       container
       spacing={2}
       sx={{ paddingInline: 5, paddingTop: 2 }}
     >
-      {filteredVendorResults.map((vendor, index) => (
+      {filterVendors().map((vendor, index) => (
         <Grid item xs={4} key={index}>
-          {/*TODO need to figure out how to pass vendor Id to next page */}
           <Link
             href={`/customer-view/vendor-detailed/${vendor.id}`}
           >
-            {/* <Link href={`customer-view/vendor-detailed`}> */}
             <Box
               sx={{
                 height: 150,
