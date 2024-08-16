@@ -11,6 +11,7 @@ export default function CustomButton({
   buttonType = "button",
   hundredWidth = false,
   onClick = () => console.log(''),
+  disabled = false,
   ...buttonProps // Spread additional Button props
 }) {
   const { fetchNearby } = useNearbyVendors();
@@ -31,6 +32,7 @@ export default function CustomButton({
         type={buttonType}
         onClick={handleClick}
         fullWidth={hundredWidth}
+        disabled={disabled}
         {...buttonProps} // Spread additional Button props
       >
         {text}
