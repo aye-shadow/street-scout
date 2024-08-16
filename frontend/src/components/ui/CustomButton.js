@@ -1,14 +1,12 @@
-import React from "react";
-import { Button } from "@mui/material";
-import FontProvider from "@/theme/fontProvider";
+"use client";
 
-export default function CustomButton({
-  text,
-  size = '12px',
-  buttonType = 'button',
-  hundredWidth = false,
-  onClick // optional onClick prop
-}) {
+import React from "react";
+import {Button} from "@mui/material";
+import FontProvider from "@/theme/fontProvider";
+import {useNearbyVendors} from "@/features/location";
+
+export default function CustomButton({ text, size = '12px', buttonType = 'button', hundredWidth = false, onClick }) {
+  const { fetchNearby } = useNearbyVendors()
   return (
     <FontProvider>
       <Button
@@ -23,8 +21,7 @@ export default function CustomButton({
           },
         }}
         type={buttonType}
-        fullWidth={hundredWidth}
-        onClick={onClick} // pass onClick prop (or undefined)
+        onClick={onClick || () => fetchNearby()}
       >
         {text}
       </Button>
