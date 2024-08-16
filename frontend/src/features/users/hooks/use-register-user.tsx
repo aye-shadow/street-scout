@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {registerUser, UserProfile, UserRegistration} from "@/features/users";
+import {registerUser, UserRegistration} from "@/features/users";
 import {toast} from "sonner";
 import {useModalStore} from "@/features/modal";
 
@@ -13,15 +13,18 @@ export function useRegisterUser()  {
     },
 
     onSuccess: (data) => {
-      toast.success(`🔥 User Registered`);
+      toast.success(`User Registered`);
       queryClient.invalidateQueries({ queryKey: ["vendors"] });
+      // redirect("/signin")
     },
 
     onMutate: () => {
       hideModal();
+
     },
 
     onError: (error) => {
+      toast.error("🙄Error Registering");
       console.error("error", error);
     },
   });
