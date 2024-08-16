@@ -141,4 +141,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
 
+    @ExceptionHandler(AwsException.class)
+    public ResponseEntity<ErrorMessage> awsExceptionHandler(
+            AwsException e,
+            HttpServletRequest request
+    ) {
+        ErrorMessage errorMessage = new ErrorMessage(
+                request.getRequestURI(),
+                e.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
+    }
 }
