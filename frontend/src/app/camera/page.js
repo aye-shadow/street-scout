@@ -6,6 +6,9 @@ import Step from "@mui/material/Step";
 import ButtonGroup from "./_components/buttonGroup";
 import StepperIcon from "./_components/stepperIcon";
 import CustomButton from "@/components/ui/CustomButton";
+import EnterManually from "./_components/enterManually";
+import UploadImage from "./_components/uploadImage";
+import OpenCamera from "./_components/openCamera";
 
 const steps = ["Upload Menu", "Verify"];
 
@@ -58,24 +61,20 @@ export default function Camera() {
               switch (activeStep) {
                 case 0:
                   return (
-                    <>
-                      <Box width={"100%"}>
-                        {/* Conditional rendering based on method */}
-                        {method === "Enter Manually" && (
-                          <Typography>Manual Entry Selected</Typography>
-                        )}
-                        {method === "Upload Image" && (
-                          <Typography>Image Upload Selected</Typography>
-                        )}
-                        {method === "Camera" && (
-                          <Typography>Camera Selected</Typography>
-                        )}
-                        <ButtonGroup
-                          method={method}
-                          handleMethodChange={handleMethodChange}
-                        />
-                      </Box>
-                    </>
+                    <Box
+                      width={"600px"}
+                      position={"relative"}
+                      margin={"auto"}
+                      paddingTop={"1rem"}
+                    >
+                      {method === "Enter Manually" && <EnterManually />}
+                      {method === "Upload Image" && <UploadImage />}
+                      {method === "Camera" && <OpenCamera />}
+                      <ButtonGroup
+                        method={method}
+                        handleMethodChange={handleMethodChange}
+                      />
+                    </Box>
                   );
                 case 1:
                   return (

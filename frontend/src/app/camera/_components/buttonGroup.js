@@ -15,6 +15,7 @@ export default function ButtonGroup({ method, handleMethodChange }) {
         fullWidth
         sx={{
           marginBottom: "0.75rem",
+          marginTop: "1rem",
           "& .MuiToggleButton-root": {
             color: "black", // Default text color
             borderColor: "rgb(var(--lightergreen))", // Border color
