@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import xyz.streetscout.aws.service.AwsS3Service;
 import xyz.streetscout.vendor.dto.*;
 import xyz.streetscout.vendor.entity.MenuItem;
 import xyz.streetscout.vendor.entity.Vendor;
