@@ -15,59 +15,24 @@ import {
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {FavoriteVendors, ShareLocationButton, VendorReferralButton} from "@/features/customers";
+import {
+  FavoriteVendors,
+  FilteredVendors,
+  ShareLocationButton,
+  VendorReferralButton,
+  VendorSearchInput
+} from "@/features/customers";
 import {useGeolocation, useLocationStore, useNearbyVendors} from "@/features/location";
 
 export default function CustomerPage() {
-    const [vendors, setVendors] = useState([
-        "Momo Hut",
-        "Pizza Place",
-        "KFC",
-        "McD",
-        "Domino's",
-        "Toscanos",
-        "Hopshaus",
-        "in-n-out",
-    ]);
+    const setDistance = useLocationStore(state => state.setRange)
 
-    // Search functionality for Location
-    const [location, setLocation] = useState("");
-
-    // Function to handle location input change
-    const handleLocationSearchChange = (e) => {
-        setLocation(e.target.value);
-    };
-
-    const vendorId = 0; // For testing purposes only
-
-    // Search functionality for Vendor
-    const [vendorSearchQuery, setVendorSearchQuery] = useState("");
-
-    // Function to handle search input change
-    const handleVendorSearchQueryChange = (e) => {
-        setVendorSearchQuery(e.target.value);
-    };
-    const filteredVendorResults = vendors.filter((vendor) =>
-        vendor.toLowerCase().includes(vendorSearchQuery.toLowerCase())
-    );
-
-    // Distance filter functionality
-    const [distance, setDistance] = useState(10);
-
-    // Get distance
     function handleDistanceChange(value) {
         setDistance(value);
     }
 
-    // Favourites functionality
-    const [favourites, setFavourites] = useState(["Toscanos", "KFC"]);
-
     // Conditional rendering done based on this
     const [viewingFavorites, setViewingFavorites] = useState(false);
-
-    const [sharedLocation, setSharedLocation] = useState("");
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
 
     return (
         <Container
@@ -140,30 +105,7 @@ export default function CustomerPage() {
                         }}
                     >
                         <ShareLocationButton />
-                        <TextField
-                            label="Search Vendors"
-                            variant="outlined"
-                            value={vendorSearchQuery}
-                            onChange={handleVendorSearchQueryChange}
-                            sx={{
-                                backgroundColor: "#F3F695",
-                                width: "40%",
-                                borderRadius: 2,
-                                height: "40px", // Adjust height as needed
-                            }}
-                            InputProps={{
-                                sx: {
-                                    height: "100%", // Ensure input field fills the full height
-                                    padding: "0 14px", // Adjust padding as needed
-                                },
-                            }}
-                            InputLabelProps={{
-                                sx: {
-                                    lineHeight: "1em", // Adjust line height for the label
-                                    transform: "translate(14px, 10px) scale(1)", // Adjust label position
-                                },
-                            }}
-                        />
+                        <VendorSearchInput />
                         <Box
                             sx={{
                                 display: "flex",
@@ -202,36 +144,7 @@ export default function CustomerPage() {
                             />
                         </Box>
                     </Box>
-                    <Grid
-                        container
-                        spacing={2}
-                        sx={{ paddingInline: 5, paddingTop: 2 }}
-                    >
-                        {filteredVendorResults.map((vendor, index) => (
-                            <Grid item xs={4} key={index}>
-                                {/*TODO need to figure out how to pass vendor Id to next page */}
-                                <Link
-                                    href={`/customer-view/vendor-detailed?key=${vendorId}`}
-                                >
-                                    {/* <Link href={`customer-view/vendor-detailed`}> */}
-                                    <Box
-                                        sx={{
-                                            height: 150,
-                                            backgroundColor: "#F3F695",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            borderRadius: 2,
-                                        }}
-                                    >
-                                        <Typography variant="body1">
-                                            {vendor}
-                                        </Typography>
-                                    </Box>
-                                </Link>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <FilteredVendors />
                 </Container>
             )}
         </Container>
