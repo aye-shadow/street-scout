@@ -1,14 +1,14 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-export default function BoldWord({ text }) {
+export default function BoldWord({ children }) {
   return (
     <Box
       component="span"
       fontWeight={"bold"}
       color={"rgb(var(--lightergreen))"}
     >
-      {text}
+      {children}
     </Box>
   );
 }
