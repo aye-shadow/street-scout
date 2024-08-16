@@ -25,3 +25,7 @@ export * from "./hooks/use-update-vendor"
 export * from "./stores/use-menu-table"
 export * from "./stores/use-vendor"
 
+
+export * from "./hooks/use-top-vendors"
+export * from "./components/top-vendors"
+export * from "./api/get-top-vendors"

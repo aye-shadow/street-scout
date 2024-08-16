@@ -18,14 +18,14 @@ import CustomButton from "@/components/ui/CustomButton";
 import BoldWord from "@/components/ui/BoldWord";
 import Link from "next/link";
 import Image from "next/image";
+import {toast} from "sonner";
 
 interface Props {}
 
 export function RegisterForm(props: Props) {
-  const [role, setRole] = useState<UserRole>("Vendor");
+  const [role, setRole] = useState<UserRole>("VENDOR");
 
-  const hideModal = useModalStore((state) => state.hide);
-  const userMutation = useRegisterUser(hideModal);
+  const userMutation = useRegisterUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,10 +35,11 @@ export function RegisterForm(props: Props) {
       email: formData.get("email") as string,
       name: formData.get("name") as string,
       password: formData.get("password") as string,
-      role: formData.get("role") as UserRole,
+      role,
     };
 
-    console.log("⚡️ Adding Vendor", userInfo);
+    toast("Registering user " + userInfo.email)
+    console.log("⚡️Registering User", userInfo);
     userMutation.mutate(userInfo);
   };
 
@@ -82,19 +83,6 @@ export function RegisterForm(props: Props) {
             </Box>
 
             <Box>
-              <FormLabel htmlFor={"password-confirm"}>
-                Confirm password
-              </FormLabel>
-              <TextField
-                id={"password-confirm"}
-                name={"password-confirm"}
-                type={"password"}
-                size="small"
-                fullWidth
-              />
-            </Box>
-
-            <Box>
               <FormLabel htmlFor={"email"}>Enter Email</FormLabel>
               <TextField
                 id={"email"}
@@ -105,7 +93,7 @@ export function RegisterForm(props: Props) {
               />
             </Box>
 
-            <Box marginBottom={"0.75rem"}>
+            <Box>
               <FormLabel htmlFor={"password"}>Enter password</FormLabel>
               <TextField
                 id={"password"}
@@ -113,6 +101,19 @@ export function RegisterForm(props: Props) {
                 type={"password"}
                 fullWidth
                 size="small"
+              />
+            </Box>
+
+            <Box marginBottom={"0.75rem"}>
+              <FormLabel htmlFor={"password-confirm"}>
+                Confirm password
+              </FormLabel>
+              <TextField
+                id={"password-confirm"}
+                name={"password-confirm"}
+                type={"password"}
+                size="small"
+                fullWidth
               />
             </Box>
 
@@ -142,15 +143,20 @@ export function RegisterForm(props: Props) {
                 },
               }}
             >
-              <ToggleButton value="Customer">Customer</ToggleButton>
-              <ToggleButton value="Vendor">Vendor</ToggleButton>
+              <ToggleButton value="CUSTOMER">Customer</ToggleButton>
+              <ToggleButton value="VENDOR">Vendor</ToggleButton>
             </ToggleButtonGroup>
 
-            <CustomButton text="Sign Up" buttonType="submit" size="14px" />
+            <CustomButton
+              text="Sign Up"
+              buttonType="submit"
+              size="14px"
+              onClick={() => console.log("Button clicked!")}
+            />
             <Divider textAlign="right" sx={{ fontSize: "10px" }}>
               Already have an account?{" "}
               <BoldWord>
-                <Link href="/signin">Sign Ip</Link>
+                <Link href="/signin">Sign In</Link>
               </BoldWord>
             </Divider>
           </FormControl>

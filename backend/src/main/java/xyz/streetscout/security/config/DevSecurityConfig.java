@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -42,9 +43,11 @@ public class DevSecurityConfig {
                                 "/auth/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
+                                "/api/vendors/**",
+                                "/api/customers/**",
                                 "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/api/vendors/**").hasAnyAuthority("VENDOR","ADMIN")
+//                         .requestMatchers("/api/vendors").hasAnyAuthority("VENDOR","ADMIN")
                         .requestMatchers("/api/customers/**").hasAnyAuthority("CUSTOMER","ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -46,7 +46,7 @@ export function CreateReviewForm ({ vendorId }: Props) {
 
 
           <FormLabel htmlFor={"text"}>Enter review</FormLabel>
-          <TextField name={"text"} multiline />
+          <TextField name={"text"} multiline value='' />
 
 
           <Button type="submit">Submit</Button>

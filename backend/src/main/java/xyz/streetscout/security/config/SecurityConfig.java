@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 "/auth/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
+                                "/api/vendors/top",
                                 "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/api/vendors/**").hasAnyAuthority("VENDOR","ADMIN")

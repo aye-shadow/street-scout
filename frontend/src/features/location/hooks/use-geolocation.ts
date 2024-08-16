@@ -2,11 +2,10 @@
 
 import {useCallback, useState} from "react";
 import {Location} from "@/features/vendor";
+import {useLocationStore} from "@/features/location";
 
 export function useGeolocation()  {
-  const [location, setLocation] = useState<Location | null>(null);
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
+  const {setError, setLoading, setLocation } = useLocationStore()
 
   const getGeoLocation = useCallback(() => {
     if (!navigator.geolocation) {
@@ -38,6 +37,5 @@ export function useGeolocation()  {
     );
   }, []);
 
-
-  return { location, error, loading, getGeoLocation };
+  return { getGeoLocation };
 }
